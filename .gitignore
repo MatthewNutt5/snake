@@ -1,0 +1,18 @@
+# block everything, unblock subfolders
+*
+!*/
+
+# track myself
+!.gitignore
+
+# track other files
+!LICENSE
+!README.md
+!source/**
+!*.v
+!*.vh
+!*.gds
+!*.tcl
+!*.cmd
+innovus.cmd
+!run_*
