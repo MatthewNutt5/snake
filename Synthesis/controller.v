@@ -15,6 +15,10 @@ module controller (clka, clkb, restart, direction_in, from_logic, led_array,
  *  This FSM module also handles multiplexing for the 8x8 LED display.
  */
 
+
+
+
+
 //========== Setup ==========
 
 //---------- Input Ports ----------
@@ -45,6 +49,7 @@ parameter LOGIC_DONE = 0, GAME_END = 1;
  *  Nested array from logic datapath denoting which LEDs should be lit or unlit.
  *  - led_array[r] is the r-th row, led_array[r][c] is the c-th column in the
  *    r-th row.
+ *  - Indexes off the bottom-left corner of the display matrix.
  */
 input wire [7:0] led_array [7:0];
 
@@ -119,6 +124,8 @@ parameter NUM_DISPLAY_CYCLES = 4;
 
 
 
+
+
 //========== Code ==========
 
 //---------- Combinational Logic ----------
@@ -177,8 +184,6 @@ function [1:0] game_state_function;
 
 endfunction
 
-
-
 /*
  *  Direction state: Set current direction to input direction, disallowing
  *  flips (up to down, left to right). Default to right.
@@ -236,8 +241,6 @@ function [1:0] direction_state_function;
   end
 endfunction
 
-
-
 /*
  *  Execution state: Move through execution loop in different paths depending
  *  on game state
@@ -249,7 +252,8 @@ endfunction
  *    The logic datapath should be toggling the head's LED on its own(?).
  *  - INPUT: Check the direction_in input, update direction_state accordingly.
  *    direction_state should be output to the logic datapath so it can update
- *    the head position.
+ *    the head position. Send to_logic[GAME_TICK], and if the game is ended,
+ *    also to_logic[NO_UPDATE].
  *  - WAIT_LOGIC: Wait until from_logic[LOGIC_DONE] is true, meaning that the
  *    logic datapath has finished processing and updating from the directional
  *    input. This includes if the logic datapath has finished processing a new
@@ -278,19 +282,28 @@ function [1:0] execution_state_function;
     end
 
     CHECK_STATE: begin
-
+      if (game_state == INIT)
+        execution_state_function = DISPLAY;
+      else
+        execution_state_function = INPUT;
     end
 
     INPUT: begin
-
+      execution_state_function = WAIT_LOGIC;
     end
 
     WAIT_LOGIC: begin
-
+      if (from_logic[LOGIC_DONE])
+        execution_state_function = DISPLAY;
+      else
+        execution_state_function = WAIT_LOGIC;
     end
 
     DISPLAY: begin
-
+      if (current_row == 7 && cycle_count = NUM_DISPLAY_CYCLES-1)
+        execution_state_function = UPDATE_STATE;
+      else
+        execution_state_function = DISPLAY;
     end
 
     default: execution_state_function = UPDATE_STATE;
@@ -300,82 +313,41 @@ endfunction
 
 
 
+//---------- Sequential Logic ----------
+
+/*
+ *  This sequential logic section, consisting of an always block, takes inputs
+ *  at the negative edge of clka and updates internal temporary registers based
+ *  on those inputs and current states.
+ *  However, the final states will only be updated in certain circumstances,
+ *  e.g. the game state should only be updated if in UPDATE_STATE.
+ */
+
+always @(negedge clka) begin
+
+  // Update multiplex state if in display state
+  if (execution_state == DISPLAY) begin
+    if (current_row == 7) begin
+        current_row = 0;
+        if (cycle_count == NUM_DISPLAY_CYCLES-1)
+          cycle_count = 0; // Next clkb should be updating state to INPUT
+        else
+          cycle_count++;
+      end else
+        current_row++;
+  end
+
+  game_state_temp <= game_state_function;
+  direction_state_temp <= direction_state_function;
+  execution_state_temp <= execution_state_function;
+  
+end
+
+
+
 
 
 // --- Everything below this point is from Homework 3 Question 3; not part of the snake game ---
-assign temp_state = fsm_function (state, restart, load_pattern, load_test, enter, same_sig);
-
-function [SIZE-1:0] fsm_function;
-  input  [SIZE-1:0] state;
-  input  restart, load_pattern, load_test, enter, same_sig;
-  
-  if (restart)           // Restart --> return to IDLE
-    fsm_function = IDLE;
-  else begin             // Otherwise, follow normal sequence
-    case (state)
-    
-      IDLE: begin
-        if (load_pattern)
-          fsm_function = WAIT_PAT;
-        else
-          fsm_function = IDLE;
-      end
-    
-      WAIT_PAT: begin
-        if (enter)
-          fsm_function = READY;
-        else
-          fsm_function = WAIT_PAT;
-      end
-      
-      READY: begin
-        if (load_test)
-          fsm_function = WAIT_TEST;
-        else
-          fsm_function = READY;
-      end
-      
-      WAIT_TEST: begin
-        if (enter)
-          fsm_function = EVAL1;
-        else
-          fsm_function = WAIT_TEST;
-      end
-      
-      EVAL1: fsm_function = EVAL2;
-      
-      EVAL2: begin
-        if (same_sig)
-          fsm_function = MATCH;
-        else
-          fsm_function = ERROR;
-      end
-      
-      MATCH: begin
-        if (load_test)
-          fsm_function = WAIT_TEST;
-        else
-          fsm_function = MATCH;
-      end
-      
-      ERROR: begin
-        if (load_test)
-          fsm_function = WAIT_TEST;
-        else
-          fsm_function = ERROR;
-      end
-
-      default: fsm_function = IDLE;
-      
-    endcase
-  end
-  
-endfunction
-
-//----------Seq Logic-----------------------------------------------------------
-always @(negedge clka) begin
-  next_state <= temp_state;  // Store next state for output logic
-end
 
 //----------Output Logic--------------------------------------------------------
 always @(negedge clkb) begin
