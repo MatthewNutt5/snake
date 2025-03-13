@@ -17,8 +17,6 @@ module controller (clka, clkb, restart, direction_in, from_logic, led_array,
 
 
 
-
-
 //========== Setup ==========
 
 //---------- Input Ports ----------
@@ -253,7 +251,7 @@ endfunction
  *  - INPUT: Check the direction_in input, update direction_state accordingly.
  *    direction_state should be output to the logic datapath so it can update
  *    the head position. Send to_logic[GAME_TICK], and if the game is ended,
- *    also to_logic[NO_UPDATE].
+ *    also send to_logic[NO_UPDATE].
  *  - WAIT_LOGIC: Wait until from_logic[LOGIC_DONE] is true, meaning that the
  *    logic datapath has finished processing and updating from the directional
  *    input. This includes if the logic datapath has finished processing a new
@@ -316,7 +314,7 @@ endfunction
 //---------- Sequential Logic ----------
 
 /*
- *  This sequential logic section, consisting of an always block, takes inputs
+ *  This sequential logic section, consisting of one always block, takes inputs
  *  at the negative edge of clka and updates internal temporary registers based
  *  on those inputs and current states.
  *  However, the final states will only be updated in certain circumstances,
@@ -326,11 +324,14 @@ endfunction
 always @(negedge clka) begin
 
   // Update multiplex state if in display state
-  if (execution_state == DISPLAY) begin
+  if (restart)
+    current_row <= 0;
+    cycle_count <= 0;
+  else if (execution_state == DISPLAY) begin
     if (current_row == 7) begin
-        current_row = 0;
+        current_row <= 0;
         if (cycle_count == NUM_DISPLAY_CYCLES-1)
-          cycle_count = 0; // Next clkb should be updating state to INPUT
+          cycle_count <= 0; // Next clkb should be updating state to INPUT
         else
           cycle_count++;
       end else
@@ -345,53 +346,73 @@ end
 
 
 
+//---------- Output Logic ----------
 
+/*
+ *  This output logic section, also consisting of an always block, uses the
+ *  state of internal registers at the negative edge of clkb to update various
+ *  output signals. Again, final states will only be updated when appropriate.
+ */
 
-// --- Everything below this point is from Homework 3 Question 3; not part of the snake game ---
-
-//----------Output Logic--------------------------------------------------------
 always @(negedge clkb) begin
-
-  state <= next_state;
-
-  case(next_state)
-    
-    IDLE, EVAL2: begin
-      {save_pat_sig, save_pat_temp_sig, save_test_sig, save_test_temp_sig, match, error} = 0;
-    end
-    
-    WAIT_PAT: begin
-      {save_pat_sig, save_test_sig, save_test_temp_sig, match, error} = 0;
-      save_pat_temp_sig = 1;
-    end
-    
-    READY: begin
-      {save_pat_temp_sig, save_test_sig, save_test_temp_sig, match, error} = 0;
-      save_pat_sig = 1;
-    end
-    
-    WAIT_TEST: begin
-      {save_pat_sig, save_pat_temp_sig, save_test_sig, match, error} = 0;
-      save_test_temp_sig = 1;
-    end
-    
-    EVAL1: begin
-      {save_pat_sig, save_pat_temp_sig, save_test_temp_sig, match, error} = 0;
-      save_test_sig = 1;
-    end
-    
-    MATCH: begin
-      {save_pat_sig, save_pat_temp_sig, save_test_sig, save_test_temp_sig, error} = 0;
-      match = 1;
-    end
-    
-    ERROR: begin
-      {save_pat_sig, save_pat_temp_sig, save_test_sig, save_test_temp_sig, match} = 0;
-      error = 1;
-    end
-    
-  endcase
   
+  execution_state <= execution_state_temp;
+
+  case (execution_state_temp);
+
+    UPDATE_STATE: begin
+      game_state <= game_state_temp;
+      // Setting non-state outputs to idle/off condition
+      to_logic <= 0;
+      row_cathode <= {8{1'b1}};
+      column_anode <= 0;
+    end
+
+    CHECK_STATE: begin
+      // Setting non-state outputs to idle/off condition
+      to_logic <= 0;
+      row_cathode <= {8{1'b1}};
+      column_anode <= 0;
+    end
+
+    INPUT: begin
+      direction_state <= direction_state_temp;
+      to_logic[GAME_TICK] <= 1;
+      if (game_state == STOP)
+        to_logic[NO_UPDATE] <= 1;
+      else
+        to_logic[NO_UPDATE] <= 0;
+      // Setting non-state outputs to idle/off condition
+      row_cathode <= {8{1'b1}};
+      column_anode <= 0;
+    end
+
+    WAIT_LOGIC: begin
+      // Setting non-state outputs to idle/off condition
+      to_logic <= 0;
+      row_cathode <= {8{1'b1}};
+      column_anode <= 0;
+    end
+
+    DISPLAY: begin
+      // Start off with idle state, only enable necessary row and column
+      row_cathode = {8{1'b1}};
+      column_anode = 0;
+
+      row_cathode[current_row] = 1;
+      column_anode = led_array[current_row];
+      // Setting non-state outputs to idle/off condition
+      to_logic <= 0;
+    end
+
+    default: begin
+      // Setting non-state outputs to idle/off condition
+      to_logic <= 0;
+      row_cathode <= {8{1'b1}};
+      column_anode <= 0;
+    end
+
+  endcase
 end
 
 
