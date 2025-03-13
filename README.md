@@ -15,13 +15,15 @@ The `.gitignore` is set up as a whitelist - a file/file type must be added for G
 
 ## Controller FSM
 
-The Controller FSM in `/snake/source/verilog/controller.v` manages the synchronization between modules for the game. It contains three FSMs:
+The Controller FSM in `/snake/source/verilog/controller.v` manages the synchronization between modules for the game. It contains three sub-FSMs:
 
 1) The game FSM, showing whether the game is ready/started/ended,
 2) The direction FSM, keeping track of which direction the snake is moving, and
 3) The execution FSM, synchronizing the phases of movement, collision detection, etc., as well as updates to the other FSMs.
 
-The inputs include the dual-phase clock signals, a restart signal provided by a button, "done" signals from the other modules, and a direction signal provided by the movement buttons.
+The inputs include the dual-phase clock signals, a restart signal provided by a button, various signals from the other modules, and a direction signal provided by the movement buttons.
+
+The outputs include each sub-FSM's current state, signals to the other modules, and control signals for a multiplexed 8x8 LED display.
 
 ## Logic Datapath
 
