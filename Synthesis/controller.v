@@ -11,7 +11,6 @@ module controller (clka, clkb, restart, direction_in, from_logic, led_array,
  *     the snake is moving, and
  *  3) The execution FSM, synchronizing the phases of movement,
  *     collision detection, etc., as well as updates to the other FSMs.
- *
  *  This FSM module also handles multiplexing for the 8x8 LED display.
  */
 
@@ -362,14 +361,14 @@ always @(negedge clkb) begin
 
     UPDATE_STATE: begin
       game_state <= game_state_temp;
-      // Setting non-state outputs to idle/off condition
+      // idle/off
       to_logic <= 0;
       row_cathode <= {8{1'b1}};
       column_anode <= 0;
     end
 
     CHECK_STATE: begin
-      // Setting non-state outputs to idle/off condition
+      // idle/off
       to_logic <= 0;
       row_cathode <= {8{1'b1}};
       column_anode <= 0;
@@ -382,31 +381,31 @@ always @(negedge clkb) begin
         to_logic[NO_UPDATE] <= 1;
       else
         to_logic[NO_UPDATE] <= 0;
-      // Setting non-state outputs to idle/off condition
+      // idle/off
       row_cathode <= {8{1'b1}};
       column_anode <= 0;
     end
 
     WAIT_LOGIC: begin
-      // Setting non-state outputs to idle/off condition
+      // idle/off
       to_logic <= 0;
       row_cathode <= {8{1'b1}};
       column_anode <= 0;
     end
 
     DISPLAY: begin
-      // Start off with idle state, only enable necessary row and column
+      // Start off with idle state
       row_cathode = {8{1'b1}};
       column_anode = 0;
-
-      row_cathode[current_row] = 1;
+      // Only enable necessary row and column
+      row_cathode[current_row] = 0;
       column_anode = led_array[current_row];
-      // Setting non-state outputs to idle/off condition
+      // idle/off
       to_logic <= 0;
     end
 
     default: begin
-      // Setting non-state outputs to idle/off condition
+      // idle/off
       to_logic <= 0;
       row_cathode <= {8{1'b1}};
       column_anode <= 0;
