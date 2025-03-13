@@ -26,8 +26,6 @@ module controller (clka, clkb, restart, direction_in, from_logic, led_array,
  */
 input wire clka, clkb, restart;
 
-// TODO: Should these signal arrays instead be signal busses? i.e. collection of
-// x-many one-bit wires, instead of x-bit wire?
 /*
  *  Represents the buttons being pressed, active high and one-hot
  *  (assume only one is pressed at a time).
@@ -40,8 +38,8 @@ parameter UP_IN = 4'b0001, DOWN_IN = 4'b0010,
  *  Signal array from logic datapath. Each index represents a different signal.
  *  - The parameters represent indices, not bit masks.
  */
-input wire [2:0] from_logic;
-parameter LOGIC_DONE = 0, PRNG_DONE = 1, GAME_END = 2;
+input wire [1:0] from_logic;
+parameter LOGIC_DONE = 0, GAME_END = 1;
 
 /*
  *  Nested array from logic datapath denoting which LEDs should be lit or unlit.
@@ -68,31 +66,11 @@ parameter UP_STATE = 0, DOWN_STATE = 1, LEFT_STATE = 2, RIGHT_STATE = 3;
 
 /*
  *  Synchronizes the flow of execution between the different modules.
- *  - CHECK_STATE: Check the game state - initialized, running, or stopped.
- *    If initialized or running, check input and send signals to logic.
- *    If stopped, don't check for input, just keep going to display state.
- *    The logic datapath should be toggling the head's LED on its own(?).
- *  - INPUT: Check the direction_in input, update direction_state accordingly.
- *    direction_state should be output to the logic datapath so it can update
- *    the head position.
- *  - WAIT_LOGIC: Wait until from_logic[LOGIC_DONE] is true, meaning that the
- *    logic datapath has finished processing and updating from the directional
- *    input.
- *  - UPDATE_STATE: Based on the feedback from the logic datapath, update the
- *    game state.
- *  - WAIT_PRNG: Wait until from_logic[PRNG_DONE] is true, meaning that the
- *    logic datapath has finished processing a new random number (if any).
- *    The logic datapath and PRNG datapath will execute a handshake on their
- *    own; the logic datapath reports back to the controller.
- *  - DISPLAY: For a set number of cycles, iterate over each row in the display
- *    and turn on the LEDs that need to be lit, according to the multiplexing
- *    scheme. Go to CHECK_STATE once the required number of cycles is completed.
  */
-parameter SIZE = 3; // Expand as needed
+parameter SIZE = 3; // Adjust as needed
 output reg [SIZE-1:0] execution_state;
-parameter CHECK_STATE = 0, INPUT = 1, WAIT_LOGIC = 2, UPDATE_STATE = 3,
-          WAIT_PRNG = 4, DISPLAY = 5;
-parameter NUM_DISPLAY_CYCLES = 4;
+parameter UPDATE_STATE = 0, CHECK_STATE = 1, INPUT = 2, WAIT_LOGIC = 3, 
+  DISPLAY = 4;
 
 /*
  *  Signal array to logic datapath. Each index represents a different signal.
@@ -132,9 +110,12 @@ reg [1:0] direction_state_next;
 reg [SIZE-1:0] execution_state_next;
 
 /*
- *  Keeps track of which row to display during multiplexing.
+ *  Keeps track of which row to display during multiplexing, and how many
+ *  multiplexing cycles have been completed so far.
  */
 reg [2:0] current_row;
+reg [1:0] cycle_count;
+parameter NUM_DISPLAY_CYCLES = 4;
 
 
 
@@ -254,6 +235,70 @@ function [1:0] direction_state_function;
     endcase
   end
 endfunction
+
+
+
+/*
+ *  Execution state: Move through execution loop in different paths depending
+ *  on game state
+ *  - UPDATE_STATE: Based on directional inputs and from_logic[GAME_END],
+ *    update the game state.
+ *  - CHECK_STATE: Check the game state - initialized, running, or stopped.
+ *    If initialized or running, check input and send signals to logic.
+ *    If stopped, don't check for input, just keep going to display state.
+ *    The logic datapath should be toggling the head's LED on its own(?).
+ *  - INPUT: Check the direction_in input, update direction_state accordingly.
+ *    direction_state should be output to the logic datapath so it can update
+ *    the head position.
+ *  - WAIT_LOGIC: Wait until from_logic[LOGIC_DONE] is true, meaning that the
+ *    logic datapath has finished processing and updating from the directional
+ *    input. This includes if the logic datapath has finished processing a new
+ *    random number, if any. The logic datapath and PRNG datapath will execute a
+ *    handshake on their own; the logic datapath reports back to the controller.
+ *  - DISPLAY: For a set number of cycles, iterate over each row in the display
+ *    and turn on the LEDs that need to be lit, according to the multiplexing
+ *    scheme. Go to CHECK_STATE once the required number of cycles is completed.
+ */
+assign execution_state_temp = execution_state_function(restart, from_logic,
+  game_state, execution_state);
+
+function [1:0] execution_state_function;
+  input restart;
+  input [1:0] from_logic;
+  input [1:0] game_stage;
+  input [SIZE-1:0] execution_state;
+
+  if (restart)
+    execution_state_function = UPDATE_STATE;
+  else
+    case (execution_state)
+
+    UPDATE_STATE: begin
+      execution_state_function = CHECK_STATE;
+    end
+
+    CHECK_STATE: begin
+
+    end
+
+    INPUT: begin
+
+    end
+
+    WAIT_LOGIC: begin
+
+    end
+
+    DISPLAY: begin
+
+    end
+
+    default: execution_state_function = UPDATE_STATE;
+
+    endcase
+endfunction
+
+
 
 
 
