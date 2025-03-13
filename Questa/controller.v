@@ -1,32 +1,84 @@
-// Templated from my Homework 3 Problem 3 - change as needed
-//-----------------------------------------------
-// Combination Lock FSM - lock_fsm.v
-//-----------------------------------------------
-module lock_fsm (clka, clkb, restart, load_pattern, load_test, enter, same_sig,
-  save_pat_sig, save_pat_temp_sig, save_test_sig, save_test_temp_sig, match, error, state);
+//======================================
+// Snake Game FSM - controller.v
+//======================================
+module controller (clka, clkb, restart, logic_done, prng_done, direction_in, game_state, direction_state, execution_state);
 
-//----------Internal Constants-------------------
-parameter SIZE = 3;
-parameter IDLE = 3'b000;
-parameter WAIT_PAT = 3'b001, READY = 3'b010;
-parameter WAIT_TEST = 3'b011, EVAL1 = 3'b100, EVAL2 = 3'b101;
-parameter MATCH = 3'b110, ERROR = 3'b111;
+/*
+ *  This FSM module consists of three FSMs:
+ *  1) The game FSM, showing whether the game is ready/started/ended,
+ *  2) The direction FSM, keeping track of which direction
+ *     the snake is moving, and
+ *  3) The execution FSM, synchronizing the phases of movement,
+ *     collision detection, etc., as well as updates to the other FSMs.
+ */
 
-//----------Input Ports--------------------------
-input wire    clka, clkb, restart, load_pattern, load_test, enter, same_sig;
+//========== Setup ==========
 
-//----------Output Ports-------------------------
-output reg            save_pat_sig, save_pat_temp_sig, save_test_sig, save_test_temp_sig, match, error;
-output reg [SIZE-1:0] state;
+//---------- Input Ports ----------
 
-//----------Internal Variables-------------------
-wire  [SIZE-1:0]  temp_state;    // Combo part of FSM
-reg   [SIZE-1:0]  next_state;    // Internal state reg
+/*
+ *  - clka and clkb are provided by oscillator
+ *  - restart could come from a button
+ *  - done signals come from external modules, signal when to continue
+ *    execution
+ */
+input wire clka, clkb, restart, logic_done, prng_done;
 
-//----------Code starts here---------------------------------------------------
+/*
+ *  Represents the buttons being pressed, active high and one-hot
+ *  (assume only one is pressed at a time).
+ */
+input wire [3:0] direction_in;
+parameter UP_IN = 4'b0001, DOWN_IN = 4'b0010,
+          LEFT_IN = 4'b0100, RIGHT_IN = 4'b1000;
+
+
+
+//---------- Output Ports ----------
+
+/*
+ *  Represents the state of the game.
+ */
+output reg [1:0] game_state;
+parameter INIT = 0, RUN = 1, STOP = 2;
+
+/*
+ *  Represents the direction the snake is moving.
+ */
+output reg [1:0] direction_state;
+parameter UP_STATE = 0, DOWN_STATE = 1, LEFT_STATE = 2, RIGHT_STATE = 3;
+
+/*
+ *  Synchronizes the flow of execution between the different modules.
+ */
+output reg [?:0] execution_state;
+parameter ?;
+
+
+
+//---------- Internal Variables ----------
+
+/*
+ *  Used for combinational logic of FSM.
+ */
+wire [1:0] game_state_temp;
+wire [1:0] direction_state_temp;
+wire [?:0] execution_state_temp;
+
+/*
+ *  Stores output of combinational logic on clka.
+ */
+wire [1:0] game_state_next;
+wire [1:0] direction_state_next;
+wire [?:0] execution_state_next;
+
+
+
+//========== Code ==========
+
+//---------- Combinational Logic ----------
 assign temp_state = fsm_function (state, restart, load_pattern, load_test, enter, same_sig);
-             
-//----------Function for Combo Logic-------------------------------------------
+
 function [SIZE-1:0] fsm_function;
   input  [SIZE-1:0] state;
   input  restart, load_pattern, load_test, enter, same_sig;
@@ -94,12 +146,12 @@ function [SIZE-1:0] fsm_function;
   
 endfunction
 
-//----------Seq Logic----------------------------------------------------------
+//----------Seq Logic-----------------------------------------------------------
 always @(negedge clka) begin
   next_state <= temp_state;  // Store next state for output logic
 end
 
-//----------Output Logic-------------------------------------------------------
+//----------Output Logic--------------------------------------------------------
 always @(negedge clkb) begin
 
   state <= next_state;
