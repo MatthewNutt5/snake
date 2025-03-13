@@ -26,20 +26,22 @@ module controller (clka, clkb, restart, direction_in, from_logic, led_array,
  */
 input wire clka, clkb, restart;
 
+// TODO: Should these signal arrays instead be signal busses? i.e. collection of
+// x-many one-bit wires, instead of x-bit wire?
 /*
  *  Represents the buttons being pressed, active high and one-hot
  *  (assume only one is pressed at a time).
  */
 input wire [3:0] direction_in;
 parameter UP_IN = 4'b0001, DOWN_IN = 4'b0010,
-          LEFT_IN = 4'b0100, RIGHT_IN = 4'b1000;
+  LEFT_IN = 4'b0100, RIGHT_IN = 4'b1000;
 
 /*
  *  Signal array from logic datapath. Each index represents a different signal.
  *  - The parameters represent indices, not bit masks.
  */
-input wire [1:0] from_logic;
-parameter LOGIC_DONE = 0, PRNG_DONE = 1;
+input wire [2:0] from_logic;
+parameter LOGIC_DONE = 0, PRNG_DONE = 1, GAME_END = 2;
 
 /*
  *  Nested array from logic datapath denoting which LEDs should be lit or unlit.
@@ -137,9 +139,125 @@ reg [2:0] current_row;
 
 
 //========== Code ==========
-// --- Everything below this point is from Homework 3 Question 3; not part of the snake game
 
 //---------- Combinational Logic ----------
+
+/*
+ *  These combinational logic functions define the next state, depending on the
+ *  current state and inputs. As wires, they are continuously evaluated.
+ *  However, their corresponding registers should only be updated in certain
+ *  circumstances, e.g. game_state is updated only during the CHECK_STATE
+ *  stage of the execution FSM.
+ */
+
+
+
+/*
+ *  Game state: Start in INIT when restart is asserted, move to RUN when any
+ *  directional button is pressed, move to STOP when logic datapath signals
+ *  that a body collision has been detected.
+ */
+assign game_state_temp = game_state_function(restart, direction_in,
+  from_logic, game_state);
+
+function [1:0] game_state_function;
+  input restart;
+  input [3:0] direction_in;
+  input [2:0] from_logic;
+  input [1:0] game_state;
+
+  if (restart)
+    game_state_function = INIT;
+  else begin
+    case (game_state)
+
+      INIT: begin
+        if (direction_in) // If any direction button is pressed
+          game_state_function = RUN;
+        else
+          game_state_function = INIT;
+      end
+
+      RUN: begin
+        if (from_logic[GAME_END]) // If logic datapath indicates collision
+          game_state_function = STOP;
+        else
+          game_state_function = RUN;
+      end
+
+      STOP: begin
+        game_state_function = STOP; // Can only be taken out of STOP by restart
+      end
+      
+      default: game_state_function = STOP; // Default to STOP in unknown state
+
+    endcase
+  end
+
+endfunction
+
+
+
+/*
+ *  Direction state: Set current direction to input direction, disallowing
+ *  flips (up to down, left to right). Default to right.
+ */
+assign direction_state_temp = direction_state_function(restart, direction_in);
+
+function [1:0] direction_state_function;
+  input restart;
+  input [3:0] direction_in;
+
+  if (restart)
+    direction_state_function = RIGHT_STATE;
+  else begin
+    case (direction_state)
+      
+      UP_STATE: begin
+        if (direction_in == LEFT_IN)
+          direction_state_function = LEFT_STATE;
+        else if (direction_in == RIGHT_IN)
+          direction_state_function = RIGHT_STATE;
+        else
+          direction_state_function = UP_STATE;
+      end
+
+      DOWN_STATE: begin
+        if (direction_in == LEFT_IN)
+          direction_state_function = LEFT_STATE;
+        else if (direction_in == RIGHT_IN)
+          direction_state_function = RIGHT_STATE;
+        else
+          direction_state_function = DOWN_STATE;
+      end
+
+      LEFT_STATE: begin
+        if (direction_in == UP_IN)
+          direction_state_function = UP_STATE;
+        else if (direction_in == DOWN_IN)
+          direction_state_function = DOWN_STATE;
+        else
+          direction_state_function = LEFT_STATE;
+      end
+
+      RIGHT_STATE: begin
+        if (direction_in == UP_IN)
+          direction_state_function = UP_STATE;
+        else if (direction_in == DOWN_IN)
+          direction_state_function = DOWN_STATE;
+        else
+          direction_state_function = RIGHT_STATE;
+      end
+
+      default: direction_state_function = RIGHT_STATE;
+
+    endcase
+  end
+endfunction
+
+
+
+// --- Everything below this point is from Homework 3 Question 3; not part of the snake game ---
 assign temp_state = fsm_function (state, restart, load_pattern, load_test, enter, same_sig);
 
 function [SIZE-1:0] fsm_function;
