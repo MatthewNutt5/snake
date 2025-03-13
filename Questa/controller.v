@@ -1,7 +1,8 @@
 //======================================
 // Snake Game FSM - controller.v
 //======================================
-module controller (clka, clkb, restart, from_logic, logic_done, prng_done, direction_in, row_cathode, column_anode, game_state, direction_state, execution_state);
+module controller (clka, clkb, restart, direction_in, from_logic, led_array,
+  game_state, direction_state, execution_state, row_cathode, column_anode);
 
 /*
  *  This FSM module consists of three FSMs:
@@ -26,26 +27,19 @@ module controller (clka, clkb, restart, from_logic, logic_done, prng_done, direc
 input wire clka, clkb, restart;
 
 /*
- *  Signal array from logic datapath. Each index represents a different signal.
- *  - The parameters represent indices, not bit masks.
- */
-input wire [2:0] from_logic;
-parameter LOGIC_DONE = 0, NEED_PRNG = 1;
-
-/*
- *  Signal array from PRNG datapath. Each index represents a different signal.
- *  - Currently, only a single signal, and doing this for consistency.
- */
-input wire [0:0] from_prng;
-parameter PRNG_DONE = 0;
-
-/*
  *  Represents the buttons being pressed, active high and one-hot
  *  (assume only one is pressed at a time).
  */
 input wire [3:0] direction_in;
 parameter UP_IN = 4'b0001, DOWN_IN = 4'b0010,
           LEFT_IN = 4'b0100, RIGHT_IN = 4'b1000;
+
+/*
+ *  Signal array from logic datapath. Each index represents a different signal.
+ *  - The parameters represent indices, not bit masks.
+ */
+input wire [1:0] from_logic;
+parameter LOGIC_DONE = 0, PRNG_DONE = 1;
 
 /*
  *  Nested array from logic datapath denoting which LEDs should be lit or unlit.
@@ -84,12 +78,10 @@ parameter UP_STATE = 0, DOWN_STATE = 1, LEFT_STATE = 2, RIGHT_STATE = 3;
  *    input.
  *  - UPDATE_STATE: Based on the feedback from the logic datapath, update the
  *    game state.
- *  - REQUEST_PRNG: Signal to the PRNG datapath to generate a new random number.
- *  - WAIT_PRNG: Wait until the PRNG datapath is finished to continue to the
- *    display cycle. The PRNG will send the random number to the logic datapath
- *    on its own.
- *  TODO: Need wait state here for logic datapath to finish processing new
- *  random number, namely updating the LED output?
+ *  - WAIT_PRNG: Wait until from_logic[PRNG_DONE] is true, meaning that the
+ *    logic datapath has finished processing a new random number (if any).
+ *    The logic datapath and PRNG datapath will execute a handshake on their
+ *    own; the logic datapath reports back to the controller.
  *  - DISPLAY: For a set number of cycles, iterate over each row in the display
  *    and turn on the LEDs that need to be lit, according to the multiplexing
  *    scheme. Go to CHECK_STATE once the required number of cycles is completed.
@@ -97,7 +89,19 @@ parameter UP_STATE = 0, DOWN_STATE = 1, LEFT_STATE = 2, RIGHT_STATE = 3;
 parameter SIZE = 3; // Expand as needed
 output reg [SIZE-1:0] execution_state;
 parameter CHECK_STATE = 0, INPUT = 1, WAIT_LOGIC = 2, UPDATE_STATE = 3,
-          REQUEST_PRNG = 4, WAIT_PRNG = 5, DISPLAY = 6;
+          WAIT_PRNG = 4, DISPLAY = 5;
+parameter NUM_DISPLAY_CYCLES = 4;
+
+/*
+ *  Signal array to logic datapath. Each index represents a different signal.
+ *  - to_logic[LOGIC_TICK] tells the logic datapath when to intake a new
+ *    direction input and update the game board.
+ *  - to_logic[NO_UPDATE], when enabled during the tick, will blink the LED that
+ *    represents the head position, instead of taking input and updating. Used
+ *    after the game has ended.
+ */
+output reg [1:0] to_logic;
+parameter LOGIC_TICK = 0, NO_UPDATE = 1;
 
 /*
  *  Multiplexed 8x8 LED display output.
