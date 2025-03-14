@@ -249,7 +249,7 @@ endfunction
  *    The logic datapath should be toggling the head's LED on its own(?).
  *  - INPUT: Check the direction_in input, update direction_state accordingly.
  *    direction_state should be output to the logic datapath so it can update
- *    the head position. Send to_logic[GAME_TICK], and if the game is ended,
+ *    the head position. Send to_logic[LOGIC_TICK], and if the game is ended,
  *    also send to_logic[NO_UPDATE].
  *  - WAIT_LOGIC: Wait until from_logic[LOGIC_DONE] is true, meaning that the
  *    logic datapath has finished processing and updating from the directional
@@ -376,7 +376,7 @@ always @(negedge clkb) begin
 
     INPUT: begin
       direction_state <= direction_state_temp;
-      to_logic[GAME_TICK] <= 1;
+      to_logic[LOGIC_TICK] <= 1;
       if (game_state == STOP)
         to_logic[NO_UPDATE] <= 1;
       else
