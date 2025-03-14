@@ -2,7 +2,8 @@
 // Snake Game FSM - controller.v
 //======================================
 module controller (clka, clkb, restart, direction_in, from_logic, led_array,
-  game_state, direction_state, execution_state, row_cathode, column_anode);
+  game_state, direction_state, execution_state, to_logic, row_cathode,
+  column_anode);
 
 /*
  *  This FSM module consists of three FSMs:
@@ -90,8 +91,7 @@ parameter LOGIC_TICK = 0, NO_UPDATE = 1;
  *  - row_cathode should be one-cold, "enables" row to display
  *  - column_anode then goes high for each LED that is lit for that row
  */
-output reg [7:0] row_cathode;
-output reg [7:0] column_anode;
+output reg [7:0] row_cathode, column_anode;
 
 
 
@@ -117,7 +117,7 @@ reg [SIZE-1:0] execution_state_next;
  */
 reg [2:0] current_row;
 reg [1:0] cycle_count;
-parameter NUM_DISPLAY_CYCLES = 4;
+parameter NUM_DISPLAY_CYCLES = 2;
 
 
 

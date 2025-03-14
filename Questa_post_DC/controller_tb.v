@@ -1,7 +1,6 @@
-// Templated from my Homework 3 Problem 3 - change as needed
-//-----------------------------------------------
-// Combination Lock Testbench - lock_tb.v
-//-----------------------------------------------
+//======================================
+// Snake Game FSM Testbench - controller_tb.v
+//======================================
 `timescale 1ns/10ps
 
 `define CLOCK \
@@ -12,129 +11,91 @@
     in_clka = 0; in_clkb = 1; #10; \
   end
 
-module lock_tb();
+module controller_tb();
 
-// Inputs to top module
-reg        in_clka, in_clkb, in_restart, in_load_pattern, in_load_test, in_enter;
-reg  [1:0] in_pattern, in_test;
+// Inputs to module
+reg       in_clka, in_clkb, in_restart;
+reg [3:0] in_direction_in;
+reg [1:0] in_from_logic;
+reg [7:0] in_led_array [7:0];
 
-// Outputs from top_module
-wire       out_match, out_error, out_same_sig;
-wire       out_save_pat_sig, out_save_pat_temp_sig, out_save_test_sig, out_save_test_temp_sig;
-wire [2:0] out_state;
+// Outputs from module
+wire [1:0] out_game_state, out_direction_state, out_to_logic;
+wire [2:0] out_execution_state;
+wire [7:0] out_row_cathode, out_column_anode;
 
-// Create a top system instance
-lock_top top (.in_clka (in_clka),
-              .in_clkb (in_clkb),
-              .in_restart (in_restart),
-              .in_load_pattern (in_load_pattern),
-              .in_load_test (in_load_test),
-              .in_enter (in_enter),
-              .in_pattern (in_pattern),
-              .in_test (in_test),
-              .out_match (out_match),
-              .out_error (out_error),
-              .out_state (out_state),
-              .out_same_sig (out_same_sig),
-              .out_save_pat_sig (out_save_pat_sig),
-              .out_save_pat_temp_sig (out_save_pat_temp_sig),
-              .out_save_test_sig (out_save_test_sig),
-              .out_save_test_temp_sig (out_save_test_temp_sig)
-              );
+// Create an instance of the module
+controller control (.clka (in_clka),
+                    .clkb (in_clkb),
+                    .restart (in_restart),
+                    .direction_in (in_direction_in),
+                    .from_logic (in_from_logic),
+                    .led_array (in_led_array),
+                    .game_state (out_game_state),
+                    .direction_state (out_direction_state),
+                    .execution_state (out_execution_state),
+                    .to_logic (out_to_logic),
+                    .row_cathode (out_row_cathode),
+                    .column_anode (out_column_anode));
 
 initial
 begin
 
-/*
- *  NOTE: Numerical inputs are delayed by one cycle behind their 
- *        corresponding control input because the FSM delays
- *        control signals to the datapath by one cycle.
- */
 
 
-
-// cycle 1 - restart
+// restart
 in_restart = 1;
-{in_load_pattern, in_load_test, in_enter} = 0;
-{in_pattern, in_test} = 0;
-`CLOCK
+{in_direction_in, in_from_logic, in_led_array} = 0;
+`CLOCK // move to UPDATE_STATE
 
-// cycle 2 - load pattern
+// idle for a few cycles to show that the fsm doesn't send any
+// signals, just displays whatever the logic datapath is sending
+// (will be set to initial conditions)
 in_restart = 0;
-in_load_pattern = 1;
+in_led_array[0] = 8'b00000000;
+in_led_array[1] = 8'b00000000;
+in_led_array[2] = 8'b00000000;
+in_led_array[3] = 8'b00100100;
+in_led_array[4] = 8'b00000000;
+in_led_array[5] = 8'b00000000;
+in_led_array[6] = 8'b00000000;
+in_led_array[7] = 8'b00000000;
+`CLOCK // move to CHECK_STATE
+`CLOCK // move to DISPLAY
+`CLOCK // 16 cycles of DISPLAY multiplexing 
 `CLOCK
-
-// cycle 3 - provide pattern, enter
-in_load_pattern = 0;
-in_enter = 1;
-in_pattern = 2'b11;
 `CLOCK
-
-// cycle 4 - load test
-in_enter = 0;
-in_load_test = 1;
-in_pattern = 0;
 `CLOCK
-
-// cycle 5 - provide incorrect test, enter
-in_load_test = 0;
-in_enter = 1;
-in_test = 2'b10;
 `CLOCK
-
-// cycle 6 - wait for evalution
-in_enter = 0;
-in_test = 0;
 `CLOCK
-
-// cycle 7 - idle to see result
 `CLOCK
-
-// cycle 8 - result persists unless we input new test
-in_enter = 1;
 `CLOCK
-
-// cycle 9 - result persists unless we input new test
-in_enter = 0;
-in_load_pattern = 1;
 `CLOCK
-
-// cycle 10 - result persists unless we input new test
-in_load_pattern = 0;
 `CLOCK
-
-// cycle 11 - load test
-in_load_test = 1;
 `CLOCK
-
-// cycle 12 - provide correct test, enter
-in_load_test = 0;
-in_enter = 1;
-in_test = 2'b11;
 `CLOCK
-
-// cycle 13 - wait for evalution
-in_enter = 0;
-in_test = 0;
 `CLOCK
-
-// cycle 14 - idle to see result
 `CLOCK
-
-// cycle 15 - result persists unless we input new test
-in_enter = 1;
 `CLOCK
-
-// cycle 16 - result persists unless we input new test
-in_enter = 0;
-in_load_pattern = 1;
 `CLOCK
-
-// cycle 17 - result persists unless we input new test
-in_load_pattern = 0;
+`CLOCK // move to UPDATE_STATE
+`CLOCK // move to CHECK_STATE
+`CLOCK // move to DISPLAY
+`CLOCK // 16 cycles of DISPLAY multiplexing 
 `CLOCK
-
-// cycle 18 - one more idle for good measure :)
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
 
