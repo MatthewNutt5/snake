@@ -1,9 +1,9 @@
 //======================================
 // Snake Game FSM - controller.v
 //======================================
-module controller (clka, clkb, restart, direction_in, from_logic, led_array,
-  game_state, direction_state, execution_state, to_logic, row_cathode,
-  column_anode);
+module controller (clka, clkb, restart, direction_in, from_logic,
+  led_array_flat, game_state, direction_state, execution_state, to_logic,
+  row_cathode, column_anode);
 
 /*
  *  This FSM module consists of three FSMs:
@@ -44,12 +44,15 @@ input wire [1:0] from_logic;
 parameter LOGIC_DONE = 0, GAME_END = 1;
 
 /*
- *  Nested array from logic datapath denoting which LEDs should be lit or unlit.
+ *  Flattened version of a nested array from logic datapath denoting which LEDs
+ *  should be lit or unlit.
  *  - led_array[r] is the r-th row, led_array[r][c] is the c-th column in the
  *    r-th row.
  *  - Indexes off the bottom-left corner of the display matrix.
+ *  - Flattened version starts with 0-th row, then 1-st row, etc., unflattened
+ *    by internal wire.
  */
-input wire [7:0] led_array [7:0];
+input wire [63:0] led_array_flat;
 
 
 
@@ -118,6 +121,19 @@ reg [SIZE-1:0] execution_state_next;
 reg [2:0] current_row;
 reg [1:0] cycle_count;
 parameter NUM_DISPLAY_CYCLES = 2;
+
+/*
+ *  Unflattens input led_array_flat. Verilog why.
+ */
+wire [7:0] led_array [7:0];
+assign led_array[0] = led_array_flat[7:0];
+assign led_array[1] = led_array_flat[15:8];
+assign led_array[2] = led_array_flat[23:16];
+assign led_array[3] = led_array_flat[31:24];
+assign led_array[4] = led_array_flat[39:32];
+assign led_array[5] = led_array_flat[47:40];
+assign led_array[6] = led_array_flat[55:48];
+assign led_array[7] = led_array_flat[63:56];
 
 
 
@@ -249,7 +265,7 @@ endfunction
  *    The logic datapath should be toggling the head's LED on its own(?).
  *  - INPUT: Check the direction_in input, update direction_state accordingly.
  *    direction_state should be output to the logic datapath so it can update
- *    the head position. Send to_logic[GAME_TICK], and if the game is ended,
+ *    the head position. Send to_logic[LOGIC_TICK], and if the game is ended,
  *    also send to_logic[NO_UPDATE].
  *  - WAIT_LOGIC: Wait until from_logic[LOGIC_DONE] is true, meaning that the
  *    logic datapath has finished processing and updating from the directional
@@ -263,10 +279,10 @@ endfunction
 assign execution_state_temp = execution_state_function(restart, from_logic,
   game_state, execution_state);
 
-function [1:0] execution_state_function;
+function [SIZE-1:0] execution_state_function;
   input restart;
   input [1:0] from_logic;
-  input [1:0] game_stage;
+  input [1:0] game_state;
   input [SIZE-1:0] execution_state;
 
   if (restart)
@@ -297,7 +313,7 @@ function [1:0] execution_state_function;
     end
 
     DISPLAY: begin
-      if (current_row == 7 && cycle_count = NUM_DISPLAY_CYCLES-1)
+      if (current_row == 7 && cycle_count == NUM_DISPLAY_CYCLES-1)
         execution_state_function = UPDATE_STATE;
       else
         execution_state_function = DISPLAY;
@@ -323,23 +339,23 @@ endfunction
 always @(negedge clka) begin
 
   // Update multiplex state if in display state
-  if (restart)
+  if (restart) begin
     current_row <= 0;
     cycle_count <= 0;
-  else if (execution_state == DISPLAY) begin
+  end else if (execution_state == DISPLAY) begin
     if (current_row == 7) begin
-        current_row <= 0;
-        if (cycle_count == NUM_DISPLAY_CYCLES-1)
-          cycle_count <= 0; // Next clkb should be updating state to INPUT
-        else
-          cycle_count++;
-      end else
-        current_row++;
+      current_row <= 0;
+      if (cycle_count == NUM_DISPLAY_CYCLES-1)
+        cycle_count <= 0; // Next clkb should be updating state to INPUT
+      else
+        cycle_count <= cycle_count + 1;
+    end else
+      current_row <= current_row + 1;
   end
 
-  game_state_temp <= game_state_function;
-  direction_state_temp <= direction_state_function;
-  execution_state_temp <= execution_state_function;
+  game_state_next <= game_state_temp;
+  direction_state_next <= direction_state_temp;
+  execution_state_next <= execution_state_temp;
   
 end
 
@@ -355,12 +371,12 @@ end
 
 always @(negedge clkb) begin
   
-  execution_state <= execution_state_temp;
+  execution_state <= execution_state_next;
 
-  case (execution_state_temp);
+  case (execution_state_next)
 
     UPDATE_STATE: begin
-      game_state <= game_state_temp;
+      game_state <= game_state_next;
       // idle/off
       to_logic <= 0;
       row_cathode <= {8{1'b1}};
@@ -375,8 +391,8 @@ always @(negedge clkb) begin
     end
 
     INPUT: begin
-      direction_state <= direction_state_temp;
-      to_logic[GAME_TICK] <= 1;
+      direction_state <= direction_state_next;
+      to_logic[LOGIC_TICK] <= 1;
       if (game_state == STOP)
         to_logic[NO_UPDATE] <= 1;
       else

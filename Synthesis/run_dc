@@ -1,2 +1,0 @@
-dc_shell-xg-t -64bit -f dc.tcl | tee -i synthesis.log
-
