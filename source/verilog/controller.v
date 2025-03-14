@@ -277,13 +277,15 @@ endfunction
  *    scheme. Go to CHECK_STATE once the required number of cycles is completed.
  */
 assign execution_state_temp = execution_state_function(restart, from_logic,
-  game_state, execution_state);
+  game_state, execution_state, current_row, cycle_count);
 
 function [SIZE-1:0] execution_state_function;
   input restart;
   input [1:0] from_logic;
   input [1:0] game_state;
   input [SIZE-1:0] execution_state;
+  input [2:0] current_row;
+  input [1:0] cycle_count;
 
   if (restart)
     execution_state_function = UPDATE_STATE;
@@ -313,7 +315,7 @@ function [SIZE-1:0] execution_state_function;
     end
 
     DISPLAY: begin
-      if (current_row == 7 && cycle_count == NUM_DISPLAY_CYCLES-1)
+      if ( (current_row == 7) && (cycle_count == NUM_DISPLAY_CYCLES-1) )
         execution_state_function = UPDATE_STATE;
       else
         execution_state_function = DISPLAY;
@@ -346,7 +348,7 @@ always @(negedge clka) begin
     if (current_row == 7) begin
       current_row <= 0;
       if (cycle_count == NUM_DISPLAY_CYCLES-1)
-        cycle_count <= 0; // Next clkb should be updating state to INPUT
+        cycle_count <= 0; // Next clkb should be updating state to UPDATE_STATE
       else
         cycle_count <= cycle_count + 1;
     end else
