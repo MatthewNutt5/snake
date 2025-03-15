@@ -15,6 +15,20 @@ module controller (clka, clkb, restart, direction_in, from_logic,
  *  This FSM module also handles multiplexing for the 8x8 LED display.
  */
 
+/*
+ *  TODO: It should be possible to make the multiplexed display asynchronous,
+ *        i.e. constantly running and getting inputs directly from the logic
+ *        datapath. In all game states, the display is running, so there's no
+ *        need for it to be part of the controller. Then the DISPLAY state would
+ *        just be used to divide the clock for game ticks. Maybe implement an
+ *        asynchronous display in a separate module?
+ *        This would make sense for the intended use case, i.e. >kHz clock
+ *        speeds, but for simulation, it would create "tearing" if the logic
+ *        datapath updates the display in the middle of a frame refresh.
+ *  TODO: If the multiplexed display is being kept in its current form, is there
+ *        a smarter way to control the row cathodes? See the Output Logic block.
+ */
+
 
 
 //========== Setup ==========
@@ -397,12 +411,18 @@ always @(negedge clkb) begin
     end
 
     DISPLAY: begin
-      // Start off with idle state
-      row_cathode = {8{1'b1}};
-      column_anode = 0;
-      // Only enable necessary row and column
-      row_cathode[current_row] = 0;
-      column_anode = led_array[current_row];
+      // Enable the current row, disable all others
+      // TODO: Is there a smarter way of doing this?
+      row_cathode[0] <= (current_row == 0) ? 0 : 1;
+      row_cathode[1] <= (current_row == 1) ? 0 : 1;
+      row_cathode[2] <= (current_row == 2) ? 0 : 1;
+      row_cathode[3] <= (current_row == 3) ? 0 : 1;
+      row_cathode[4] <= (current_row == 4) ? 0 : 1;
+      row_cathode[5] <= (current_row == 5) ? 0 : 1;
+      row_cathode[6] <= (current_row == 6) ? 0 : 1;
+      row_cathode[7] <= (current_row == 7) ? 0 : 1;
+      // Columns can just be taken from led_array
+      column_anode <= led_array[current_row];
       // idle/off
       to_logic <= 0;
     end
