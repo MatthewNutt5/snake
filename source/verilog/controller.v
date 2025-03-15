@@ -22,9 +22,10 @@ module controller (clka, clkb, restart, direction_in, from_logic,
  *        need for it to be part of the controller. Then the DISPLAY state would
  *        just be used to divide the clock for game ticks. Maybe implement an
  *        asynchronous display in a separate module?
- *        This would make sense for the intended use case, i.e. >kHz clock
- *        speeds, but for simulation, it would create "tearing" if the logic
- *        datapath updates the display in the middle of a frame refresh.
+ *        This would create "tearing" if the logic datapath updates the display
+ *        in the middle of a frame refresh. Not a problem in the intended use
+ *        case, i.e. >kHz clock speeds, but it could cause some confusion when
+ *        reading simulation results.
  *  TODO: If the multiplexed display is being kept in its current form, is there
  *        a smarter way to control the row cathodes? See the Output Logic block.
  */
