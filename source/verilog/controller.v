@@ -73,10 +73,8 @@ parameter UP_STATE = 0, DOWN_STATE = 1, LEFT_STATE = 2, RIGHT_STATE = 3;
 /*
  *  Synchronizes the flow of execution between the different modules.
  */
-parameter SIZE = 3; // Adjust as needed
-output reg [SIZE-1:0] execution_state;
-parameter UPDATE_STATE = 0, CHECK_STATE = 1, INPUT = 2, WAIT_LOGIC = 3, 
-  DISPLAY = 4;
+output reg [1:0] execution_state;
+parameter CHECK_STATE = 0, INPUT = 1, WAIT_LOGIC = 2, DISPLAY = 3;
 
 /*
  *  Signal array to logic datapath. Each index represents a different signal.
@@ -105,14 +103,14 @@ output reg [7:0] row_cathode, column_anode;
  */
 wire [1:0] game_state_temp;
 wire [1:0] direction_state_temp;
-wire [SIZE-1:0] execution_state_temp;
+wire [1:0] execution_state_temp;
 
 /*
  *  Stores output of combinational logic on clka.
  */
 reg [1:0] game_state_next;
 reg [1:0] direction_state_next;
-reg [SIZE-1:0] execution_state_next;
+reg [1:0] execution_state_next;
 
 /*
  *  Keeps track of which row to display during multiplexing, and how many
@@ -201,11 +199,13 @@ endfunction
  *  Direction state: Set current direction to input direction, disallowing
  *  flips (up to down, left to right). Default to right.
  */
-assign direction_state_temp = direction_state_function(restart, direction_in);
+assign direction_state_temp = direction_state_function(restart, direction_in,
+  direction_state);
 
 function [1:0] direction_state_function;
   input restart;
   input [3:0] direction_in;
+  input [1:0] direction_state;
 
   if (restart)
     direction_state_function = RIGHT_STATE;
@@ -256,12 +256,10 @@ endfunction
 
 /*
  *  Execution state: Move through execution loop in different paths depending
- *  on game state
- *  - UPDATE_STATE: Based on directional inputs and from_logic[GAME_END],
- *    update the game state.
+ *  on game state.
  *  - CHECK_STATE: Check the game state - initialized, running, or stopped.
  *    If initialized or running, check input and send signals to logic.
- *    If stopped, don't check for input, just keep going to display state.
+ *    If stopped, check input, but also send NO_UPDATE to logic.
  *    The logic datapath should be toggling the head's LED on its own(?).
  *  - INPUT: Check the direction_in input, update direction_state accordingly.
  *    direction_state should be output to the logic datapath so it can update
@@ -279,22 +277,18 @@ endfunction
 assign execution_state_temp = execution_state_function(restart, from_logic,
   game_state, execution_state, current_row, cycle_count);
 
-function [SIZE-1:0] execution_state_function;
+function [1:0] execution_state_function;
   input restart;
   input [1:0] from_logic;
   input [1:0] game_state;
-  input [SIZE-1:0] execution_state;
+  input [1:0] execution_state;
   input [2:0] current_row;
   input [1:0] cycle_count;
 
   if (restart)
-    execution_state_function = UPDATE_STATE;
+    execution_state_function = CHECK_STATE;
   else
     case (execution_state)
-
-    UPDATE_STATE: begin
-      execution_state_function = CHECK_STATE;
-    end
 
     CHECK_STATE: begin
       if (game_state == INIT)
@@ -316,12 +310,12 @@ function [SIZE-1:0] execution_state_function;
 
     DISPLAY: begin
       if ( (current_row == 7) && (cycle_count == NUM_DISPLAY_CYCLES-1) )
-        execution_state_function = UPDATE_STATE;
+        execution_state_function = CHECK_STATE;
       else
         execution_state_function = DISPLAY;
     end
 
-    default: execution_state_function = UPDATE_STATE;
+    default: execution_state_function = CHECK_STATE;
 
     endcase
 endfunction
@@ -334,8 +328,6 @@ endfunction
  *  This sequential logic section, consisting of one always block, takes inputs
  *  at the negative edge of clka and updates internal temporary registers based
  *  on those inputs and current states.
- *  However, the final states will only be updated in certain circumstances,
- *  e.g. the game state should only be updated if in UPDATE_STATE.
  */
 
 always @(negedge clka) begin
@@ -348,7 +340,7 @@ always @(negedge clka) begin
     if (current_row == 7) begin
       current_row <= 0;
       if (cycle_count == NUM_DISPLAY_CYCLES-1)
-        cycle_count <= 0; // Next clkb should be updating state to UPDATE_STATE
+        cycle_count <= 0; // Next clkb should be updating state to CHECK_STATE
       else
         cycle_count <= cycle_count + 1;
     end else
@@ -373,17 +365,11 @@ end
 
 always @(negedge clkb) begin
   
+  game_state <= game_state_next;
+  direction_state <= direction_state_next;
   execution_state <= execution_state_next;
 
   case (execution_state_next)
-
-    UPDATE_STATE: begin
-      game_state <= game_state_next;
-      // idle/off
-      to_logic <= 0;
-      row_cathode <= {8{1'b1}};
-      column_anode <= 0;
-    end
 
     CHECK_STATE: begin
       // idle/off
@@ -393,7 +379,6 @@ always @(negedge clkb) begin
     end
 
     INPUT: begin
-      direction_state <= direction_state_next;
       to_logic[LOGIC_TICK] <= 1;
       if (game_state == STOP)
         to_logic[NO_UPDATE] <= 1;

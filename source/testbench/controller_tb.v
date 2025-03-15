@@ -24,8 +24,8 @@ wire [0:63] in_led_array_flat = {in_led_array[0], in_led_array[1],
   in_led_array[6], in_led_array[7]};
 
 // Outputs from module
-wire [1:0] out_game_state, out_direction_state, out_to_logic;
-wire [2:0] out_execution_state;
+wire [1:0] out_game_state, out_direction_state, out_execution_state,
+  out_to_logic;
 wire [7:0] out_row_cathode, out_column_anode;
 
 // Create an instance of the module
@@ -58,7 +58,7 @@ in_led_array[4] = 8'b00000000;
 in_led_array[5] = 8'b00000000;
 in_led_array[6] = 8'b00000000;
 in_led_array[7] = 8'b00000000;
-`CLOCK // move to UPDATE_STATE
+`CLOCK // move to CHECK_STATE
 
 // idle for a few cycles to show that the fsm doesn't send any
 // signals, just displays whatever the logic datapath is sending
@@ -72,6 +72,22 @@ in_led_array[4] = 8'b00000000;
 in_led_array[5] = 8'b00000000;
 in_led_array[6] = 8'b00000000;
 in_led_array[7] = 8'b00000000;
+`CLOCK // move to DISPLAY
+`CLOCK // 16 cycles of DISPLAY multiplexing 
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK // move to CHECK_STATE
 `CLOCK // move to DISPLAY
 `CLOCK // 16 cycles of DISPLAY multiplexing 
@@ -89,24 +105,32 @@ in_led_array[7] = 8'b00000000;
 `CLOCK
 `CLOCK
 `CLOCK
-`CLOCK
-`CLOCK // move to UPDATE_STATE
-`CLOCK // move to CHECK_STATE
-`CLOCK // move to DISPLAY
-`CLOCK // 16 cycles of DISPLAY multiplexing 
+// press a button to start the game
+in_direction_in = 4'b0001;
 `CLOCK
 `CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
+
+`CLOCK // checking game state
+`CLOCK // move to INPUT
+
+// "wait" for logic datapath - in reality, could be dozens of clock cycles
 `CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
-`CLOCK
+
+// logic datapath done, go to display cycle
+in_led_array[0] = 8'b00000000;
+in_led_array[1] = 8'b00000000;
+in_led_array[2] = 8'b00100000;
+in_led_array[3] = 8'b00000100;
+in_led_array[4] = 8'b00000000;
+in_led_array[5] = 8'b00000000;
+in_led_array[6] = 8'b00000000;
+in_led_array[7] = 8'b00000000;
+in_from_logic = 2'b01;
 `CLOCK
 `CLOCK
 
