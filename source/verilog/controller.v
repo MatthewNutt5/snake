@@ -26,8 +26,6 @@ module controller (clka, clkb, restart, direction_in, from_logic,
  *        in the middle of a frame refresh. Not a problem in the intended use
  *        case, i.e. >kHz clock speeds, but it could cause some confusion when
  *        reading simulation results.
- *  TODO: If the multiplexed display is being kept in its current form, is there
- *        a smarter way to control the row cathodes? See the Output Logic block.
  */
 
 
@@ -413,15 +411,14 @@ always @(negedge clkb) begin
 
     DISPLAY: begin
       // Enable the current row, disable all others
-      // TODO: Is there a smarter way of doing this?
-      row_cathode[0] <= (current_row == 0) ? 0 : 1;
-      row_cathode[1] <= (current_row == 1) ? 0 : 1;
-      row_cathode[2] <= (current_row == 2) ? 0 : 1;
-      row_cathode[3] <= (current_row == 3) ? 0 : 1;
-      row_cathode[4] <= (current_row == 4) ? 0 : 1;
-      row_cathode[5] <= (current_row == 5) ? 0 : 1;
-      row_cathode[6] <= (current_row == 6) ? 0 : 1;
-      row_cathode[7] <= (current_row == 7) ? 0 : 1;
+      row_cathode[0] <= (current_row != 0);
+      row_cathode[1] <= (current_row != 1);
+      row_cathode[2] <= (current_row != 2);
+      row_cathode[3] <= (current_row != 3);
+      row_cathode[4] <= (current_row != 4);
+      row_cathode[5] <= (current_row != 5);
+      row_cathode[6] <= (current_row != 6);
+      row_cathode[7] <= (current_row != 7);
       // Columns can just be taken from led_array
       column_anode <= led_array[current_row];
       // idle/off

@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////
 // Created by: Synopsys DC Expert(TM) in wire load mode
 // Version   : U-2022.12-SP7
-// Date      : Sat Mar 15 18:20:49 2025
+// Date      : Mon Mar 17 09:47:32 2025
 /////////////////////////////////////////////////////////////
 
 
@@ -19,9 +19,9 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   output [7:0] column_anode;
   input clka, clkb, restart;
   wire   \game_state_temp[1] , \current_row[2]1 , \current_row[1]1 ,
-         \current_row[0]1 , \cycle_count[1]1 , \cycle_count[0]1 , N115, N116,
-         N117, N118, N119, N120, N121, N122, N123, N124, N125, N126, N127,
-         N128, N129, N130, N131, N132, n1, n2, n3, n4, n5, n7, n8, n9, n10,
+         \current_row[0]1 , \cycle_count[1]1 , \cycle_count[0]1 , N114, N115,
+         N116, N117, N118, N119, N120, N121, N122, N123, N124, N125, N126,
+         N127, N128, N129, N130, N131, n1, n2, n3, n4, n5, n7, n8, n9, n10,
          n11, n12, n13, n14, n15, n16, n17, n18, n19, n20, n21, n22, n23, n24,
          n25, n26, n27, n28, n29, n30, n31, n32, n33, n34, n35, n36, n37, n38,
          n39, n40, n41, n42, n43, n44, n45, n46, n47, n48, n49, n50, n51, n52,
@@ -74,31 +74,31 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
          );
   DFFNEGX1 \execution_state_next_reg[0]  ( .D(execution_state_temp[0]), .CLK(
         clka), .Q(execution_state_next[0]) );
-  DFFNEGX1 \to_logic_reg[0]  ( .D(N115), .CLK(clkb), .Q(to_logic[0]) );
-  DFFNEGX1 \to_logic_reg[1]  ( .D(N116), .CLK(clkb), .Q(to_logic[1]) );
-  DFFNEGX1 \row_cathode_reg[7]  ( .D(N124), .CLK(clkb), .Q(row_cathode[7]) );
-  DFFNEGX1 \row_cathode_reg[6]  ( .D(N123), .CLK(clkb), .Q(row_cathode[6]) );
-  DFFNEGX1 \row_cathode_reg[5]  ( .D(N122), .CLK(clkb), .Q(row_cathode[5]) );
-  DFFNEGX1 \row_cathode_reg[3]  ( .D(N120), .CLK(n151), .Q(row_cathode[3]) );
-  DFFNEGX1 \row_cathode_reg[1]  ( .D(N118), .CLK(n151), .Q(row_cathode[1]) );
-  DFFNEGX1 \row_cathode_reg[4]  ( .D(N121), .CLK(n151), .Q(row_cathode[4]) );
-  DFFNEGX1 \row_cathode_reg[2]  ( .D(N119), .CLK(n151), .Q(row_cathode[2]) );
-  DFFNEGX1 \row_cathode_reg[0]  ( .D(N117), .CLK(n151), .Q(row_cathode[0]) );
-  DFFNEGX1 \column_anode_reg[7]  ( .D(N132), .CLK(n151), .Q(column_anode[7])
+  DFFNEGX1 \to_logic_reg[0]  ( .D(N114), .CLK(clkb), .Q(to_logic[0]) );
+  DFFNEGX1 \to_logic_reg[1]  ( .D(N115), .CLK(clkb), .Q(to_logic[1]) );
+  DFFNEGX1 \row_cathode_reg[7]  ( .D(N123), .CLK(clkb), .Q(row_cathode[7]) );
+  DFFNEGX1 \row_cathode_reg[6]  ( .D(N122), .CLK(clkb), .Q(row_cathode[6]) );
+  DFFNEGX1 \row_cathode_reg[5]  ( .D(N121), .CLK(clkb), .Q(row_cathode[5]) );
+  DFFNEGX1 \row_cathode_reg[3]  ( .D(N119), .CLK(n151), .Q(row_cathode[3]) );
+  DFFNEGX1 \row_cathode_reg[1]  ( .D(N117), .CLK(n151), .Q(row_cathode[1]) );
+  DFFNEGX1 \row_cathode_reg[4]  ( .D(N120), .CLK(n151), .Q(row_cathode[4]) );
+  DFFNEGX1 \row_cathode_reg[2]  ( .D(N118), .CLK(n151), .Q(row_cathode[2]) );
+  DFFNEGX1 \row_cathode_reg[0]  ( .D(N116), .CLK(n151), .Q(row_cathode[0]) );
+  DFFNEGX1 \column_anode_reg[7]  ( .D(N131), .CLK(n151), .Q(column_anode[7])
          );
-  DFFNEGX1 \column_anode_reg[6]  ( .D(N131), .CLK(n151), .Q(column_anode[6])
+  DFFNEGX1 \column_anode_reg[6]  ( .D(N130), .CLK(n151), .Q(column_anode[6])
          );
-  DFFNEGX1 \column_anode_reg[5]  ( .D(N130), .CLK(n151), .Q(column_anode[5])
+  DFFNEGX1 \column_anode_reg[5]  ( .D(N129), .CLK(n151), .Q(column_anode[5])
          );
-  DFFNEGX1 \column_anode_reg[4]  ( .D(N129), .CLK(n151), .Q(column_anode[4])
+  DFFNEGX1 \column_anode_reg[4]  ( .D(N128), .CLK(n151), .Q(column_anode[4])
          );
-  DFFNEGX1 \column_anode_reg[3]  ( .D(N128), .CLK(n151), .Q(column_anode[3])
+  DFFNEGX1 \column_anode_reg[3]  ( .D(N127), .CLK(n151), .Q(column_anode[3])
          );
-  DFFNEGX1 \column_anode_reg[2]  ( .D(N127), .CLK(n151), .Q(column_anode[2])
+  DFFNEGX1 \column_anode_reg[2]  ( .D(N126), .CLK(n151), .Q(column_anode[2])
          );
-  DFFNEGX1 \column_anode_reg[1]  ( .D(N126), .CLK(n151), .Q(column_anode[1])
+  DFFNEGX1 \column_anode_reg[1]  ( .D(N125), .CLK(n151), .Q(column_anode[1])
          );
-  DFFNEGX1 \column_anode_reg[0]  ( .D(N125), .CLK(n151), .Q(column_anode[0])
+  DFFNEGX1 \column_anode_reg[0]  ( .D(N124), .CLK(n151), .Q(column_anode[0])
          );
   AND2X2 U3 ( .A(\cycle_count[1]1 ), .B(n31), .Y(n146) );
   AND2X2 U4 ( .A(n39), .B(n21), .Y(\game_state_temp[1] ) );
@@ -180,7 +180,7 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   NAND3X1 U83 ( .A(direction_in[1]), .B(n27), .C(n63), .Y(n61) );
   NOR2X1 U84 ( .A(direction_in[3]), .B(direction_in[2]), .Y(n63) );
   NAND3X1 U85 ( .A(n25), .B(n24), .C(n26), .Y(n43) );
-  NOR2X1 U86 ( .A(n64), .B(n65), .Y(N132) );
+  NOR2X1 U86 ( .A(n64), .B(n65), .Y(N131) );
   OAI21X1 U87 ( .A(led_array_flat[63]), .B(n33), .C(n66), .Y(n65) );
   OAI21X1 U88 ( .A(led_array_flat[55]), .B(n67), .C(n68), .Y(n64) );
   OAI21X1 U89 ( .A(n71), .B(n72), .C(n13), .Y(n70) );
@@ -190,7 +190,7 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   OAI21X1 U92 ( .A(n73), .B(n74), .C(\current_row[0]1 ), .Y(n69) );
   OAI22X1 U93 ( .A(led_array_flat[31]), .B(n9), .C(led_array_flat[15]), .D(n10), .Y(n74) );
   NOR2X1 U94 ( .A(led_array_flat[47]), .B(n7), .Y(n73) );
-  NOR2X1 U95 ( .A(n75), .B(n76), .Y(N131) );
+  NOR2X1 U95 ( .A(n75), .B(n76), .Y(N130) );
   OAI21X1 U96 ( .A(led_array_flat[62]), .B(n33), .C(n66), .Y(n76) );
   OAI21X1 U97 ( .A(led_array_flat[54]), .B(n67), .C(n77), .Y(n75) );
   OAI21X1 U98 ( .A(n80), .B(n81), .C(n13), .Y(n79) );
@@ -201,7 +201,7 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   OAI22X1 U102 ( .A(led_array_flat[30]), .B(n9), .C(led_array_flat[14]), .D(
         n10), .Y(n83) );
   NOR2X1 U103 ( .A(led_array_flat[46]), .B(n7), .Y(n82) );
-  NOR2X1 U104 ( .A(n84), .B(n85), .Y(N130) );
+  NOR2X1 U104 ( .A(n84), .B(n85), .Y(N129) );
   OAI21X1 U105 ( .A(led_array_flat[61]), .B(n33), .C(n66), .Y(n85) );
   OAI21X1 U106 ( .A(led_array_flat[53]), .B(n67), .C(n86), .Y(n84) );
   OAI21X1 U107 ( .A(n89), .B(n90), .C(n13), .Y(n88) );
@@ -211,7 +211,7 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   OAI22X1 U111 ( .A(led_array_flat[29]), .B(n9), .C(led_array_flat[13]), .D(
         n10), .Y(n92) );
   NOR2X1 U112 ( .A(led_array_flat[45]), .B(n7), .Y(n91) );
-  NOR2X1 U113 ( .A(n93), .B(n94), .Y(N129) );
+  NOR2X1 U113 ( .A(n93), .B(n94), .Y(N128) );
   OAI21X1 U114 ( .A(led_array_flat[60]), .B(n33), .C(n66), .Y(n94) );
   OAI21X1 U115 ( .A(led_array_flat[52]), .B(n67), .C(n95), .Y(n93) );
   OAI21X1 U116 ( .A(n98), .B(n99), .C(n13), .Y(n97) );
@@ -221,7 +221,7 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   OAI22X1 U120 ( .A(led_array_flat[28]), .B(n9), .C(led_array_flat[12]), .D(
         n10), .Y(n101) );
   NOR2X1 U121 ( .A(led_array_flat[44]), .B(n7), .Y(n100) );
-  NOR2X1 U122 ( .A(n102), .B(n103), .Y(N128) );
+  NOR2X1 U122 ( .A(n102), .B(n103), .Y(N127) );
   OAI21X1 U123 ( .A(led_array_flat[59]), .B(n33), .C(n66), .Y(n103) );
   OAI21X1 U124 ( .A(led_array_flat[51]), .B(n67), .C(n104), .Y(n102) );
   OAI21X1 U125 ( .A(n107), .B(n108), .C(n13), .Y(n106) );
@@ -231,7 +231,7 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   OAI22X1 U129 ( .A(led_array_flat[27]), .B(n9), .C(led_array_flat[11]), .D(
         n10), .Y(n110) );
   NOR2X1 U130 ( .A(led_array_flat[43]), .B(n7), .Y(n109) );
-  NOR2X1 U131 ( .A(n111), .B(n112), .Y(N127) );
+  NOR2X1 U131 ( .A(n111), .B(n112), .Y(N126) );
   OAI21X1 U132 ( .A(led_array_flat[58]), .B(n33), .C(n66), .Y(n112) );
   OAI21X1 U133 ( .A(led_array_flat[50]), .B(n67), .C(n113), .Y(n111) );
   OAI21X1 U134 ( .A(n116), .B(n117), .C(n13), .Y(n115) );
@@ -241,7 +241,7 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   OAI22X1 U138 ( .A(led_array_flat[26]), .B(n9), .C(led_array_flat[10]), .D(
         n10), .Y(n119) );
   NOR2X1 U139 ( .A(led_array_flat[42]), .B(n7), .Y(n118) );
-  NOR2X1 U140 ( .A(n120), .B(n121), .Y(N126) );
+  NOR2X1 U140 ( .A(n120), .B(n121), .Y(N125) );
   OAI21X1 U141 ( .A(led_array_flat[57]), .B(n33), .C(n66), .Y(n121) );
   OAI21X1 U142 ( .A(led_array_flat[49]), .B(n67), .C(n122), .Y(n120) );
   OAI21X1 U143 ( .A(n125), .B(n126), .C(n13), .Y(n124) );
@@ -250,7 +250,7 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   OAI21X1 U146 ( .A(n127), .B(n128), .C(\current_row[0]1 ), .Y(n123) );
   OAI22X1 U147 ( .A(led_array_flat[25]), .B(n9), .C(led_array_flat[9]), .D(n10), .Y(n128) );
   NOR2X1 U148 ( .A(led_array_flat[41]), .B(n7), .Y(n127) );
-  NOR2X1 U149 ( .A(n129), .B(n130), .Y(N125) );
+  NOR2X1 U149 ( .A(n129), .B(n130), .Y(N124) );
   OAI21X1 U150 ( .A(led_array_flat[56]), .B(n33), .C(n66), .Y(n130) );
   OAI21X1 U151 ( .A(led_array_flat[48]), .B(n67), .C(n131), .Y(n129) );
   OAI21X1 U152 ( .A(n134), .B(n135), .C(n13), .Y(n133) );
@@ -259,24 +259,24 @@ module controller ( clka, clkb, restart, direction_in, from_logic,
   OAI21X1 U155 ( .A(n136), .B(n137), .C(\current_row[0]1 ), .Y(n132) );
   OAI22X1 U156 ( .A(led_array_flat[24]), .B(n9), .C(led_array_flat[8]), .D(n10), .Y(n137) );
   NOR2X1 U157 ( .A(led_array_flat[40]), .B(n7), .Y(n136) );
-  NAND2X1 U158 ( .A(n141), .B(n5), .Y(N124) );
+  NAND2X1 U158 ( .A(n141), .B(n5), .Y(N123) );
   NAND3X1 U159 ( .A(\current_row[1]1 ), .B(\current_row[0]1 ), .C(
         \current_row[2]1 ), .Y(n33) );
-  NAND2X1 U160 ( .A(n141), .B(n150), .Y(N123) );
+  NAND2X1 U160 ( .A(n141), .B(n150), .Y(N122) );
   NAND3X1 U161 ( .A(\current_row[1]1 ), .B(n13), .C(\current_row[2]1 ), .Y(n67) );
-  NAND2X1 U162 ( .A(n142), .B(n140), .Y(N122) );
-  NAND2X1 U163 ( .A(n143), .B(n140), .Y(N121) );
+  NAND2X1 U162 ( .A(n142), .B(n140), .Y(N121) );
+  NAND2X1 U163 ( .A(n143), .B(n140), .Y(N120) );
   NOR2X1 U164 ( .A(n8), .B(\current_row[1]1 ), .Y(n140) );
-  NAND2X1 U165 ( .A(n142), .B(n139), .Y(N120) );
-  NAND2X1 U166 ( .A(n143), .B(n139), .Y(N119) );
+  NAND2X1 U165 ( .A(n142), .B(n139), .Y(N119) );
+  NAND2X1 U166 ( .A(n143), .B(n139), .Y(N118) );
   NOR2X1 U167 ( .A(n11), .B(\current_row[2]1 ), .Y(n139) );
-  NAND2X1 U168 ( .A(n142), .B(n138), .Y(N118) );
-  NAND2X1 U169 ( .A(n143), .B(n138), .Y(N117) );
+  NAND2X1 U168 ( .A(n142), .B(n138), .Y(N117) );
+  NAND2X1 U169 ( .A(n143), .B(n138), .Y(N116) );
   NOR2X1 U170 ( .A(\current_row[1]1 ), .B(\current_row[2]1 ), .Y(n138) );
-  NOR2X1 U171 ( .A(n1), .B(N115), .Y(n141) );
-  NOR2X1 U172 ( .A(n15), .B(n144), .Y(N116) );
-  NAND2X1 U173 ( .A(N115), .B(n16), .Y(n144) );
-  NOR2X1 U174 ( .A(n1), .B(execution_state_next[1]), .Y(N115) );
+  NOR2X1 U171 ( .A(n1), .B(N114), .Y(n141) );
+  NOR2X1 U172 ( .A(n15), .B(n144), .Y(N115) );
+  NAND2X1 U173 ( .A(N114), .B(n16), .Y(n144) );
+  NOR2X1 U174 ( .A(n1), .B(execution_state_next[1]), .Y(N114) );
   INVX2 U175 ( .A(\current_row[0]1 ), .Y(n13) );
   INVX2 U176 ( .A(n139), .Y(n9) );
   INVX2 U177 ( .A(n140), .Y(n7) );
