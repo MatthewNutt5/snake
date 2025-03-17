@@ -132,9 +132,69 @@ in_led_array[6] = 8'b00000000;
 in_led_array[7] = 8'b00000000;
 in_from_logic = 2'b01;
 `CLOCK
+in_from_logic = 2'b00;
+`CLOCK // 16 cycles of DISPLAY multiplexing 
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+in_direction_in = 4'b0010; // direction FSM should not change, up --/--> down
+`CLOCK
 `CLOCK
 
+`CLOCK // checking game state
+`CLOCK // move to INPUT
 
+// "wait" for logic datapath - in reality, could be dozens of clock cycles
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+
+// logic datapath done, go to display cycle
+in_led_array[0] = 8'b00000000;
+in_led_array[1] = 8'b00100000;
+in_led_array[2] = 8'b00000000;
+in_led_array[3] = 8'b00000100;
+in_led_array[4] = 8'b00000000;
+in_led_array[5] = 8'b00000000;
+in_led_array[6] = 8'b00000000;
+in_led_array[7] = 8'b00000000;
+in_from_logic = 2'b11; // let's say that the game ends here
+`CLOCK
+in_from_logic = 2'b00;
+`CLOCK // 16 cycles of DISPLAY multiplexing 
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+
+`CLOCK // checking game state
+`CLOCK // move to INPUT, but this time sending NO_UPDATE
 
 
 
