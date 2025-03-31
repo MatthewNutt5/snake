@@ -51,7 +51,7 @@ parameter UP_IN = 4'b0001, DOWN_IN = 4'b0010,
 
 /*
  *  Signal array from logic datapath. Each index represents a different signal.
- *  - The parameters represent indices, not bit masks.
+ *  - The parameters are indices, not bit masks.
  */
 input wire [1:0] from_logic;
 parameter LOGIC_DONE = 0, GAME_END = 1;
@@ -134,7 +134,7 @@ reg [1:0] cycle_count;
 parameter NUM_DISPLAY_CYCLES = 2;
 
 /*
- *  Unflattens input led_array_flat. Verilog why.
+ *  Unflattens input led_array_flat.
  */
 wire [7:0] led_array [7:0];
 assign led_array[0] = led_array_flat[7:0];
