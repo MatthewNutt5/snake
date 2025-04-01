@@ -124,6 +124,7 @@ reg [5:0] random_num_temp;
 /*
  *  Temp registers for holding the value of outputs at clka.
  */
+reg [63:0] led_array_flat_temp;
 reg [1:0] to_controller_temp;
 reg request_rand_temp;
 
@@ -203,20 +204,20 @@ always @(negedge clka) begin
       snake_body[i] = 0;
     end
     for (j = 0; j < 64; j = j + 1)begin
-      led_array_flat[j] = 0;
+      led_array_flat_temp[j] = 0;
     end
     snake_length = 1; 
-    led_array_flat[36] = 1; //turn on led at middle of board. could turn on at game_start instead
+    led_array_flat_temp[36] = 1; //turn on led at middle of board. could turn on at game_start instead
 
   end else begin
     for (i = 0; i < snake_length; i = i + 1)begin
       snake_body[i + 1] = snake_body[i];
       //turn on the led at (x_pos, y_pos) of i-th body piece
       //led_array[snake_body[i + 1][5:3]][snake_body[i + 1][2:0]] = 1;
-      led_array_flat[(8*snake_body[i + 1][5:3]) + snake_body[i + 1][2:0]] = 1
+      led_array_flat_temp[(8*snake_body[i + 1][5:3]) + snake_body[i + 1][2:0]] = 1
     end
     snake_body[0] = next_head;
-    led_array_flat[(8*snake_body[0][5:3]) + snake_body[0][2:0]] = 1;
+    led_array_flat_temp[(8*snake_body[0][5:3]) + snake_body[0][2:0]] = 1;
 
   end
 
