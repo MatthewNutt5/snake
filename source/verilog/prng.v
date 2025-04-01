@@ -54,8 +54,6 @@ output reg [5:0] random_num;
 
 
 
-
-
 //---------- Internal Variables ----------
 
 /*

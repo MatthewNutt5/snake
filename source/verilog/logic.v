@@ -98,6 +98,8 @@ output reg request_rand;
 
 /*
  *  Unflattens output led_array_flat.
+ *  NOTE: Is it necessary to unflatten led_array if we just end up having to 
+ *  flatten it for output anyway?
  */
 wire [7:0] led_array [7:0];
 assign led_array[0] = led_array_flat[7:0];
@@ -109,17 +111,70 @@ assign led_array[5] = led_array_flat[47:40];
 assign led_array[6] = led_array_flat[55:48];
 assign led_array[7] = led_array_flat[63:56];
 
+
 /*
  *  Various registers for holding the value of inputs at clka.
  */
 reg restart_temp;
+reg direction_state_temp;
+reg [1:0] from_controller_temp;
+reg prng_done_temp;
+reg [5:0] random_num_temp;
+
+/*
+ *  Temp registers for holding the value of outputs at clka.
+ */
+reg [1:0] to_controller_temp;
+reg request_rand_temp;
 
 // May need counters here for iterating over multiple clock cycles
 // Definitely put the shift register, next head location, apple location, and
 // current snake length here
 
+/*
+*  64 6-bit registers. The n-th register keeps track of the position of the n-th
+*  body part of the snake. snake_body[n][2:0] will be the x-position, and
+*  snake_body[n][5:3] will be the y-position.
+*/
+reg [5:0] snake_body [63:0];
+
+/*
+*  Register to store the location of the next head, determined by the current
+*  direction_state.
+*/
+reg [5:0] next_head;
+
+/*
+*  Register to store the location of the apple on the board. This is determined
+*  by our PRNG module. 
+*/
+reg [5:0] apple_location;
+
+/*
+*  Register to keep track of the current snake length, for score keeping purposes
+*  as well as boundary conditions.
+*/
+reg [5:0] snake_length;
 
 
+/*
+*  Logic to determine next_head based on direction_state. 
+*  NOTE: Our direction FSM takes care of cases where we're moving up
+*  and an up or down input is applied, so we don't need to worry about
+*  those cases here. We do however, care about the grid boundaries.
+*  Enter collision detection.
+*/
+always @(*) begin
+  if (direction_state == UP_STATE)begin
+    next_head[5:3] = snake_body[0][5:3] + 1'b1; 
+  end else if (direction_state == DOWN_STATE) begin
+    next_head[5:3] = snake_body[0][5:3] - 1'b1; 
+  end else if (direction_state == RIGHT_STATE) begin
+    next_head[2:0] = snake_body[0][2:0] + 1'b1; 
+  end else if (direction_state == LEFT_STATE) begin
+    next_head[2:0] = snake_body[0][2:0] - 1'b1; 
+  end
+end
 
 
 //========== Code ==========
@@ -133,10 +188,35 @@ reg restart_temp;
  */
 
 always @(negedge clka) begin
-
-  restart_temp <= restart;
+  
+  integer i = 0;
+  integer j = 0;
+  restart_temp = restart;
+  direction_state_temp = direction_state;
+  from_controller_temp = from_controller;
 
   if (restart) begin
+
+    to_controller_temp = 2'b11;
+    snake_body[0] = 100100; //"middle" of board for now
+    for (i = 1; i < 64; i = i + 1)begin //reset all registers to 0
+      snake_body[i] = 0;
+    end
+    for (j = 0; j < 64; j = j + 1)begin
+      led_array_flat[j] = 0;
+    end
+    snake_length = 1; 
+    led_array_flat[36] = 1; //turn on led at middle of board. could turn on at game_start instead
+
+  end else begin
+    for (i = 0; i < snake_length; i = i + 1)begin
+      snake_body[i + 1] = snake_body[i];
+      //turn on the led at (x_pos, y_pos) of i-th body piece
+      //led_array[snake_body[i + 1][5:3]][snake_body[i + 1][2:0]] = 1;
+      led_array_flat[(8*snake_body[i + 1][5:3]) + snake_body[i + 1][2:0]] = 1
+    end
+    snake_body[0] = next_head;
+    led_array_flat[(8*snake_body[0][5:3]) + snake_body[0][2:0]] = 1;
 
   end
 
