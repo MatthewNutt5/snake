@@ -172,13 +172,13 @@ function [5:0] next_head_function;
 
   case(direction_state)
     UP_STATE:
-      next_head[5:3] = current_head[5:3] + 1;
+      next_head_function = {(current_head[5:3] + 1), 3'b000};
     DOWN_STATE:
-      next_head[5:3] = current_head[5:3] - 1;
+      next_head_function = {(current_head[5:3] - 1), 3'b000};
     RIGHT_STATE:
-      next_head[2:0] = current_head[2:0] + 1;
+      next_head_function = {3'b000, (current_head[2:0] + 1)};
     LEFT_STATE:
-      next_head[2:0] = current_head[2:0] - 1;
+      next_head_function = {3'b000, (current_head[2:0] - 1)};
   endcase
 
 endfunction
@@ -196,9 +196,19 @@ endfunction
 always @(negedge clka) begin
   
   restart_temp <= restart;
-  next_head_temp <= next_head;
   from_controller_temp <= from_controller;
   random_num_temp <= random_num;
+
+  case(direction_state)
+    UP_STATE:
+      next_head_temp = next_head | {current_head[5:3], 3'b000};
+    DOWN_STATE:
+      next_head_temp = next_head | {current_head[5:3], 3'b000};
+    RIGHT_STATE:
+      next_head_temp <= next_head | {3'b000, current_head[2:0]};
+    LEFT_STATE:
+      next_head_temp <= next_head | {3'b000, current_head[2:0]};
+  endcase
 
 end
 
@@ -241,7 +251,7 @@ always @(negedge clkb) begin
     snake_body[counter + 1] <= snake_body[counter];
     led_array[snake_body[counter][5:3]][snake_body[counter][2:0]] <= 1;
     if (snake_body[counter] == next_head_temp)
-      to_controller_temp[GAME_END] <= 1;
+      to_controller[GAME_END] <= 1;
   
   end else if (~shift_done) begin
     
