@@ -1,0 +1,1 @@
+../source/testbench/logic_tb.v
