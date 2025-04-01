@@ -6,6 +6,10 @@ module prng (clka, clkb, restart, request_rand, prng_done, random_num);
 /*
  *  This datapath module handles the random number generation for the game.
  *  It is based around a 6-bit LFSR.
+ *  NOTE: Ideas for future reference. I wonder if it would be better for us to make
+ *  one call to prng module with our seed, and then the prng module outputs an array
+ *  to memory of all of the generate random numbers for the game (this is how I did 
+ *  my 327). Also... something else but idk if it's a good idea. 
  */
 
 /*
@@ -15,6 +19,7 @@ module prng (clka, clkb, restart, request_rand, prng_done, random_num);
  *        get other parts working?
  *  TODO: I forgot our LFSR research; is there a way to get a PRNG period longer
  *        than (2^6 - 1)?
+ *  RESPONSE NOTE: Yes, we just implement x^6 + x^5 + 1 as our LFSR polynomial.
  */
 
 
@@ -34,8 +39,6 @@ input wire clka, clkb, restart;
  *  Signal sent by the logic datapath when a new random number is needed.
  */
 input wire request_rand;
-
-
 
 //---------- Output Ports ----------
 
@@ -58,8 +61,22 @@ output reg [5:0] random_num;
 /*
  *  Hard-coded seed to initialize the LFSR with. In future versions, this may
  *  be replaced by some mechanism to randomize the seed.
+ *  NOTE: if we hardcode seed, it can't be a zero seed. LFSRs fall apart when 
+ *  they come across a zero seed. Perhaps we can gather entropy from time it takes
+ *  user to press start game button to initialize our seed.
  */
-parameter SEED = 6'b000000;
+parameter SEED = 6'b000000; 
+
+/*
+*   State of the LFSR. This is necessary to generate our new random number.
+*/
+reg lfsr;
+
+/*
+*   Register for holding the bit that we eventually use to replace the MSB of
+*   our LFSR (post right shift)
+*/
+reg bit;
 
 /*
  *  Temporary register for holding the next random number, in order to maintain
@@ -67,6 +84,11 @@ parameter SEED = 6'b000000;
  */
 reg [5:0] random_num_temp;
 
+/*
+ *  Temporary register for holding prng done flag, in order to maintain
+ *  timing discipline.
+ */
+reg [5:0] prng_done_temp;
 
 
 
@@ -81,11 +103,20 @@ reg [5:0] random_num_temp;
  *  any outputs until clkb; use temporary registers if necessary.
  */
 
+ /*
+ *  This is where we will calculate our lfsr (random_num). I used blocking assignment
+ *  because otherwise bit wouldn't be assigned before lfsr is computed, etc...
+ */
 always @(negedge clka) begin
 
   if (restart) begin
-    random_num_temp <= SEED;
+    random_num_temp = SEED;
+  end else if (request_rand) begin
+    bit = lfsr[0] ^ lfsr[1];
+    lfsr = (lfsr >> 1) | (bit << 5) //appends bit to end of shifted lfsr
+    random_num_temp = lfsr; 
   end
+  prng_done_temp = 1'b1;
 
 end
 
@@ -100,6 +131,7 @@ end
 always @(negedge clkb) begin
 
   random_num <= random_num_temp;
+  prng_done <= prng_done_temp;
 
 end
 
