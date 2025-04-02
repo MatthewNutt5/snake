@@ -161,6 +161,27 @@ in_from_controller = 0;
 `CLOCK
 `CLOCK
 
+// now check if it blinks the head's LED
+`CLOCK
+in_from_controller = 2'b11; // LOGIC_TICK, NO_UPDATE
+`CLOCK
+in_from_controller = 0;
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+
+`CLOCK
+in_from_controller = 2'b11; // LOGIC_TICK, NO_UPDATE
+`CLOCK
+in_from_controller = 0;
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+
 
 
 $dumpfile ("controller_tb.vcd");
