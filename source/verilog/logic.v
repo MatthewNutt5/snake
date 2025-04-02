@@ -31,6 +31,9 @@ module logic (clka, clkb, restart, from_controller, direction_state,
 
 //========== Setup ==========
 
+`define Xpos 2:0
+`define Ypos 5:3
+
 //---------- Input Ports ----------
 
 /*
@@ -74,10 +77,7 @@ parameter LOGIC_DONE = 0, GAME_END = 1;
 
 /*
  *  Flattened version of a nested array denoting which LEDs should be lit.
- *  - led_array[r] is the r-th row, led_array[r][c] is the c-th column in the
- *    r-th row.
- *  - Indexes off the bottom-left corner of the display matrix.
- *  - Flattened version starts with 0-th row, then 1-st row, etc., unflattened
+ *  - Starts with 0-th row at LSB, then 1-st row, etc., unflattened
  *    by internal wire.
  */
 output wire [63:0] led_array_flat;
@@ -92,18 +92,12 @@ output reg request_rand;
 //---------- Internal Variables ----------
 
 /*
- *  Register responsible for keeping track of clock cycles.
- */
-reg [5:0] counter;
-
-/*
- * Flag to help us determine when shifting of body, collision detection, etc, is
- * complete and we need to save a clock cycle for end processes. 
- */
-reg shift_done;
-
-/*
- *  Flattens internal led_array to output led_array_flat wire.
+ *  Nested array denoting which LEDs should be lit or unlit.
+ *  - led_array[r] is the r-th row, led_array[r][c] is the c-th column in the
+ *    r-th row.
+ *  - Indexes off the bottom-left corner of the display matrix.
+ *  - Flattened version starts with 0-th row at LSB, then 1-st row, etc.,
+ *    unflattened by internal wire.
  */
 reg [7:0] led_array [7:0];
 assign led_array_flat = {led_array[7], led_array[6], led_array[5], led_array[4],
@@ -118,8 +112,9 @@ reg [5:0] random_num_temp;
 
 /*
  *  64 6-bit registers. The n-th register keeps track of the position of the
- *  n-th body part of the snake. snake_body[n][2:0] will be the x-position, and
- *  snake_body[n][5:3] will be the y-position.
+ *  n-th body part of the snake. snake_body[n][`Xpos] will be the x-position,
+ *  and snake_body[n][`Ypos] will be the y-position.
+ *  - Position = YYYXXX
  */
 reg [5:0] snake_body [63:0];
 
@@ -149,20 +144,32 @@ reg [5:0] apple_location;
  */
 reg [5:0] snake_length;
 
+/*
+ *  Register responsible for keeping track of clock cycles.
+ */
+reg [5:0] counter;
 
 /*
- *  Logic to determine next_head based on direction_state. 
- *  NOTE: Our direction FSM takes care of cases where we're moving up
- *  and an up or down input is applied, so we don't need to worry about
- *  those cases here. We do however, care about the grid boundaries.
- *  Enter collision detection.
+ * Flag to help us determine when shifting of body, collision detection, etc, is
+ * complete and we need to save a clock cycle for end processes. 
  */
+reg shift_done;
+
+
 
 
 
 //========== Code ==========
 
 //---------- Combinational Logic ----------
+
+/*
+ *  Logic to determine next_head based on direction_state. 
+ *  - Our direction FSM takes care of cases where we're moving up
+ *    and an up or down input is applied, so we don't need to worry about
+ *    those cases here. We do however, care about the grid boundaries.
+ *    Enter collision detection.
+ */
 
 assign next_head = next_head_function(direction_state, current_head);
 
@@ -172,13 +179,13 @@ function [5:0] next_head_function;
 
   case(direction_state)
     UP_STATE:
-      next_head_function = {(current_head[5:3] + 1), 3'b000};
+      next_head_function = {(current_head[`Ypos] + 1), 3'b000};
     DOWN_STATE:
-      next_head_function = {(current_head[5:3] - 1), 3'b000};
+      next_head_function = {(current_head[`Ypos] - 1), 3'b000};
     RIGHT_STATE:
-      next_head_function = {3'b000, (current_head[2:0] + 1)};
+      next_head_function = {3'b000, (current_head[`Xpos] + 1)};
     LEFT_STATE:
-      next_head_function = {3'b000, (current_head[2:0] - 1)};
+      next_head_function = {3'b000, (current_head[`Xpos] - 1)};
   endcase
 
 endfunction
@@ -201,13 +208,13 @@ always @(negedge clka) begin
 
   case(direction_state)
     UP_STATE:
-      next_head_temp = next_head | {current_head[5:3], 3'b000};
+      next_head_temp = next_head | {3'b000, current_head[`Xpos]};
     DOWN_STATE:
-      next_head_temp = next_head | {current_head[5:3], 3'b000};
+      next_head_temp = next_head | {3'b000, current_head[`Xpos]};
     RIGHT_STATE:
-      next_head_temp <= next_head | {3'b000, current_head[2:0]};
+      next_head_temp <= next_head | {current_head[`Ypos], 3'b000};
     LEFT_STATE:
-      next_head_temp <= next_head | {3'b000, current_head[2:0]};
+      next_head_temp <= next_head | {current_head[`Ypos], 3'b000};
   endcase
 
 end
@@ -225,32 +232,44 @@ always @(negedge clkb) begin
 
   if (restart_temp) begin
     
-    to_controller <= 2'b00;
+    to_controller <= 2'b01; // init with LOGIC_DONE; it will go low at tick
     snake_length <= 1;
-    snake_body[0] <= 100100; //"middle" of board for now
-    led_array[4][4] <= 1;
+    request_rand <= 0;
+    snake_body[0] <= 6'b011010; // "middle" of board for now
+    apple_location <= 6'b011101; // apple to the right of that
+    led_array[3][2] <= 1; // light the LED for those positions
+    led_array[3][5] <= 1;
     {led_array[7], led_array[6], led_array[5], led_array[4], led_array[3],
      led_array[2], led_array[1], led_array[0]} <= 0;
     
-  end else if (from_controller_temp[LOGIC_TICK]) begin
+  end else if (from_controller_temp[LOGIC_TICK] &&
+    ~from_controller_temp[NO_UPDATE]) begin
     
     shift_done <= 0;
     to_controller[LOGIC_DONE] <= 0;
     {led_array[7], led_array[6], led_array[5], led_array[4], led_array[3],
-     led_array[2], led_array[1], led_array[0]} <= 0;
+      led_array[2], led_array[1], led_array[0]} <= 0;
     if (apple_location == next_head_temp) begin
       snake_length <= snake_length + 1;
       request_rand <= 1;
-      counter <= snake_length - 1;
+      counter <= snake_length;
     end else
-      counter <= snake_length - 2;
-    
+      counter <= snake_length - 1;
+  
+  end else if (from_controller_temp[LOGIC_TICK] &&
+  from_controller_temp[NO_UPDATE]) begin
+
+    led_array[current_head[`Ypos]][current_head[`Xpos]] <= 
+    led_array[current_head[`Ypos]][current_head[`Xpos]] ^ 1;
+
   end else if (counter > 0) begin
 
+    request_rand <= 0;
     counter <= counter - 1;
-    snake_body[counter + 1] <= snake_body[counter];
-    led_array[snake_body[counter][5:3]][snake_body[counter][2:0]] <= 1;
-    if (snake_body[counter] == next_head_temp)
+    snake_body[counter] <= snake_body[counter - 1];
+    led_array[snake_body[counter - 1][`Ypos]][snake_body[counter - 1][`Xpos]]
+      <= 1;
+    if (snake_body[counter - 1] == next_head_temp)
       to_controller[GAME_END] <= 1;
   
   end else if (~shift_done) begin
@@ -258,9 +277,9 @@ always @(negedge clkb) begin
     shift_done <= 1;
     to_controller[LOGIC_DONE] <= 1;
     snake_body[0] <= next_head_temp;
-    led_array[next_head_temp[5:3]][next_head_temp[2:0]] <= 1;
+    led_array[next_head_temp[`Ypos]][next_head_temp[`Xpos]] <= 1;
     apple_location <= random_num_temp;
-    led_array[random_num_temp[5:3]][random_num_temp[2:0]] <= 1;
+    led_array[random_num_temp[`Ypos]][random_num_temp[`Xpos]] <= 1;
 
   end
 

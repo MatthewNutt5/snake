@@ -62,8 +62,8 @@ parameter LOGIC_DONE = 0, GAME_END = 1;
  *  - led_array[r] is the r-th row, led_array[r][c] is the c-th column in the
  *    r-th row.
  *  - Indexes off the bottom-left corner of the display matrix.
- *  - Flattened version starts with 0-th row, then 1-st row, etc., unflattened
- *    by internal wire.
+ *  - Flattened version starts with 0-th row at LSB, then 1-st row, etc.,
+ *    unflattened by internal wire.
  */
 input wire [63:0] led_array_flat;
 

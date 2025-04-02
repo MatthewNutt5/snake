@@ -49,8 +49,13 @@ output reg [5:0] random_num;
 /*
  *  Hard-coded seed to initialize the LFSR with. In future versions, this may
  *  be replaced by some mechanism to randomize the seed.
+ *  TODO: This is currently set to the initial position of the apple, since
+ *        the logic datapath will always update the apple position with the
+ *        current random number; besides the starting condition, this works
+ *        since the datapath will only request a new random number when it's
+ *        needed.
  */
-parameter SEED = 6'b110100;
+parameter SEED = 6'b011101;
 
 /*
  *  Temp register to hold value of input at clka.
