@@ -208,9 +208,9 @@ always @(negedge clka) begin
 
   case(direction_state)
     UP_STATE:
-      next_head_temp = next_head | {3'b000, current_head[`Xpos]};
+      next_head_temp <= next_head | {3'b000, current_head[`Xpos]};
     DOWN_STATE:
-      next_head_temp = next_head | {3'b000, current_head[`Xpos]};
+      next_head_temp <= next_head | {3'b000, current_head[`Xpos]};
     RIGHT_STATE:
       next_head_temp <= next_head | {current_head[`Ypos], 3'b000};
     LEFT_STATE:
@@ -228,7 +228,6 @@ end
  */
 
 always @(negedge clkb) begin
-
 
   if (restart_temp) begin
     

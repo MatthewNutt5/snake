@@ -58,9 +58,9 @@ output reg [5:0] random_num;
 parameter SEED = 6'b011101;
 
 /*
- *  Temp register to hold value of input at clka.
+ *  Temp registers to hold values of inputs at clka.
  */
-reg request_rand_temp;
+reg restart_temp, request_rand_temp;
 
 
 

@@ -12,10 +12,10 @@
 #/* Edit this part only of the file.                                     */
 #/* Add all verilog files, separated by spaces after keyword "list"      */
 
-set my_verilog_files [list controller.v]
+set my_verilog_files [list logic.v]
 
 #/* Top-level Module Name update                            */
-set my_toplevel controller
+set my_toplevel logic
 
 #/* The name of the clock pin. If no clock-pin     */
 #/* exists, pick anything                          */

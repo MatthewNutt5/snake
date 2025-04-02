@@ -18,7 +18,6 @@ reg       in_clka, in_clkb, in_restart;
 reg       in_request_rand;
 
 // Outputs from module
-wire       out_prng_done;
 wire [5:0] out_random_num;
 
 // Create an instance of the module
@@ -26,9 +25,8 @@ prng         numgen (.clka (in_clka),
                     .clkb (in_clkb),
                     .restart (in_restart),
                     .request_rand (in_request_rand),
-                    .prng_done (out_prng_done),
-                    .random_num (out_random_num),
-)
+                    .random_num (out_random_num)
+);
 
 initial
 begin
@@ -82,7 +80,6 @@ in_request_rand = 0;
 `CLOCK
 `CLOCK
 `CLOCK
-
 
 
 
