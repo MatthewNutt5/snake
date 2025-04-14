@@ -231,15 +231,13 @@ always @(negedge clkb) begin
 
   if (restart_temp) begin
     
-    shift_done <= 1;
-    counter <= 0;
     to_controller <= 2'b01; // init with LOGIC_DONE; it will go low at tick
     snake_length <= 1;
     request_rand <= 0;
+    counter <= 0;
+    shift_done <= 1;
     snake_body[0] <= 6'b011010; // "middle" of board for now
     apple_location <= 6'b011101; // apple to the right of that
-    led_array[3][2] <= 1; // light the LED for those positions
-    led_array[3][5] <= 1; // we should light them after zeroing
     {led_array[7], led_array[6], led_array[5], led_array[4], led_array[3],
      led_array[2], led_array[1], led_array[0]} <= 0;
     {snake_body[1], snake_body[2], snake_body[3], snake_body[4], snake_body[5],

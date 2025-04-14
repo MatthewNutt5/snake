@@ -11,7 +11,7 @@
     in_clka = 0; in_clkb = 1; #10; \
   end
 
-module snake_tb();
+module top_tb();
 
 // Inputs to top module
 reg        in_clka, in_clkb, in_restart;
@@ -42,16 +42,10 @@ top snake_top (.in_clka(in_clka),
                .out_request_rand(out_request_rand)
                );
 
-
-
 initial
 begin
 
-/*
- *  NOTE: Numerical inputs are delayed by one cycle behind their 
- *        corresponding control input because the FSM delays
- *        control signals to the datapath by one cycle.
- */
+
 
 // restart
 in_restart = 1;
@@ -66,7 +60,7 @@ in_restart = 0;
 `CLOCK
 
 // move to the right
-in_direction_in = 3; 
+in_direction_in = 4'b1000;
 `CLOCK //execution_state: CHECK -> INPUT, game_state: INIT -> RUN
 // LOGIC_TICK
 `CLOCK //execution_state: INPUT -> WAIT_LOGIC
@@ -80,7 +74,6 @@ in_direction_in = 3;
 `CLOCK
 `CLOCK
 `CLOCK
-
 
 // multiplexing done, let's keep moving
 `CLOCK // LOGIC_TICK
@@ -117,7 +110,7 @@ in_direction_in = 3;
 `CLOCK
 
 // move up to eat the next apple
-in_direction_in = 0;
+in_direction_in = 4'b0001;
 `CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
@@ -129,8 +122,13 @@ in_direction_in = 0;
 `CLOCK
 
 // continue moving up, eat apple here
-// new apple at (3,7)
+// new apple at (6,7)
 `CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -141,7 +139,7 @@ in_direction_in = 0;
 `CLOCK
 
 // move right
-in_direction_in = 3; 
+in_direction_in = 4'b1000; 
 `CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
@@ -151,9 +149,13 @@ in_direction_in = 3;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 
-// move down
-in_direction_in = 1; 
+// move up
+in_direction_in = 4'b0001;
 `CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
@@ -163,10 +165,23 @@ in_direction_in = 1;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 
-// move down, eat apple
+// move right, eat apple
 // next apple at (3,3)
+in_direction_in = 4'b1000; 
 `CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -176,8 +191,8 @@ in_direction_in = 1;
 `CLOCK
 `CLOCK
 
-// move left 3 spaces
-in_direction_in = 2; 
+// move down 4 spaces
+in_direction_in = 4'b0010; 
 `CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
@@ -197,6 +212,90 @@ in_direction_in = 2;
 `CLOCK
 `CLOCK
 `CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+
+// move left
+in_direction_in = 4'b0100; 
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -206,9 +305,12 @@ in_direction_in = 2;
 `CLOCK
 `CLOCK
 
-// move left, eat apple
-// next apple at (1,5), need to eat one more before SELF DESTRUCT
+// move down to eat apple at (1,5)
+in_direction_in = 4'b0010; 
 `CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -218,39 +320,12 @@ in_direction_in = 2;
 `CLOCK
 `CLOCK
 
-// move down 2 spaces
-in_direction_in = 1; 
+// move right
+in_direction_in = 4'b1000; 
 `CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
 `CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK // LOGIC_TICK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-
-// move right 2 spaces, eat apple
-in_direction_in = 3; 
-`CLOCK // LOGIC_TICK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -261,7 +336,7 @@ in_direction_in = 3;
 `CLOCK
 
 // move up, contemplate impending doom
-in_direction_in = 0; 
+in_direction_in = 4'b0001; 
 `CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
@@ -271,44 +346,22 @@ in_direction_in = 0;
 `CLOCK
 `CLOCK
 `CLOCK
-
-// move left, continue contemplation
-in_direction_in = 2; 
-`CLOCK // LOGIC_TICK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
 `CLOCK
 
-// move down, panic
-in_direction_in = 1; 
-`CLOCK // LOGIC_TICK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-
-// perish
-`CLOCK // LOGIC_TICK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-
-// now check if it blinks the head's LED
+// perish, now check if it blinks the head's LED
 `CLOCK // LOGIC_TICK, NO_UPDATE
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
