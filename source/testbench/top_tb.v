@@ -18,28 +18,31 @@ reg        in_clka, in_clkb, in_restart;
 reg [3:0]  in_direction_in;
 
 // Outputs from top_module
-wire [5:0]  out_random_num;
+wire [7:0]  out_row_cathode, out_column_anode;
+wire [1:0]  out_control_to_logic, out_logic_to_control, out_game_state,
+            out_direction_state, out_execution_state;
 wire [63:0] out_led_array_flat;
+wire [5:0]  out_random_num;
 wire        out_request_rand;
-wire [1:0]  out_game_state, out_direction_state, out_execution_state, out_to_logic, out_from_logic;
-wire [7:0]  out_row_cathode, out_column_cathode;
 
 // Create a top system instance
-top snake_top (.in_clka (in_clka),
-              .in_clkb (in_clkb),
-              .in_restart (in_restart),
-              .in_direction_in(in_direction_in),
-              .out_led_array_flat(out_led_array_flat), 
-              .out_from_logic(out_from_logic),  
-              .out_game_state(out_game_state), 
-              .out_direction_state(out_direction_state), 
-              .out_execution_state(out_execution_state), 
-              .out_to_logic(out_to_logic), 
-              .out_row_cathode(out_row_cathode), 
-              .out_column_cathode(out_column_cathode), 
-              .out_random_num(out_random_num), 
-              .out_request_rand(out_request_rand)
-              );
+top snake_top (.in_clka(in_clka),
+               .in_clkb(in_clkb),
+               .in_restart(in_restart),
+               .in_direction_in(in_direction_in),
+               .out_row_cathode(out_row_cathode),
+               .out_column_anode(out_column_anode),
+               .out_control_to_logic(out_control_to_logic),
+               .out_logic_to_control(out_logic_to_control),
+               .out_game_state(out_game_state),
+               .out_direction_state(out_direction_state),
+               .out_execution_state(out_execution_state),
+               .out_led_array_flat(out_led_array_flat),
+               .out_random_num(out_random_num),
+               .out_request_rand(out_request_rand)
+               );
+
+
 
 initial
 begin
@@ -49,8 +52,6 @@ begin
  *        corresponding control input because the FSM delays
  *        control signals to the datapath by one cycle.
  */
-
-
 
 // restart
 in_restart = 1;
@@ -65,7 +66,7 @@ in_restart = 0;
 `CLOCK
 
 // move to the right
-in_direction = 3; 
+in_direction_in = 3; 
 `CLOCK //execution_state: CHECK -> INPUT, game_state: INIT -> RUN
 // LOGIC_TICK
 `CLOCK //execution_state: INPUT -> WAIT_LOGIC
@@ -78,10 +79,13 @@ in_direction = 3;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
+
 
 // multiplexing done, let's keep moving
 `CLOCK // LOGIC_TICK
 `CLOCK // multiplexing
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -99,6 +103,7 @@ in_direction = 3;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
 
 // snake is at (3,5), move right one more
 `CLOCK // LOGIC_TICK 
@@ -109,10 +114,12 @@ in_direction = 3;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
 
 // move up to eat the next apple
-in_direction = 0;
+in_direction_in = 0;
 `CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -131,10 +138,12 @@ in_direction = 0;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
 
 // move right
-in_direction = 3; 
+in_direction_in = 3; 
 `CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -144,8 +153,9 @@ in_direction = 3;
 `CLOCK
 
 // move down
-in_direction = 1; 
+in_direction_in = 1; 
 `CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -164,9 +174,10 @@ in_direction = 1;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
 
 // move left 3 spaces
-in_direction = 2; 
+in_direction_in = 2; 
 `CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
@@ -175,15 +186,18 @@ in_direction = 2;
 `CLOCK
 `CLOCK
 `CLOCK
-`CLOCK // LOGIC_TICK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
-`CLOCK
 `CLOCK
 `CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -202,9 +216,10 @@ in_direction = 2;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
 
 // move down 2 spaces
-in_direction = 1; 
+in_direction_in = 1; 
 `CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
@@ -213,7 +228,9 @@ in_direction = 1;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
 `CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -223,7 +240,7 @@ in_direction = 1;
 `CLOCK
 
 // move right 2 spaces, eat apple
-in_direction = 3; 
+in_direction_in = 3; 
 `CLOCK // LOGIC_TICK
 `CLOCK
 `CLOCK
@@ -232,7 +249,9 @@ in_direction = 3;
 `CLOCK
 `CLOCK
 `CLOCK
+`CLOCK
 `CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -242,8 +261,9 @@ in_direction = 3;
 `CLOCK
 
 // move up, contemplate impending doom
-in_direction = 0; 
+in_direction_in = 0; 
 `CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -253,8 +273,9 @@ in_direction = 0;
 `CLOCK
 
 // move left, continue contemplation
-in_direction = 2; 
+in_direction_in = 2; 
 `CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -264,8 +285,9 @@ in_direction = 2;
 `CLOCK
 
 // move down, panic
-in_direction = 1; 
+in_direction_in = 1; 
 `CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -276,6 +298,7 @@ in_direction = 1;
 
 // perish
 `CLOCK // LOGIC_TICK
+`CLOCK
 `CLOCK
 `CLOCK
 `CLOCK
@@ -300,7 +323,6 @@ in_direction = 1;
 `CLOCK
 `CLOCK
 `CLOCK
-
 
 
 

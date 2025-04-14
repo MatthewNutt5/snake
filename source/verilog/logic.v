@@ -231,16 +231,33 @@ always @(negedge clkb) begin
 
   if (restart_temp) begin
     
+    shift_done <= 1;
+    counter <= 0;
     to_controller <= 2'b01; // init with LOGIC_DONE; it will go low at tick
     snake_length <= 1;
     request_rand <= 0;
     snake_body[0] <= 6'b011010; // "middle" of board for now
-    apple_location <= 6'b011101; // apple to the right of that (I think we can set this to random_num,
-    // since at restart we set random num to 011101 in prng)
+    apple_location <= 6'b011101; // apple to the right of that
     led_array[3][2] <= 1; // light the LED for those positions
     led_array[3][5] <= 1; // we should light them after zeroing
     {led_array[7], led_array[6], led_array[5], led_array[4], led_array[3],
      led_array[2], led_array[1], led_array[0]} <= 0;
+    {snake_body[1], snake_body[2], snake_body[3], snake_body[4], snake_body[5],
+    snake_body[6], snake_body[7], snake_body[8], snake_body[9], snake_body[10],
+    snake_body[11], snake_body[12], snake_body[13], snake_body[14],
+    snake_body[15], snake_body[16], snake_body[17], snake_body[18],
+    snake_body[19], snake_body[20], snake_body[21], snake_body[22],
+    snake_body[23], snake_body[24], snake_body[25], snake_body[26],
+    snake_body[27], snake_body[28], snake_body[29], snake_body[30],
+    snake_body[31], snake_body[32], snake_body[33], snake_body[34],
+    snake_body[35], snake_body[36], snake_body[37], snake_body[38],
+    snake_body[39], snake_body[40], snake_body[41], snake_body[42],
+    snake_body[43], snake_body[44], snake_body[45], snake_body[46],
+    snake_body[47], snake_body[48], snake_body[49], snake_body[50],
+    snake_body[51], snake_body[52], snake_body[53], snake_body[54],
+    snake_body[55], snake_body[56], snake_body[57], snake_body[58],
+    snake_body[59], snake_body[60], snake_body[61], snake_body[62],
+    snake_body[63]} <= 0;
     
   end else if (from_controller_temp[LOGIC_TICK] &&
     ~from_controller_temp[NO_UPDATE]) begin
@@ -283,7 +300,6 @@ always @(negedge clkb) begin
     led_array[random_num_temp[`Ypos]][random_num_temp[`Xpos]] <= 1;
 
   end
-
 
 end
 

@@ -131,7 +131,7 @@ reg [1:0] execution_state_next;
  */
 reg [2:0] current_row;
 reg [1:0] cycle_count;
-parameter NUM_DISPLAY_CYCLES = 2;
+parameter NUM_DISPLAY_CYCLES = 1;
 
 /*
  *  Unflattens input led_array_flat.
