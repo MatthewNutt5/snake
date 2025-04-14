@@ -235,9 +235,10 @@ always @(negedge clkb) begin
     snake_length <= 1;
     request_rand <= 0;
     snake_body[0] <= 6'b011010; // "middle" of board for now
-    apple_location <= 6'b011101; // apple to the right of that
+    apple_location <= 6'b011101; // apple to the right of that (I think we can set this to random_num,
+    // since at restart we set random num to 011101 in prng)
     led_array[3][2] <= 1; // light the LED for those positions
-    led_array[3][5] <= 1;
+    led_array[3][5] <= 1; // we should light them after zeroing
     {led_array[7], led_array[6], led_array[5], led_array[4], led_array[3],
      led_array[2], led_array[1], led_array[0]} <= 0;
     
@@ -255,6 +256,7 @@ always @(negedge clkb) begin
     end else
       counter <= snake_length - 1;
   
+  //in the event of game end, blink head led
   end else if (from_controller_temp[LOGIC_TICK] &&
   from_controller_temp[NO_UPDATE]) begin
 

@@ -1,6 +1,5 @@
-// Templated from my Homework 3 Problem 3 - change as needed
 //-----------------------------------------------
-// Combination Lock Testbench - lock_tb.v
+// Snake Game Testbench - top_tb.v
 //-----------------------------------------------
 `timescale 1ns/10ps
 
@@ -12,34 +11,34 @@
     in_clka = 0; in_clkb = 1; #10; \
   end
 
-module lock_tb();
+module snake_tb();
 
 // Inputs to top module
-reg        in_clka, in_clkb, in_restart, in_load_pattern, in_load_test, in_enter;
-reg  [1:0] in_pattern, in_test;
+reg        in_clka, in_clkb, in_restart;
+reg [3:0]  in_direction_in;
 
 // Outputs from top_module
-wire       out_match, out_error, out_same_sig;
-wire       out_save_pat_sig, out_save_pat_temp_sig, out_save_test_sig, out_save_test_temp_sig;
-wire [2:0] out_state;
+wire [5:0]  out_random_num;
+wire [63:0] out_led_array_flat;
+wire        out_request_rand;
+wire [1:0]  out_game_state, out_direction_state, out_execution_state, out_to_logic, out_from_logic;
+wire [7:0]  out_row_cathode, out_column_cathode;
 
 // Create a top system instance
-lock_top top (.in_clka (in_clka),
+top snake_top (.in_clka (in_clka),
               .in_clkb (in_clkb),
               .in_restart (in_restart),
-              .in_load_pattern (in_load_pattern),
-              .in_load_test (in_load_test),
-              .in_enter (in_enter),
-              .in_pattern (in_pattern),
-              .in_test (in_test),
-              .out_match (out_match),
-              .out_error (out_error),
-              .out_state (out_state),
-              .out_same_sig (out_same_sig),
-              .out_save_pat_sig (out_save_pat_sig),
-              .out_save_pat_temp_sig (out_save_pat_temp_sig),
-              .out_save_test_sig (out_save_test_sig),
-              .out_save_test_temp_sig (out_save_test_temp_sig)
+              .in_direction_in(in_direction_in),
+              .out_led_array_flat(out_led_array_flat), 
+              .out_from_logic(out_from_logic),  
+              .out_game_state(out_game_state), 
+              .out_direction_state(out_direction_state), 
+              .out_execution_state(out_execution_state), 
+              .out_to_logic(out_to_logic), 
+              .out_row_cathode(out_row_cathode), 
+              .out_column_cathode(out_column_cathode), 
+              .out_random_num(out_random_num), 
+              .out_request_rand(out_request_rand)
               );
 
 initial
@@ -53,95 +52,261 @@ begin
 
 
 
-// cycle 1 - restart
+// restart
 in_restart = 1;
-{in_load_pattern, in_load_test, in_enter} = 0;
-{in_pattern, in_test} = 0;
-`CLOCK
+in_direction_in = 0;
+`CLOCK // move to CHECK_STATE
 
-// cycle 2 - load pattern
+// idle for a few cycles to show that nothing happens until user input detected
 in_restart = 0;
-in_load_pattern = 1;
+`CLOCK // execution_state: CHECK -> DISPLAY, game_state: INIT
+`CLOCK 
+`CLOCK
 `CLOCK
 
-// cycle 3 - provide pattern, enter
-in_load_pattern = 0;
-in_enter = 1;
-in_pattern = 2'b11;
+// move to the right
+in_direction = 3; 
+`CLOCK //execution_state: CHECK -> INPUT, game_state: INIT -> RUN
+// LOGIC_TICK
+`CLOCK //execution_state: INPUT -> WAIT_LOGIC
+
+// now we wait for logic_done, fsm will then do some multiplexing
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 4 - load test
-in_enter = 0;
-in_load_test = 1;
-in_pattern = 0;
+// multiplexing done, let's keep moving
+`CLOCK // LOGIC_TICK
+`CLOCK // multiplexing
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 5 - provide incorrect test, enter
-in_load_test = 0;
-in_enter = 1;
-in_test = 2'b10;
+// should eat an apple on this stage and request a new random number
+// new apple is now at (5,6) or 101110
+`CLOCK // LOGIC_TICK
+`CLOCK // multiplexing 
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 6 - wait for evalution
-in_enter = 0;
-in_test = 0;
+// snake is at (3,5), move right one more
+`CLOCK // LOGIC_TICK 
+`CLOCK // multiplexing
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 7 - idle to see result
+// move up to eat the next apple
+in_direction = 0;
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 8 - result persists unless we input new test
-in_enter = 1;
+// continue moving up, eat apple here
+// new apple at (3,7)
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 9 - result persists unless we input new test
-in_enter = 0;
-in_load_pattern = 1;
+// move right
+in_direction = 3; 
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 10 - result persists unless we input new test
-in_load_pattern = 0;
+// move down
+in_direction = 1; 
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 11 - load test
-in_load_test = 1;
+// move down, eat apple
+// next apple at (3,3)
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 12 - provide correct test, enter
-in_load_test = 0;
-in_enter = 1;
-in_test = 2'b11;
+// move left 3 spaces
+in_direction = 2; 
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 13 - wait for evalution
-in_enter = 0;
-in_test = 0;
+// move left, eat apple
+// next apple at (1,5), need to eat one more before SELF DESTRUCT
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 14 - idle to see result
+// move down 2 spaces
+in_direction = 1; 
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 15 - result persists unless we input new test
-in_enter = 1;
+// move right 2 spaces, eat apple
+in_direction = 3; 
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 16 - result persists unless we input new test
-in_enter = 0;
-in_load_pattern = 1;
+// move up, contemplate impending doom
+in_direction = 0; 
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 17 - result persists unless we input new test
-in_load_pattern = 0;
+// move left, continue contemplation
+in_direction = 2; 
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
-// cycle 18 - one more idle for good measure :)
+// move down, panic
+in_direction = 1; 
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+
+// perish
+`CLOCK // LOGIC_TICK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+
+// now check if it blinks the head's LED
+`CLOCK // LOGIC_TICK, NO_UPDATE
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
+`CLOCK
 `CLOCK
 
 
 
 
 
-$dumpfile ("lock_tb.vcd");
+
+$dumpfile ("snake_tb.vcd");
 $dumpvars;
 $stop;
 
