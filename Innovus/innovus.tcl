@@ -15,8 +15,8 @@ suppressMessage ENCEXT-2799
 # Change only these two lines each time to your top level cell names
 # init_verilog = top .vh file
 # init_top_cell = top module name in .vh
-set init_verilog ""
-set init_top_cell ""
+set init_verilog "top.vh"
+set init_top_cell "top"
 ###################################################################
 ###################################################################
 #

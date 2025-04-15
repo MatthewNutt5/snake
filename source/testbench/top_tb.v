@@ -26,20 +26,20 @@ wire [5:0]  out_random_num;
 wire        out_request_rand;
 
 // Create a top system instance
-top snake_top (.in_clka(in_clka),
-               .in_clkb(in_clkb),
-               .in_restart(in_restart),
-               .in_direction_in(in_direction_in),
-               .out_row_cathode(out_row_cathode),
-               .out_column_anode(out_column_anode),
-               .out_control_to_logic(out_control_to_logic),
-               .out_logic_to_control(out_logic_to_control),
-               .out_game_state(out_game_state),
-               .out_direction_state(out_direction_state),
-               .out_execution_state(out_execution_state),
-               .out_led_array_flat(out_led_array_flat),
-               .out_random_num(out_random_num),
-               .out_request_rand(out_request_rand)
+top snake_top (.in_clka (in_clka),
+               .in_clkb (in_clkb),
+               .in_restart (in_restart),
+               .in_direction_in (in_direction_in),
+               .out_row_cathode (out_row_cathode),
+               .out_column_anode (out_column_anode),
+               .out_control_to_logic (out_control_to_logic),
+               .out_logic_to_control (out_logic_to_control),
+               .out_game_state (out_game_state),
+               .out_direction_state (out_direction_state),
+               .out_execution_state (out_execution_state),
+               .out_led_array_flat (out_led_array_flat),
+               .out_random_num (out_random_num),
+               .out_request_rand (out_request_rand)
                );
 
 initial
@@ -49,7 +49,7 @@ begin
 
 // restart
 in_restart = 1;
-in_direction_in = 0;
+in_direction_in = 4'b0000; // with the simple Python script, you HAVE to explicitly define each digit
 `CLOCK // move to CHECK_STATE
 
 // idle for a few cycles to show that nothing happens until user input detected
