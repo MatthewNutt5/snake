@@ -46,7 +46,7 @@ setIoFlowFlag 0
 # Leave 21 micron space around core for power and ground rings
 # If errors occur, such as "ENCSP-2002" or "ENCSP-2020" and the layout does not
 # complete, then reduce density from 0.8 in floorPlan to 0.6.
-floorPlan -r 1.0 0.6 21 21 21 21
+floorPlan -r 1.0 0.75 21 21 21 21
 
 uiSetTool select
 getIoFlowFlag
