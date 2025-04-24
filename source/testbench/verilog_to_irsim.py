@@ -1,4 +1,4 @@
-# Python script for converting verilog testbench to grid form
+# Python script for converting verilog testbench to IRSIM grid form
 # Specifically built for snake game - not generalized
 # Only operates on the section between "begin" and $dumpfile, etc.
 # Make a separate file with all other parts removed
@@ -14,9 +14,12 @@ persist_digit = 0
 
 
 def writeVector():
-    for digit in write_line:
+    # write 40 per line, insert extra line afterwards
+    for i, digit in enumerate(write_line):
         write_file.write(str(digit))
         write_file.write(' ')
+        if (i+1) % 40 == 0 and i > 0:
+            write_file.write('\n')
     write_file.write('\n')
 
 
