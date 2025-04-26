@@ -9,11 +9,15 @@
 !LICENSE
 !README.md
 !source/**
-!pad_06_frame64/**
 !*.v
 !*.vh
 !*.gds
+!*.mag
+!*.ext
+!*.sim
 !*.tcl
 !*.cmd
-innovus.cmd
 !run_*
+
+# block other files
+innovus.cmd

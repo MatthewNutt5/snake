@@ -1,1 +1,0 @@
-../source/testbench/top_tb.cmd
