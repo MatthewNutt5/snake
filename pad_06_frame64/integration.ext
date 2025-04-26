@@ -1,0 +1,227 @@
+timestamp 1745650429
+version 8.3
+tech scmos
+style AMI0.5um(amic5)from:T11Z
+scale 1000 1 30
+resistclasses 82400 102700 816000 816000 1 22300 41300 41300 90 90 60
+use top top_0 1 0 1196 0 1 1236
+use PadFrame64 PadFrame64_0 1 0 2500 0 1 2400
+node "m2_1006_3057#" 6 30747.9 1006 3057 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5642 1254 399 80
+node "m2_1007_4034#" 12 59120.8 1007 4034 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 11010 2452 256 64
+node "m2_5641_5244#" 5 22335.2 5641 5244 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4074 922 156 50
+node "m2_1007_4857#" 6 30751.4 1007 4857 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5649 1272 182 54
+node "m2_1008_5157#" 4 18472.4 1008 5157 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3324 746 323 72
+node "m2_5638_5356#" 3 14074.3 5638 5356 v2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2496 566 272 66
+node "m2_5638_5448#" 3 12420.3 5638 5448 v2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2232 514 77 36
+node "m2_5454_5573#" 7 12647 5454 5573 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1263 632 0 0
+node "m2_2926_5573#" 71 100260 2926 5573 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8238 5090 0 0
+node "m2_2830_5570#" 56 80038.8 2830 5570 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6672 4086 0 0
+node "m2_2678_5571#" 52 74132.2 2678 5571 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 6171 3788 0 0
+node "m2_2582_5567#" 47 66619.2 2582 5567 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5511 3388 0 0
+node "m2_2494_5568#" 33 46334.6 2494 5568 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3822 2362 0 0
+node "m2_2478_5571#" 25 35020.8 2478 5571 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2901 1788 0 0
+node "m2_2757_5789#" 1 360.96 2757 5789 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 20 0 0
+node "m2_2534_5568#" 40 56661.8 2534 5568 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4662 2886 0 0
+node "m2_2398_5569#" 9 15024.7 2398 5569 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1440 754 0 0
+node "m2_2457_5787#" 0 456.48 2457 5787 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 27 24 0 0
+node "m2_2244_5647#" 6 15120 2244 5647 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1917 720 0 0
+node "m2_2157_5784#" 0 647.52 2157 5784 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 63 32 0 0
+node "m2_1943_5626#" 6 26361.4 1943 5626 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4576 1146 0 0
+node "m2_1857_5786#" 0 504.24 1857 5786 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 36 26 0 0
+node "m2_1643_5632#" 14 33211.2 1643 5632 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3992 1588 0 0
+node "m2_1557_5784#" 0 599.76 1557 5784 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 54 30 0 0
+node "m2_1344_5593#" 18 36205.9 1344 5593 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3800 1776 0 0
+node "m2_1257_5582#" 14 31202.4 1257 5582 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3495 1504 0 0
+node "m2_1008_5457#" 3 15750.1 1008 5457 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2811 632 323 72
+node "m2_1007_5757#" 6 28584.2 1007 5757 m2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5267 1184 240 62
+node "m1_2335_1249#" 0 3084.03 2335 1249 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 437 84 0 0 0 0
+node "GND!" 0 5219.4 279 2630 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 900 122 0 0 0 0
+node "p_in_clkb" 0 9057.78 271 2930 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1862 174 0 0 0 0
+node "p_in_restart" 0 14298.1 264 4111 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3231 238 0 0 0 0
+node "p_out_column_anode2" 0 6107.73 6496 5331 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1107 136 0 0 0 0
+node "p_out_column_anode3" 0 8756.94 6494 5627 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1786 170 0 0 0 0
+node "p_in_direction0" 0 11013 272 4717 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2340 202 0 0 0 0
+node "p_in_direction1" 0 14571.8 266 5015 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3345 236 0 0 0 0
+node "p_in_direction3" 0 12690.7 267 5317 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2814 218 0 0 0 0
+node "p_in_direction2" 0 12874.8 265 5619 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2880 218 0 0 0 0
+node "m1_998_2640#" 116 1.14509e+06 998 2640 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 174681 26864 10249 3240 0 0
+node "m1_1318_5758#" 46 488225 1318 5758 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 76389 11366 4021 1222 0 0
+node "p_out_column_anode5" 0 8288.7 5629 6493 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1650 166 0 0 0 0
+node "p_out_column_anode0" 0 8695.56 5327 6492 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1764 170 0 0 0 0
+node "p_out_column_anode1" 0 11481.7 4719 6485 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2508 202 0 0 0 0
+node "p_out_column_anode6" 0 10862.8 4420 6491 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2318 198 0 0 0 0
+node "p_out_column_anode7" 0 12776.9 4114 6495 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2829 220 0 0 0 0
+node "p_out_row_cathode0" 0 12141.8 3817 6491 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2665 212 0 0 0 0
+node "p_out_row_cathode4" 0 13989.6 3519 6485 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3200 228 0 0 0 0
+node "p_out_row_cathode2" 0 14134.2 3215 6489 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3220 232 0 0 0 0
+node "Vdd!" 0 14549.4 2913 6484 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3337 236 0 0 0 0
+node "p_out_row_cathode1" 0 10261.1 2625 6490 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2166 190 0 0 0 0
+node "p_out_row_cathode5" 0 9447.42 2320 6496 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1938 182 0 0 0 0
+node "p_out_row_cathode3" 0 13947.8 2016 6487 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3185 228 0 0 0 0
+node "p_out_row_cathode6" 0 11690.2 1719 6492 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2535 208 0 0 0 0
+node "p_out_row_cathode7" 0 12406.8 1420 6486 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2760 212 0 0 0 0
+node "p_in_clka" 0 9171.93 1125 6494 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1887 176 0 0 0 0
+cap "m1_1318_5758#" "m2_2478_5571#" 502.2
+cap "m1_1318_5758#" "m2_2398_5569#" 315.9
+cap "m1_998_2640#" "m2_1006_3057#" 315.9
+cap "m1_1318_5758#" "m2_2244_5647#" 315.9
+cap "m1_1318_5758#" "m2_2534_5568#" 502.2
+cap "m1_998_2640#" "m2_1008_5157#" 315.9
+cap "m1_1318_5758#" "m2_2678_5571#" 1247.4
+cap "m2_2494_5568#" "m1_1318_5758#" 502.2
+cap "m1_1318_5758#" "m2_5638_5448#" 315.9
+cap "m1_1318_5758#" "m2_2926_5573#" 315.9
+cap "m1_1318_5758#" "m2_2830_5570#" 1247.4
+cap "m1_1318_5758#" "m2_5638_5356#" 315.9
+cap "m1_998_2640#" "m2_1007_4857#" 315.9
+cap "m1_1318_5758#" "m2_5454_5573#" 315.9
+cap "m1_1318_5758#" "m2_5641_5244#" 315.9
+cap "m2_1643_5632#" "m1_1318_5758#" 315.9
+cap "m1_998_2640#" "m2_1007_4034#" 315.9
+cap "m1_1318_5758#" "m2_2582_5567#" 502.2
+cap "m1_998_2640#" "m2_1007_5757#" 661.5
+cap "m2_1344_5593#" "m1_1318_5758#" 315.9
+cap "m1_1318_5758#" "m2_1943_5626#" 315.9
+cap "m1_998_2640#" "m2_1008_5457#" 315.9
+cap "PadFrame64_0/17_26/OEN" "PadFrame64_0/17_25/m3_n36_n11#" -1.13687e-13
+cap "PadFrame64_0/PadGnd_0/w_n3_n3#" "PadFrame64_0/PadGnd_0/GND!" 8.37
+cap "top_0/FILL_3707/gnd" "top_0/FILL_3528/vdd" 702
+merge "PadFrame64_0/17_0/OEN" "PadFrame64_0/17_9/OEN" -63297.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -8087 -1309 -586 -622 0 0
+merge "PadFrame64_0/17_9/OEN" "PadFrame64_0/17_10/OEN"
+merge "PadFrame64_0/17_10/OEN" "PadFrame64_0/17_11/OEN"
+merge "PadFrame64_0/17_11/OEN" "PadFrame64_0/17_20/OEN"
+merge "PadFrame64_0/17_20/OEN" "PadFrame64_0/17_12/OEN"
+merge "PadFrame64_0/17_12/OEN" "PadFrame64_0/17_21/OEN"
+merge "PadFrame64_0/17_21/OEN" "PadFrame64_0/17_13/OEN"
+merge "PadFrame64_0/17_13/OEN" "PadFrame64_0/19_1/GND!"
+merge "PadFrame64_0/19_1/GND!" "PadFrame64_0/PadBiDir_19/OEN"
+merge "PadFrame64_0/PadBiDir_19/OEN" "PadFrame64_0/PadBiDir_14/OEN"
+merge "PadFrame64_0/PadBiDir_14/OEN" "PadFrame64_0/PadBiDir_18/OEN"
+merge "PadFrame64_0/PadBiDir_18/OEN" "PadFrame64_0/PadBiDir_13/OEN"
+merge "PadFrame64_0/PadBiDir_13/OEN" "PadFrame64_0/PadBiDir_17/OEN"
+merge "PadFrame64_0/PadBiDir_17/OEN" "PadFrame64_0/PadBiDir_12/OEN"
+merge "PadFrame64_0/PadBiDir_12/OEN" "PadFrame64_0/PadBiDir_16/OEN"
+merge "PadFrame64_0/PadBiDir_16/OEN" "PadFrame64_0/PadBiDir_11/OEN"
+merge "PadFrame64_0/PadBiDir_11/OEN" "top_0/FILL_3707/gnd"
+merge "top_0/FILL_3707/gnd" "PadFrame64_0/PadGnd_0/GND!"
+merge "PadFrame64_0/PadGnd_0/GND!" "GND!"
+merge "GND!" "PadFrame64_0/PadBiDir_15/OEN"
+merge "PadFrame64_0/PadBiDir_15/OEN" "PadFrame64_0/PadBiDir_10/OEN"
+merge "PadFrame64_0/PadBiDir_10/OEN" "PadFrame64_0/17_22/OEN"
+merge "PadFrame64_0/17_22/OEN" "PadFrame64_0/17_14/OEN"
+merge "PadFrame64_0/17_14/OEN" "PadFrame64_0/17_23/OEN"
+merge "PadFrame64_0/17_23/OEN" "PadFrame64_0/17_15/OEN"
+merge "PadFrame64_0/17_15/OEN" "PadFrame64_0/17_24/OEN"
+merge "PadFrame64_0/17_24/OEN" "PadFrame64_0/17_16/OEN"
+merge "PadFrame64_0/17_16/OEN" "PadFrame64_0/17_34/OEN"
+merge "PadFrame64_0/17_34/OEN" "PadFrame64_0/PadBiDir_9/OEN"
+merge "PadFrame64_0/PadBiDir_9/OEN" "PadFrame64_0/PadBiDir_8/OEN"
+merge "PadFrame64_0/PadBiDir_8/OEN" "PadFrame64_0/PadBiDir_7/OEN"
+merge "PadFrame64_0/PadBiDir_7/OEN" "PadFrame64_0/PadBiDir_6/OEN"
+merge "PadFrame64_0/PadBiDir_6/OEN" "PadFrame64_0/PadBiDir_5/OEN"
+merge "PadFrame64_0/PadBiDir_5/OEN" "PadFrame64_0/17_35/OEN"
+merge "PadFrame64_0/17_35/OEN" "PadFrame64_0/17_33/OEN"
+merge "PadFrame64_0/17_33/OEN" "PadFrame64_0/17_32/OEN"
+merge "PadFrame64_0/17_32/OEN" "PadFrame64_0/17_31/OEN"
+merge "PadFrame64_0/17_31/OEN" "PadFrame64_0/17_30/OEN"
+merge "PadFrame64_0/17_30/OEN" "PadFrame64_0/17_29/OEN"
+merge "PadFrame64_0/17_29/OEN" "PadFrame64_0/17_28/OEN"
+merge "PadFrame64_0/17_28/OEN" "PadFrame64_0/17_27/OEN"
+merge "PadFrame64_0/17_27/OEN" "PadFrame64_0/17_26/OEN"
+merge "PadFrame64_0/17_26/OEN" "PadFrame64_0/17_25/OEN"
+merge "PadFrame64_0/17_25/OEN" "m1_998_2640#"
+merge "PadFrame64_0/17_8/DATA" "p_out_row_cathode0" -31646 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -7506 -496 0 0 0 0
+merge "PadFrame64_0/PadBiDir_4/OEN" "Vdd!" -78735.7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -13487 -1664 -114 -230 0 0
+merge "Vdd!" "PadFrame64_0/PadBiDir_3/OEN"
+merge "PadFrame64_0/PadBiDir_3/OEN" "PadFrame64_0/PadBiDir_2/OEN"
+merge "PadFrame64_0/PadBiDir_2/OEN" "PadFrame64_0/PadBiDir_1/OEN"
+merge "PadFrame64_0/PadBiDir_1/OEN" "PadFrame64_0/PadBiDir_0/OEN"
+merge "PadFrame64_0/PadBiDir_0/OEN" "PadFrame64_0/17_8/OEN"
+merge "PadFrame64_0/17_8/OEN" "PadFrame64_0/17_7/OEN"
+merge "PadFrame64_0/17_7/OEN" "PadFrame64_0/17_6/OEN"
+merge "PadFrame64_0/17_6/OEN" "PadFrame64_0/18_0/Vdd!"
+merge "PadFrame64_0/18_0/Vdd!" "PadFrame64_0/17_5/OEN"
+merge "PadFrame64_0/17_5/OEN" "PadFrame64_0/17_4/OEN"
+merge "PadFrame64_0/17_4/OEN" "PadFrame64_0/17_3/OEN"
+merge "PadFrame64_0/17_3/OEN" "PadFrame64_0/17_2/OEN"
+merge "PadFrame64_0/17_2/OEN" "PadFrame64_0/17_1/OEN"
+merge "PadFrame64_0/17_1/OEN" "PadFrame64_0/17_17/OEN"
+merge "PadFrame64_0/17_17/OEN" "top_0/m1_14_4307#"
+merge "top_0/m1_14_4307#" "PadFrame64_0/17_18/OEN"
+merge "PadFrame64_0/17_18/OEN" "PadFrame64_0/17_19/OEN"
+merge "PadFrame64_0/17_19/OEN" "m1_1318_5758#"
+merge "PadFrame64_0/17_0/DATA" "p_in_clka" -25265.6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5682 -424 0 0 0 0
+merge "PadFrame64_0/17_5/DATA" "p_out_row_cathode1" -21311.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -4941 -339 0 0 0 0
+merge "PadFrame64_0/17_10/DI" "top_0/NOR2X1_320/A" -6226.68 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1062 -254 -30 -22
+merge "top_0/NOR2X1_320/A" "top_0/in_direction_in[3]"
+merge "top_0/in_direction_in[3]" "m2_1008_5457#"
+merge "PadFrame64_0/17_2/DO" "top_0/out_row_cathode[6]" -1051.68 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -102 -52 0 0
+merge "top_0/out_row_cathode[6]" "m2_1643_5632#"
+merge "PadFrame64_0/PadBiDir_11/DATA" "p_in_clkb" -24987.1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5614 -420 0 0 0 0
+merge "PadFrame64_0/PadBiDir_1/DO" "top_0/out_column_anode[6]" -24264.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1896 -1252 0 0
+merge "top_0/out_column_anode[6]" "m2_2678_5571#"
+merge "top_0/in_restart" "PadFrame64_0/17_13/DI" -50998.3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9504 -2130 -25 -20
+merge "PadFrame64_0/17_13/DI" "m2_1007_4034#"
+merge "PadFrame64_0/17_6/DATA" "p_out_row_cathode2" -40288.7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -8644 -534 -264 -182 -88 -178
+merge "PadFrame64_0/17_5/DO" "top_0/out_row_cathode[1]" -5723.04 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -446 -292 0 0
+merge "top_0/out_row_cathode[1]" "m2_2398_5569#"
+merge "PadFrame64_0/17_3/DI" "m2_2157_5784#" -647.52 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -63 -32 0 0
+merge "PadFrame64_0/17_3/DATA" "p_out_row_cathode3" -39374.6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -8464 -524 -249 -172 -166 -170
+merge "PadFrame64_0/PadBiDir_2/DO" "top_0/out_column_anode[1]" -1082.16 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -99 -54 0 0
+merge "top_0/out_column_anode[1]" "m2_2830_5570#"
+merge "PadFrame64_0/17_8/DO" "top_0/out_row_cathode[0]" -20542.8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1599 -1054 0 0
+merge "top_0/out_row_cathode[0]" "m2_2534_5568#"
+merge "PadFrame64_0/PadBiDir_0/DO" "top_0/out_column_anode[7]" -20660.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1608 -1060 0 0
+merge "top_0/out_column_anode[7]" "m2_2582_5567#"
+merge "PadFrame64_0/17_7/DATA" "p_out_row_cathode4" -39659.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -8546 -526 -246 -170 -82 -166
+merge "PadFrame64_0/17_1/DATA" "p_out_row_cathode7" -32215.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -7678 -496 0 0 0 0
+merge "PadFrame64_0/17_4/DATA" "p_out_row_cathode5" -25958.8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5835 -436 0 0 0 0
+merge "PadFrame64_0/17_3/DO" "top_0/out_row_cathode[3]" -1003.92 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -93 -50 0 0
+merge "top_0/out_row_cathode[3]" "m2_1943_5626#"
+merge "PadFrame64_0/17_2/DATA" "p_out_row_cathode6" -30943.9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -7217 -488 0 0 0 0
+merge "PadFrame64_0/17_0/DI" "top_0/in_clka" -1264.56 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -129 -62 0 0
+merge "top_0/in_clka" "m2_1257_5582#"
+merge "top_0/in_direction_in[1]" "PadFrame64_0/17_11/DI" -10479.7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1863 -432 -20 -23
+merge "PadFrame64_0/17_11/DI" "m2_1008_5157#"
+merge "PadFrame64_0/17_4/DI" "m2_2457_5787#" -456.48 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -27 -24 0 0
+merge "PadFrame64_0/PadBiDir_2/DATA" "p_out_column_anode1" -30289.7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -7078 -476 0 0 0 0
+merge "PadFrame64_0/17_9/DI" "top_0/NAND2X1_76/A" -10634.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1908 -442 -15 -16
+merge "top_0/NAND2X1_76/A" "top_0/in_direction_in[2]"
+merge "top_0/in_direction_in[2]" "m2_1007_5757#"
+merge "PadFrame64_0/17_13/DATA" "p_in_restart" -14298.1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3231 -238 0 0 0 0
+merge "PadFrame64_0/17_12/DATA" "p_in_direction0" -22991.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5411 -359 0 0 0 0
+merge "top_0/out_column_anode[4]" "PadFrame64_0/17_19/DO" -3831.84 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -621 -156 -20 -18
+merge "PadFrame64_0/17_19/DO" "m2_5641_5244#"
+merge "PadFrame64_0/17_1/DO" "top_0/out_row_cathode[7]" -1160.4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -105 -58 0 0
+merge "top_0/out_row_cathode[7]" "m2_1344_5593#"
+merge "PadFrame64_0/17_1/DI" "m2_1557_5784#" -599.76 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -54 -30 0 0
+merge "PadFrame64_0/17_4/DO" "top_0/out_row_cathode[5]" -1051.68 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -102 -52 0 0
+merge "top_0/out_row_cathode[5]" "m2_2244_5647#"
+merge "PadFrame64_0/17_7/DO" "top_0/out_row_cathode[4]" -18469.4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1440 -948 0 0
+merge "top_0/out_row_cathode[4]" "m2_2494_5568#"
+merge "top_0/m1_14_13#" "m1_2335_1249#" -13104 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2437 -284 0 0 0 0
+merge "PadFrame64_0/17_5/DI" "m2_2757_5789#" -360.96 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9 -20 0 0
+merge "PadFrame64_0/17_6/DO" "top_0/out_row_cathode[2]" -15457.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1209 -794 0 0
+merge "top_0/out_row_cathode[2]" "m2_2478_5571#"
+merge "PadFrame64_0/PadBiDir_4/DO" "top_0/out_column_anode[5]" -964.8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -90 -48 0 0
+merge "top_0/out_column_anode[5]" "m2_5454_5573#"
+merge "PadFrame64_0/PadBiDir_3/DO" "top_0/out_column_anode[0]" -964.8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -90 -48 0 0
+merge "top_0/out_column_anode[0]" "m2_2926_5573#"
+merge "PadFrame64_0/17_18/DATA" "p_out_column_anode2" -18132.8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3762 -344 0 0 0 0
+merge "PadFrame64_0/PadBiDir_3/DATA" "p_out_column_anode0" -24162.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5382 -412 0 0 0 0
+merge "top_0/in_direction_in[0]" "PadFrame64_0/17_12/DI" -21032.3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3852 -874 -30 -22
+merge "PadFrame64_0/17_12/DI" "m2_1007_4857#"
+merge "PadFrame64_0/17_2/DI" "m2_1857_5786#" -504.24 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -36 -26 0 0
+merge "PadFrame64_0/17_17/DATA" "p_out_column_anode3" -24103.6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5426 -412 0 0 0 0
+merge "top_0/in_clkb" "PadFrame64_0/PadBiDir_11/DI" -21584.9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3951 -896 -35 -24
+merge "PadFrame64_0/PadBiDir_11/DI" "m2_1006_3057#"
+merge "PadFrame64_0/17_17/DO" "top_0/out_column_anode[3]" -4439.1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -720 -178 -35 -24
+merge "top_0/out_column_anode[3]" "m2_5638_5448#"
+merge "PadFrame64_0/PadBiDir_1/DATA" "p_out_column_anode6" -29132.8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -6718 -468 0 0 0 0
+merge "PadFrame64_0/17_11/DATA" "p_in_direction1" -28113.1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -7129 -410 0 0 0 0
+merge "PadFrame64_0/PadBiDir_4/DATA" "p_out_column_anode5" -23248 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5118 -404 0 0 0 0
+merge "top_0/out_column_anode[2]" "PadFrame64_0/17_18/DO" -1075.44 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -81 -36 -40 -26
+merge "PadFrame64_0/17_18/DO" "m2_5638_5356#"
+merge "PadFrame64_0/PadBiDir_0/DATA" "p_out_column_anode7" -37140.6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -7744 -508 -261 -180 -174 -178
+merge "PadFrame64_0/17_9/DATA" "p_in_direction2" -30580.9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -6406 -386 -246 -170 -82 -166
+merge "PadFrame64_0/17_10/DATA" "p_in_direction3" -25853.1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -6384 -387 0 0 0 0

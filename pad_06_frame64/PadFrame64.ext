@@ -1,0 +1,684 @@
+timestamp 1745621596
+version 8.3
+tech scmos
+style AMI0.5um(amic5)from:T11Z
+scale 1000 1 30
+resistclasses 82400 102700 816000 816000 1 22300 41300 41300 90 90 60
+use PadFC 16_2 0 -1 -1500 1 0 -2400
+use PadBiDir 17_25 0 -1 -1500 1 0 -1400
+use PadBiDir 17_26 1 0 -1500 0 -1 -1400
+use PadBiDir 17_27 1 0 -1200 0 -1 -1400
+use PadBiDir 17_28 1 0 -900 0 -1 -1400
+use PadBiDir 17_29 1 0 -600 0 -1 -1400
+use PadBiDir 17_30 1 0 0 0 -1 -1400
+use PadBiDir 17_31 1 0 300 0 -1 -1400
+use PadVdd 18_1 1 0 -300 0 -1 -1400
+use PadBiDir 17_32 1 0 600 0 -1 -1400
+use PadBiDir 17_33 1 0 900 0 -1 -1400
+use PadBiDir 17_35 1 0 1200 0 -1 -1400
+use PadVdd PadVdd_1 1 0 1500 0 -1 -1400
+use PadBiDir PadBiDir_5 1 0 1800 0 -1 -1400
+use PadBiDir PadBiDir_6 1 0 2100 0 -1 -1400
+use PadBiDir PadBiDir_7 1 0 2400 0 -1 -1400
+use PadFC 16_3 -1 0 4300 0 -1 -1400
+use PadBiDir 17_34 0 1 3300 1 0 -1400
+use PadBiDir PadBiDir_8 1 0 2700 0 -1 -1400
+use PadBiDir PadBiDir_9 1 0 3000 0 -1 -1400
+use PadBiDir 17_14 0 -1 -1500 1 0 -500
+use PadBiDir 17_15 0 -1 -1500 1 0 -800
+use PadBiDir 17_16 0 -1 -1500 1 0 -1100
+use PadBiDir 17_22 0 1 3300 1 0 -500
+use PadBiDir 17_23 0 1 3300 1 0 -800
+use PadBiDir 17_24 0 1 3300 1 0 -1100
+use PadBiDir PadBiDir_10 0 -1 -1500 -1 0 100
+use PadBiDir PadBiDir_11 0 -1 -1500 1 0 400
+use PadGnd PadGnd_0 0 -1 -1500 -1 0 400
+use PadBiDir PadBiDir_15 0 1 3300 1 0 100
+use PadBiDir PadBiDir_16 0 1 3300 1 0 400
+use PadGnd PadGnd_1 0 1 3300 -1 0 100
+use PadBiDir 17_13 0 -1 -1500 -1 0 1900
+use PadBiDir PadBiDir_12 0 -1 -1500 1 0 700
+use PadBiDir PadBiDir_13 0 -1 -1500 1 0 1000
+use PadBiDir PadBiDir_14 0 -1 -1500 1 0 1300
+use PadGnd 19_1 0 1 3300 -1 0 1900
+use PadBiDir PadBiDir_17 0 1 3300 1 0 700
+use PadBiDir PadBiDir_18 0 1 3300 1 0 1000
+use PadBiDir PadBiDir_19 0 1 3300 1 0 1300
+use PadBiDir 17_11 0 -1 -1500 1 0 2500
+use PadBiDir 17_12 0 -1 -1500 1 0 2200
+use PadGnd 19_0 0 -1 -1500 -1 0 2200
+use PadBiDir 17_19 0 1 3300 1 0 2500
+use PadBiDir 17_20 0 1 3300 1 0 2200
+use PadBiDir 17_21 0 1 3300 1 0 1900
+use PadFC 16_0 1 0 -2500 0 1 3400
+use PadBiDir 17_0 1 0 -1500 0 1 3400
+use PadBiDir 17_9 0 -1 -1500 1 0 3100
+use PadBiDir 17_10 0 -1 -1500 1 0 2800
+use PadBiDir 17_1 1 0 -1200 0 1 3400
+use PadBiDir 17_2 1 0 -900 0 1 3400
+use PadBiDir 17_3 1 0 -600 0 1 3400
+use PadBiDir 17_4 1 0 -300 0 1 3400
+use PadBiDir 17_5 1 0 0 0 1 3400
+use PadVdd 18_0 1 0 300 0 1 3400
+use PadBiDir 17_6 1 0 600 0 1 3400
+use PadBiDir 17_7 1 0 900 0 1 3400
+use PadBiDir 17_8 1 0 1200 0 1 3400
+use PadBiDir PadBiDir_0 1 0 1500 0 1 3400
+use PadBiDir PadBiDir_1 1 0 1800 0 1 3400
+use PadBiDir PadBiDir_2 1 0 2100 0 1 3400
+use PadVdd PadVdd_0 1 0 2400 0 1 3400
+use PadFC 16_1 0 1 3300 -1 0 4400
+use PadBiDir 17_17 0 1 3300 1 0 3100
+use PadBiDir 17_18 0 1 3300 1 0 2800
+use PadBiDir PadBiDir_3 1 0 2700 0 1 3400
+use PadBiDir PadBiDir_4 1 0 3000 0 1 3400
+cap "18_1/Vdd!" "18_1/w_n3_340#" 2.27374e-13
+cap "17_30/Gnd!" "18_1/Vdd!" 4.54747e-13
+cap "17_30/w_14_425#" "17_30/Gnd!" 2.27374e-13
+cap "PadVdd_1/Vdd!" "PadVdd_1/w_n3_340#" 2.27374e-13
+cap "PadBiDir_5/w_14_425#" "PadBiDir_5/Gnd!" 4.54747e-13
+cap "PadBiDir_5/Gnd!" "PadBiDir_5/w_14_425#" 2.27374e-13
+cap "18_1/w_n3_340#" "18_1/Vdd!" -2.27374e-13
+cap "17_30/w_14_425#" "17_30/Gnd!" -2.27374e-13
+cap "PadVdd_1/Vdd!" "PadVdd_1/w_n3_340#" -2.27374e-13
+cap "PadBiDir_5/w_14_425#" "PadBiDir_5/Gnd!" -2.27374e-13
+cap "PadBiDir_9/Gnd!" "PadBiDir_9/w_14_425#" -2.27374e-13
+cap "17_26/DIB" "17_26/Gnd!" -2.27374e-13
+cap "17_27/Gnd!" "17_27/DIB" -2.27374e-13
+cap "17_28/DIB" "17_28/Gnd!" -2.27374e-13
+cap "17_30/OEN" "17_30/Gnd!" -5.68434e-14
+cap "17_30/Gnd!" "17_30/DIB" -2.27374e-13
+cap "17_31/DIB" "17_31/Gnd!" -2.27374e-13
+cap "17_32/DIB" "17_32/Gnd!" -2.27374e-13
+cap "17_33/Gnd!" "17_33/DIB" -2.27374e-13
+cap "PadBiDir_5/OEN" "PadBiDir_5/Gnd!" -5.68434e-14
+cap "PadBiDir_5/DIB" "PadBiDir_5/Gnd!" -2.27374e-13
+cap "PadBiDir_6/DIB" "PadBiDir_6/Gnd!" -2.27374e-13
+cap "PadBiDir_7/DIB" "PadBiDir_7/Gnd!" -2.27374e-13
+cap "PadBiDir_8/DIB" "PadBiDir_8/Gnd!" -2.27374e-13
+cap "17_27/OEN" "17_26/Vdd!" -5.68434e-14
+cap "17_28/OEN" "17_27/Vdd!" -5.68434e-14
+cap "17_28/Vdd!" "17_29/OEN" -5.68434e-14
+cap "17_30/GND!" "17_30/OEN" 1.42109e-14
+cap "17_30/OEN" "18_1/Vdd!" -2.84217e-14
+cap "17_30/Vdd!" "17_31/OEN" -5.68434e-14
+cap "17_32/OEN" "17_31/Vdd!" -5.68434e-14
+cap "17_33/OEN" "17_32/Vdd!" -5.68434e-14
+cap "17_35/OEN" "17_33/Vdd!" -5.68434e-14
+cap "PadBiDir_5/Vdd!" "PadBiDir_5/OEN" -2.84217e-14
+cap "PadBiDir_5/GND!" "PadBiDir_5/OEN" 1.42109e-14
+cap "PadBiDir_6/OEN" "PadBiDir_5/Vdd!" -5.68434e-14
+cap "PadBiDir_6/Vdd!" "PadBiDir_7/OEN" -5.68434e-14
+cap "PadBiDir_8/OEN" "PadBiDir_7/Vdd!" -5.68434e-14
+cap "PadBiDir_8/Vdd!" "PadBiDir_9/OEN" -5.68434e-14
+cap "17_26/Vdd!" "17_26/m3_n36_n11#" -518.4
+cap "17_26/Vdd!" "17_26/GND!" 3.63798e-12
+cap "17_26/GND!" "17_26/m3_n36_n11#" 16174.1
+cap "17_25/m3_n36_n11#" "17_26/Vdd!" -8.1
+cap "17_27/m3_n36_n11#" "17_26/DI" 74.88
+cap "17_27/m3_n36_n11#" "17_27/Vdd!" -220.32
+cap "17_27/m3_n36_n11#" "17_26/GND!" 9686.16
+cap "17_27/DI" "17_28/m3_n36_n11#" 74.88
+cap "17_28/Vdd!" "17_28/m3_n36_n11#" -220.32
+cap "17_27/GND!" "17_28/m3_n36_n11#" 9686.16
+cap "17_29/Vdd!" "17_29/m3_n36_n11#" -220.32
+cap "17_29/m3_n36_n11#" "17_28/DI" 74.88
+cap "17_28/GND!" "17_29/m3_n36_n11#" 9686.16
+cap "17_30/m3_n36_n11#" "18_1/w_11_10#" 9953.28
+cap "17_30/m3_n36_n11#" "18_1/Vdd!" -259.2
+cap "17_30/GND!" "17_31/m3_n36_n11#" 9686.16
+cap "17_31/m3_n36_n11#" "17_30/DI" 74.88
+cap "17_31/m3_n36_n11#" "17_31/Vdd!" -220.32
+cap "17_32/Vdd!" "17_32/m3_n36_n11#" -220.32
+cap "17_32/m3_n36_n11#" "17_31/GND!" 9686.16
+cap "17_31/DI" "17_32/m3_n36_n11#" 74.88
+cap "17_32/DI" "17_33/m3_n36_n11#" 74.88
+cap "17_33/m3_n36_n11#" "17_33/Vdd!" -220.32
+cap "17_32/GND!" "17_33/m3_n36_n11#" 9686.16
+cap "17_35/m3_n36_n11#" "17_35/Vdd!" -220.32
+cap "17_35/m3_n36_n11#" "17_33/GND!" 9686.16
+cap "17_35/m3_n36_n11#" "17_33/DI" 74.88
+cap "PadBiDir_5/m3_n36_n11#" "PadVdd_1/w_11_10#" 9953.28
+cap "PadBiDir_5/m3_n36_n11#" "PadVdd_1/Vdd!" -259.2
+cap "PadBiDir_6/m3_n36_n11#" "PadBiDir_5/DI" 74.88
+cap "PadBiDir_6/m3_n36_n11#" "PadBiDir_5/GND!" 9686.16
+cap "PadBiDir_6/Vdd!" "PadBiDir_6/m3_n36_n11#" -220.32
+cap "PadBiDir_7/m3_n36_n11#" "PadBiDir_6/GND!" 9686.16
+cap "PadBiDir_7/m3_n36_n11#" "PadBiDir_7/Vdd!" -220.32
+cap "PadBiDir_7/m3_n36_n11#" "PadBiDir_6/DI" 74.88
+cap "PadBiDir_7/GND!" "PadBiDir_8/m3_n36_n11#" 9686.16
+cap "PadBiDir_8/m3_n36_n11#" "PadBiDir_7/DI" 74.88
+cap "PadBiDir_8/m3_n36_n11#" "PadBiDir_8/Vdd!" -220.32
+cap "PadBiDir_8/DI" "PadBiDir_9/m3_n36_n11#" 74.88
+cap "PadBiDir_9/m3_n36_n11#" "PadBiDir_8/GND!" 9686.16
+cap "PadBiDir_9/m3_n36_n11#" "PadBiDir_9/Vdd!" -220.32
+cap "17_34/m3_n36_n11#" "PadBiDir_9/GND!" 1140.48
+cap "17_34/m3_n36_n11#" "PadBiDir_9/Vdd!" -8.1
+cap "PadBiDir_9/Vdd!" "17_34/m3_n36_n11#" -259.2
+cap "PadBiDir_9/GND!" "17_34/m3_n36_n11#" 9953.28
+cap "17_26/Vdd!" "17_26/m3_n36_n11#" -8.1
+cap "17_26/m3_n36_n11#" "17_26/Vdd!" -8.1
+cap "17_26/DI" "17_27/m3_n36_n11#" 63.36
+cap "17_27/Vdd!" "17_27/m3_n36_n11#" 83.7
+cap "17_28/Vdd!" "17_28/m3_n36_n11#" 83.7
+cap "17_28/m3_n36_n11#" "17_27/DI" 63.36
+cap "17_29/Vdd!" "17_29/m3_n36_n11#" 83.7
+cap "17_28/DI" "17_29/m3_n36_n11#" 63.36
+cap "17_30/GND!" "17_30/m3_n36_n11#" 103.68
+cap "18_1/Vdd!" "17_30/m3_n36_n11#" 89.1
+cap "18_1/Vdd!" "17_30/m3_n36_n11#" 2.7
+cap "17_31/m3_n36_n11#" "17_31/Vdd!" 83.7
+cap "17_31/m3_n36_n11#" "17_30/DI" 63.36
+cap "17_32/m3_n36_n11#" "17_32/Vdd!" 83.7
+cap "17_32/m3_n36_n11#" "17_31/DI" 63.36
+cap "17_33/Vdd!" "17_33/m3_n36_n11#" 83.7
+cap "17_33/m3_n36_n11#" "17_32/DI" 63.36
+cap "17_35/m3_n36_n11#" "17_35/Vdd!" 83.7
+cap "17_33/DI" "17_35/m3_n36_n11#" 63.36
+cap "PadBiDir_5/GND!" "PadBiDir_5/m3_n36_n11#" 103.68
+cap "PadVdd_1/Vdd!" "PadBiDir_5/m3_n36_n11#" 89.1
+cap "PadBiDir_5/m3_n36_n11#" "PadVdd_1/Vdd!" 2.7
+cap "PadBiDir_6/m3_n36_n11#" "PadBiDir_6/Vdd!" 83.7
+cap "PadBiDir_6/m3_n36_n11#" "PadBiDir_5/DI" 63.36
+cap "PadBiDir_7/m3_n36_n11#" "PadBiDir_6/DI" 63.36
+cap "PadBiDir_7/Vdd!" "PadBiDir_7/m3_n36_n11#" 83.7
+cap "PadBiDir_8/m3_n36_n11#" "PadBiDir_8/Vdd!" 83.7
+cap "PadBiDir_8/m3_n36_n11#" "PadBiDir_7/DI" 63.36
+cap "PadBiDir_9/m3_n36_n11#" "PadBiDir_9/Vdd!" 83.7
+cap "PadBiDir_8/DI" "PadBiDir_9/m3_n36_n11#" 63.36
+cap "17_34/m3_n36_n11#" "PadBiDir_9/Vdd!" 21.6
+cap "17_16/m3_n36_n11#" "17_16/Vdd!" -220.32
+cap "17_25/DI" "17_16/m3_n36_n11#" 74.88
+cap "17_25/GND!" "17_16/m3_n36_n11#" 9686.16
+cap "17_16/m3_n36_n11#" "17_25/DI" 63.36
+cap "17_16/Vdd!" "17_16/m3_n36_n11#" 83.7
+cap "17_34/DI" "17_24/m3_n36_n11#" 63.36
+cap "17_24/m3_n36_n11#" "17_24/Vdd!" 83.7
+cap "17_24/m3_n36_n11#" "17_34/DI" 74.88
+cap "17_34/GND!" "17_24/m3_n36_n11#" 9686.16
+cap "17_34/Vdd!" "17_24/m3_n36_n11#" -220.32
+cap "17_15/m3_n36_n11#" "17_16/GND!" 9686.16
+cap "17_16/Vdd!" "17_15/m3_n36_n11#" -220.32
+cap "17_15/m3_n36_n11#" "17_16/DI" 74.88
+cap "17_15/m3_n36_n11#" "17_16/DI" 63.36
+cap "17_16/Vdd!" "17_15/m3_n36_n11#" 83.7
+cap "17_23/m3_n36_n11#" "17_24/DI" 63.36
+cap "17_23/m3_n36_n11#" "17_24/Vdd!" 83.7
+cap "17_24/GND!" "17_23/m3_n36_n11#" 9686.16
+cap "17_24/Vdd!" "17_23/m3_n36_n11#" -220.32
+cap "17_24/DI" "17_23/m3_n36_n11#" 74.88
+cap "17_14/m3_n36_n11#" "17_15/DI" 74.88
+cap "17_14/m3_n36_n11#" "17_15/GND!" 9686.16
+cap "17_14/m3_n36_n11#" "17_15/Vdd!" -220.32
+cap "17_14/m3_n36_n11#" "17_15/DI" 63.36
+cap "17_14/m3_n36_n11#" "17_15/Vdd!" 83.7
+cap "17_22/m3_n36_n11#" "17_23/DI" 63.36
+cap "17_22/m3_n36_n11#" "17_23/Vdd!" 83.7
+cap "17_22/m3_n36_n11#" "17_23/GND!" 9686.16
+cap "17_22/m3_n36_n11#" "17_23/Vdd!" -220.32
+cap "17_22/m3_n36_n11#" "17_23/DI" 74.88
+cap "PadGnd_1/w_n3_n3#" "PadBiDir_15/m3_n36_n11#" 89.1
+cap "PadGnd_1/w_n3_n3#" "PadBiDir_15/m3_n36_n11#" -259.2
+cap "PadGnd_1/GND!" "PadBiDir_15/m3_n36_n11#" 9953.28
+cap "PadGnd_0/GND!" "PadBiDir_10/m3_n36_n11#" 9953.28
+cap "PadBiDir_10/m3_n36_n11#" "PadGnd_0/w_n3_n3#" -259.2
+cap "PadBiDir_10/m3_n36_n11#" "PadBiDir_10/Vdd!" 89.1
+cap "PadGnd_0/w_n3_n3#" "PadBiDir_11/m3_n36_n11#" -259.2
+cap "PadGnd_0/GND!" "PadBiDir_11/m3_n36_n11#" 9953.28
+cap "PadBiDir_11/m3_n36_n11#" "PadGnd_0/w_n3_n3#" 89.1
+cap "PadBiDir_16/Vdd!" "PadBiDir_16/m3_n36_n11#" 83.7
+cap "PadBiDir_15/DI" "PadBiDir_16/m3_n36_n11#" 63.36
+cap "PadBiDir_16/m3_n36_n11#" "PadBiDir_15/GND!" 9686.16
+cap "PadBiDir_16/m3_n36_n11#" "PadBiDir_15/DI" 74.88
+cap "PadBiDir_16/m3_n36_n11#" "PadBiDir_15/Vdd!" -220.32
+cap "PadBiDir_11/DI" "PadBiDir_12/m3_n36_n11#" 74.88
+cap "PadBiDir_11/GND!" "PadBiDir_12/m3_n36_n11#" 9686.16
+cap "PadBiDir_12/Vdd!" "PadBiDir_12/m3_n36_n11#" -220.32
+cap "PadBiDir_11/DI" "PadBiDir_12/m3_n36_n11#" 63.36
+cap "PadBiDir_12/Vdd!" "PadBiDir_12/m3_n36_n11#" 83.7
+cap "PadBiDir_17/m3_n36_n11#" "PadBiDir_16/DI" 63.36
+cap "PadBiDir_17/Vdd!" "PadBiDir_17/m3_n36_n11#" 83.7
+cap "PadBiDir_17/m3_n36_n11#" "PadBiDir_16/GND!" 9686.16
+cap "PadBiDir_17/m3_n36_n11#" "PadBiDir_16/Vdd!" -220.32
+cap "PadBiDir_16/DI" "PadBiDir_17/m3_n36_n11#" 74.88
+cap "PadBiDir_13/m3_n36_n11#" "PadBiDir_12/DI" 74.88
+cap "PadBiDir_13/m3_n36_n11#" "PadBiDir_13/Vdd!" -220.32
+cap "PadBiDir_13/m3_n36_n11#" "PadBiDir_12/GND!" 9686.16
+cap "PadBiDir_12/DI" "PadBiDir_13/m3_n36_n11#" 63.36
+cap "PadBiDir_13/Vdd!" "PadBiDir_13/m3_n36_n11#" 83.7
+cap "PadBiDir_17/DI" "PadBiDir_18/m3_n36_n11#" 63.36
+cap "PadBiDir_18/m3_n36_n11#" "PadBiDir_18/Vdd!" 83.7
+cap "PadBiDir_17/Vdd!" "PadBiDir_18/m3_n36_n11#" -220.32
+cap "PadBiDir_17/GND!" "PadBiDir_18/m3_n36_n11#" 9686.16
+cap "PadBiDir_17/DI" "PadBiDir_18/m3_n36_n11#" 74.88
+cap "PadBiDir_14/Vdd!" "PadBiDir_14/m3_n36_n11#" -220.32
+cap "PadBiDir_13/GND!" "PadBiDir_14/m3_n36_n11#" 9686.16
+cap "PadBiDir_13/DI" "PadBiDir_14/m3_n36_n11#" 74.88
+cap "PadBiDir_14/m3_n36_n11#" "PadBiDir_14/Vdd!" 83.7
+cap "PadBiDir_14/m3_n36_n11#" "PadBiDir_13/DI" 63.36
+cap "PadBiDir_18/DI" "PadBiDir_19/m3_n36_n11#" 63.36
+cap "PadBiDir_19/Vdd!" "PadBiDir_19/m3_n36_n11#" 83.7
+cap "PadBiDir_19/m3_n36_n11#" "PadBiDir_18/GND!" 9686.16
+cap "PadBiDir_19/m3_n36_n11#" "PadBiDir_18/Vdd!" -220.32
+cap "PadBiDir_19/m3_n36_n11#" "PadBiDir_18/DI" 74.88
+cap "19_1/w_n3_n3#" "17_21/m3_n36_n11#" 89.1
+cap "17_21/m3_n36_n11#" "19_1/w_n3_n3#" -259.2
+cap "17_21/m3_n36_n11#" "19_1/GND!" 9953.28
+cap "19_0/GND!" "17_13/m3_n36_n11#" 9953.28
+cap "17_13/m3_n36_n11#" "19_0/w_n3_n3#" -259.2
+cap "17_13/Vdd!" "17_13/m3_n36_n11#" 89.1
+cap "19_0/w_n3_n3#" "17_12/m3_n36_n11#" -259.2
+cap "19_0/GND!" "17_12/m3_n36_n11#" 9953.28
+cap "17_12/m3_n36_n11#" "19_0/w_n3_n3#" 89.1
+cap "17_21/Vdd!" "17_20/m3_n36_n11#" 83.7
+cap "17_20/m3_n36_n11#" "17_21/DI" 63.36
+cap "17_21/Vdd!" "17_20/m3_n36_n11#" -220.32
+cap "17_20/m3_n36_n11#" "17_21/DI" 74.88
+cap "17_20/m3_n36_n11#" "17_21/GND!" 9686.16
+cap "17_11/m3_n36_n11#" "17_12/GND!" 9686.16
+cap "17_12/DI" "17_11/m3_n36_n11#" 74.88
+cap "17_12/Vdd!" "17_11/m3_n36_n11#" -220.32
+cap "17_12/DI" "17_11/m3_n36_n11#" 63.36
+cap "17_11/m3_n36_n11#" "17_12/Vdd!" 83.7
+cap "17_19/m3_n36_n11#" "17_20/Vdd!" 83.7
+cap "17_20/DI" "17_19/m3_n36_n11#" 63.36
+cap "17_19/m3_n36_n11#" "17_20/Vdd!" -220.32
+cap "17_19/m3_n36_n11#" "17_20/DI" 74.88
+cap "17_19/m3_n36_n11#" "17_20/GND!" 9686.16
+cap "17_10/Vdd!" "17_10/m3_n36_n11#" -220.32
+cap "17_11/DI" "17_10/m3_n36_n11#" 74.88
+cap "17_11/GND!" "17_10/m3_n36_n11#" 9686.16
+cap "17_10/m3_n36_n11#" "17_11/DI" 63.36
+cap "17_10/m3_n36_n11#" "17_10/Vdd!" 83.7
+cap "17_19/DI" "17_18/m3_n36_n11#" 63.36
+cap "17_18/Vdd!" "17_18/m3_n36_n11#" 83.7
+cap "17_18/m3_n36_n11#" "17_19/DI" 74.88
+cap "17_19/GND!" "17_18/m3_n36_n11#" 9686.16
+cap "17_19/Vdd!" "17_18/m3_n36_n11#" -220.32
+cap "17_10/GND!" "17_9/m3_n36_n11#" 9686.16
+cap "17_10/Vdd!" "17_9/m3_n36_n11#" -220.32
+cap "17_10/DI" "17_9/m3_n36_n11#" 74.88
+cap "17_9/m3_n36_n11#" "17_10/Vdd!" 83.7
+cap "17_10/DI" "17_9/m3_n36_n11#" 63.36
+cap "17_17/m3_n36_n11#" "17_18/DI" 63.36
+cap "17_17/m3_n36_n11#" "17_18/Vdd!" 83.7
+cap "17_17/m3_n36_n11#" "17_18/Vdd!" -220.32
+cap "17_17/m3_n36_n11#" "17_18/GND!" 9686.16
+cap "17_18/DI" "17_17/m3_n36_n11#" 74.88
+cap "17_9/GND!" "17_0/m3_n36_n11#" 1140.48
+cap "17_0/m3_n36_n11#" "17_9/Vdd!" -8.1
+cap "17_0/m3_n36_n11#" "17_9/Vdd!" 21.6
+cap "17_1/m3_n36_n11#" "17_0/DI" 63.36
+cap "17_1/Vdd!" "17_1/m3_n36_n11#" 83.7
+cap "17_2/Vdd!" "17_2/m3_n36_n11#" 83.7
+cap "17_1/DI" "17_2/m3_n36_n11#" 63.36
+cap "17_3/m3_n36_n11#" "17_3/Vdd!" 83.7
+cap "17_2/DI" "17_3/m3_n36_n11#" 63.36
+cap "17_4/Vdd!" "17_4/m3_n36_n11#" 83.7
+cap "17_3/DI" "17_4/m3_n36_n11#" 63.36
+cap "17_4/DI" "17_5/m3_n36_n11#" 63.36
+cap "17_5/Vdd!" "17_5/m3_n36_n11#" 83.7
+cap "18_0/w_11_10#" "17_6/m3_n36_n11#" 103.68
+cap "17_6/m3_n36_n11#" "18_0/Vdd!" 89.1
+cap "18_0/Vdd!" "17_6/m3_n36_n11#" 2.7
+cap "17_7/m3_n36_n11#" "17_7/Vdd!" 83.7
+cap "17_7/m3_n36_n11#" "17_6/DI" 63.36
+cap "17_8/m3_n36_n11#" "17_8/Vdd!" 83.7
+cap "17_8/m3_n36_n11#" "17_7/DI" 63.36
+cap "PadBiDir_0/Vdd!" "PadBiDir_0/m3_n36_n11#" 83.7
+cap "PadBiDir_0/m3_n36_n11#" "17_8/DI" 63.36
+cap "PadBiDir_1/Vdd!" "PadBiDir_1/m3_n36_n11#" 83.7
+cap "PadBiDir_0/DI" "PadBiDir_1/m3_n36_n11#" 63.36
+cap "PadBiDir_2/m3_n36_n11#" "PadBiDir_1/DI" 63.36
+cap "PadBiDir_2/m3_n36_n11#" "PadBiDir_2/Vdd!" 83.7
+cap "PadBiDir_3/m3_n36_n11#" "PadVdd_0/Vdd!" 89.1
+cap "PadBiDir_3/m3_n36_n11#" "PadVdd_0/w_11_10#" 103.68
+cap "PadBiDir_3/m3_n36_n11#" "PadVdd_0/Vdd!" 2.7
+cap "PadBiDir_4/m3_n36_n11#" "PadBiDir_4/Vdd!" 83.7
+cap "PadBiDir_4/m3_n36_n11#" "PadBiDir_3/DI" 63.36
+cap "17_9/Vdd!" "17_0/m3_n36_n11#" -259.2
+cap "17_9/Vdd!" "17_9/GND!" 7.27596e-12
+cap "17_9/GND!" "17_0/m3_n36_n11#" 9953.28
+cap "17_9/GND!" "17_9/Vdd!" 4.54747e-13
+cap "17_0/OEN" "17_9/Vdd!" 2.84217e-14
+cap "17_1/m3_n36_n11#" "17_0/DI" 74.88
+cap "17_1/Vdd!" "17_0/GND!" -4.54747e-13
+cap "17_1/m3_n36_n11#" "17_0/GND!" 9686.16
+cap "17_1/Vdd!" "17_1/m3_n36_n11#" -220.32
+cap "17_2/m3_n36_n11#" "17_1/DI" 74.88
+cap "17_1/GND!" "17_2/m3_n36_n11#" 9686.16
+cap "17_2/Vdd!" "17_2/m3_n36_n11#" -220.32
+cap "17_1/GND!" "17_2/Vdd!" -4.54747e-13
+cap "17_2/DI" "17_3/m3_n36_n11#" 74.88
+cap "17_2/GND!" "17_3/m3_n36_n11#" 9686.16
+cap "17_3/Vdd!" "17_2/GND!" -4.54747e-13
+cap "17_3/Vdd!" "17_3/m3_n36_n11#" -220.32
+cap "17_3/GND!" "17_4/Vdd!" -4.54747e-13
+cap "17_4/m3_n36_n11#" "17_3/DI" 74.88
+cap "17_4/Vdd!" "17_4/m3_n36_n11#" -220.32
+cap "17_3/GND!" "17_4/m3_n36_n11#" 9686.16
+cap "17_4/DI" "17_5/m3_n36_n11#" 74.88
+cap "17_5/Vdd!" "17_5/m3_n36_n11#" -220.32
+cap "17_4/GND!" "17_5/m3_n36_n11#" 9686.16
+cap "17_5/Vdd!" "17_4/GND!" -4.54747e-13
+cap "18_0/w_11_10#" "17_6/m3_n36_n11#" 9953.28
+cap "18_0/Vdd!" "17_6/m3_n36_n11#" -259.2
+cap "18_0/Vdd!" "18_0/w_11_10#" 4.54747e-13
+cap "17_6/GND!" "17_7/m3_n36_n11#" 9686.16
+cap "17_7/Vdd!" "17_6/GND!" -4.54747e-13
+cap "17_7/Vdd!" "17_7/m3_n36_n11#" -220.32
+cap "17_7/m3_n36_n11#" "17_6/DI" 74.88
+cap "17_7/GND!" "17_8/Vdd!" -4.54747e-13
+cap "17_8/m3_n36_n11#" "17_7/GND!" 9686.16
+cap "17_8/m3_n36_n11#" "17_7/DI" 74.88
+cap "17_8/m3_n36_n11#" "17_8/Vdd!" -220.32
+cap "PadBiDir_0/Vdd!" "PadBiDir_0/m3_n36_n11#" -220.32
+cap "17_8/GND!" "PadBiDir_0/m3_n36_n11#" 9686.16
+cap "PadBiDir_0/m3_n36_n11#" "17_8/DI" 74.88
+cap "17_8/GND!" "PadBiDir_0/Vdd!" -4.54747e-13
+cap "PadBiDir_1/m3_n36_n11#" "PadBiDir_0/DI" 74.88
+cap "PadBiDir_1/Vdd!" "PadBiDir_1/m3_n36_n11#" -220.32
+cap "PadBiDir_1/Vdd!" "PadBiDir_0/GND!" -4.54747e-13
+cap "PadBiDir_1/m3_n36_n11#" "PadBiDir_0/GND!" 9686.16
+cap "PadBiDir_2/m3_n36_n11#" "PadBiDir_1/GND!" 9686.16
+cap "PadBiDir_2/m3_n36_n11#" "PadBiDir_2/Vdd!" -220.32
+cap "PadBiDir_1/GND!" "PadBiDir_2/Vdd!" -4.54747e-13
+cap "PadBiDir_2/m3_n36_n11#" "PadBiDir_1/DI" 74.88
+cap "PadBiDir_3/m3_n36_n11#" "PadVdd_0/w_11_10#" 9953.28
+cap "PadBiDir_3/m3_n36_n11#" "PadVdd_0/Vdd!" -259.2
+cap "PadVdd_0/Vdd!" "PadVdd_0/w_11_10#" 4.54747e-13
+cap "PadBiDir_3/DI" "PadBiDir_4/m3_n36_n11#" 74.88
+cap "PadBiDir_4/Vdd!" "PadBiDir_4/m3_n36_n11#" -220.32
+cap "PadBiDir_4/m3_n36_n11#" "PadBiDir_3/GND!" 9686.16
+cap "PadBiDir_4/Vdd!" "PadBiDir_3/GND!" -4.54747e-13
+cap "17_0/OEN" "17_0/Vdd!" -5.68434e-14
+cap "17_0/Vdd!" "17_1/OEN" -5.68434e-14
+cap "17_2/OEN" "17_1/Vdd!" -5.68434e-14
+cap "17_2/Vdd!" "17_3/OEN" -5.68434e-14
+cap "17_3/Vdd!" "17_4/OEN" -5.68434e-14
+cap "17_4/Vdd!" "17_5/OEN" -5.68434e-14
+cap "17_6/OEN" "17_6/GND!" 1.42109e-14
+cap "17_6/Vdd!" "17_7/OEN" -5.68434e-14
+cap "17_7/Vdd!" "17_8/OEN" -5.68434e-14
+cap "17_8/Vdd!" "PadBiDir_0/OEN" -5.68434e-14
+cap "PadBiDir_0/Vdd!" "PadBiDir_1/OEN" -5.68434e-14
+cap "PadBiDir_1/Vdd!" "PadBiDir_2/OEN" -5.68434e-14
+cap "PadBiDir_3/OEN" "PadBiDir_3/GND!" 1.42109e-14
+cap "PadBiDir_4/OEN" "PadBiDir_3/Vdd!" -5.68434e-14
+cap "17_0/Gnd!" "17_0/DIB" -2.27374e-13
+cap "17_1/DIB" "17_1/Gnd!" -2.27374e-13
+cap "17_2/Gnd!" "17_2/DIB" -2.27374e-13
+cap "17_3/Gnd!" "17_3/DIB" -2.27374e-13
+cap "17_4/DIB" "17_4/Gnd!" -2.27374e-13
+cap "17_6/OEN" "17_6/Gnd!" 5.68434e-14
+cap "17_6/DIB" "17_6/Gnd!" -2.27374e-13
+cap "17_7/DIB" "17_7/Gnd!" -2.27374e-13
+cap "17_8/Gnd!" "17_8/DIB" -2.27374e-13
+cap "PadBiDir_0/DIB" "PadBiDir_0/Gnd!" -2.27374e-13
+cap "PadBiDir_1/Gnd!" "PadBiDir_1/DIB" -2.27374e-13
+cap "PadBiDir_3/OEN" "PadBiDir_3/Gnd!" 5.68434e-14
+cap "PadBiDir_3/DIB" "PadBiDir_3/Gnd!" -2.27374e-13
+cap "17_0/w_14_425#" "17_0/Gnd!" -1.81899e-12
+merge "PadBiDir_4/w_14_425#" "PadBiDir_3/w_14_425#" -1.84795e+06 0 -34468 0 0 -64974 -18518 0 0 0 0 0 0 0 0 0 0 0 -34384 0 -49228 0 0
+merge "PadBiDir_3/w_14_425#" "PadBiDir_2/w_14_425#"
+merge "PadBiDir_2/w_14_425#" "PadBiDir_1/w_14_425#"
+merge "PadBiDir_1/w_14_425#" "PadBiDir_0/w_14_425#"
+merge "PadBiDir_0/w_14_425#" "17_8/w_14_425#"
+merge "17_8/w_14_425#" "17_7/w_14_425#"
+merge "17_7/w_14_425#" "17_6/w_14_425#"
+merge "17_6/w_14_425#" "17_5/w_14_425#"
+merge "17_5/w_14_425#" "17_4/w_14_425#"
+merge "17_4/w_14_425#" "17_3/w_14_425#"
+merge "17_3/w_14_425#" "17_2/w_14_425#"
+merge "17_2/w_14_425#" "17_1/w_14_425#"
+merge "17_1/w_14_425#" "17_0/w_14_425#"
+merge "17_0/w_14_425#" "PadBiDir_4/Vdd!"
+merge "PadBiDir_4/Vdd!" "16_1/m2_330_0#"
+merge "16_1/m2_330_0#" "16_1/w_670_n3#"
+merge "16_1/w_670_n3#" "PadBiDir_3/Vdd!"
+merge "PadBiDir_3/Vdd!" "PadVdd_0/Vdd!"
+merge "PadVdd_0/Vdd!" "PadBiDir_2/Vdd!"
+merge "PadBiDir_2/Vdd!" "PadBiDir_1/Vdd!"
+merge "PadBiDir_1/Vdd!" "PadBiDir_0/Vdd!"
+merge "PadBiDir_0/Vdd!" "17_8/Vdd!"
+merge "17_8/Vdd!" "17_7/Vdd!"
+merge "17_7/Vdd!" "17_6/Vdd!"
+merge "17_6/Vdd!" "18_0/Vdd!"
+merge "18_0/Vdd!" "17_5/Vdd!"
+merge "17_5/Vdd!" "17_4/Vdd!"
+merge "17_4/Vdd!" "17_3/Vdd!"
+merge "17_3/Vdd!" "17_2/Vdd!"
+merge "17_2/Vdd!" "17_1/Vdd!"
+merge "17_1/Vdd!" "17_0/Vdd!"
+merge "17_0/Vdd!" "17_18/w_14_425#"
+merge "17_18/w_14_425#" "16_0/w_670_n3#"
+merge "16_0/w_670_n3#" "16_0/m2_330_0#"
+merge "16_0/m2_330_0#" "17_17/w_14_425#"
+merge "17_17/w_14_425#" "17_17/Vdd!"
+merge "17_17/Vdd!" "17_9/Vdd!"
+merge "17_9/Vdd!" "17_9/w_14_425#"
+merge "17_9/w_14_425#" "17_18/Vdd!"
+merge "17_18/Vdd!" "17_10/Vdd!"
+merge "17_10/Vdd!" "17_10/w_14_425#"
+merge "17_10/w_14_425#" "17_21/w_14_425#"
+merge "17_21/w_14_425#" "17_19/w_14_425#"
+merge "17_19/w_14_425#" "17_19/Vdd!"
+merge "17_19/Vdd!" "17_11/Vdd!"
+merge "17_11/Vdd!" "17_11/w_14_425#"
+merge "17_11/w_14_425#" "17_20/w_14_425#"
+merge "17_20/w_14_425#" "17_20/Vdd!"
+merge "17_20/Vdd!" "17_12/Vdd!"
+merge "17_12/Vdd!" "17_12/w_14_425#"
+merge "17_12/w_14_425#" "17_21/Vdd!"
+merge "17_21/Vdd!" "19_0/w_n3_n3#"
+merge "19_0/w_n3_n3#" "19_0/w_17_429#"
+merge "19_0/w_17_429#" "PadBiDir_19/w_14_425#"
+merge "PadBiDir_19/w_14_425#" "19_1/w_17_429#"
+merge "19_1/w_17_429#" "19_1/w_n3_n3#"
+merge "19_1/w_n3_n3#" "17_13/Vdd!"
+merge "17_13/Vdd!" "17_13/w_14_425#"
+merge "17_13/w_14_425#" "PadBiDir_19/Vdd!"
+merge "PadBiDir_19/Vdd!" "PadBiDir_14/Vdd!"
+merge "PadBiDir_14/Vdd!" "PadBiDir_14/w_14_425#"
+merge "PadBiDir_14/w_14_425#" "PadBiDir_18/w_14_425#"
+merge "PadBiDir_18/w_14_425#" "PadBiDir_18/Vdd!"
+merge "PadBiDir_18/Vdd!" "PadBiDir_13/Vdd!"
+merge "PadBiDir_13/Vdd!" "PadBiDir_13/w_14_425#"
+merge "PadBiDir_13/w_14_425#" "PadBiDir_17/w_14_425#"
+merge "PadBiDir_17/w_14_425#" "PadBiDir_17/Vdd!"
+merge "PadBiDir_17/Vdd!" "PadBiDir_12/Vdd!"
+merge "PadBiDir_12/Vdd!" "PadBiDir_12/w_14_425#"
+merge "PadBiDir_12/w_14_425#" "PadBiDir_16/w_14_425#"
+merge "PadBiDir_16/w_14_425#" "PadBiDir_16/Vdd!"
+merge "PadBiDir_16/Vdd!" "PadGnd_0/w_n3_n3#"
+merge "PadGnd_0/w_n3_n3#" "PadBiDir_11/Vdd!"
+merge "PadBiDir_11/Vdd!" "PadBiDir_11/w_14_425#"
+merge "PadBiDir_11/w_14_425#" "PadBiDir_15/w_14_425#"
+merge "PadBiDir_15/w_14_425#" "PadBiDir_15/Vdd!"
+merge "PadBiDir_15/Vdd!" "PadGnd_0/w_17_429#"
+merge "PadGnd_0/w_17_429#" "PadGnd_1/w_17_429#"
+merge "PadGnd_1/w_17_429#" "PadGnd_1/w_n3_n3#"
+merge "PadGnd_1/w_n3_n3#" "PadBiDir_10/Vdd!"
+merge "PadBiDir_10/Vdd!" "PadBiDir_10/w_14_425#"
+merge "PadBiDir_10/w_14_425#" "17_24/w_14_425#"
+merge "17_24/w_14_425#" "17_22/w_14_425#"
+merge "17_22/w_14_425#" "17_22/Vdd!"
+merge "17_22/Vdd!" "17_14/Vdd!"
+merge "17_14/Vdd!" "17_14/w_14_425#"
+merge "17_14/w_14_425#" "17_23/w_14_425#"
+merge "17_23/w_14_425#" "17_23/Vdd!"
+merge "17_23/Vdd!" "17_15/Vdd!"
+merge "17_15/Vdd!" "17_15/w_14_425#"
+merge "17_15/w_14_425#" "17_24/Vdd!"
+merge "17_24/Vdd!" "17_16/Vdd!"
+merge "17_16/Vdd!" "17_16/w_14_425#"
+merge "17_16/w_14_425#" "17_34/w_14_425#"
+merge "17_34/w_14_425#" "17_34/Vdd!"
+merge "17_34/Vdd!" "17_25/Vdd!"
+merge "17_25/Vdd!" "17_25/w_14_425#"
+merge "17_25/w_14_425#" "PadBiDir_9/Vdd!"
+merge "PadBiDir_9/Vdd!" "16_3/w_670_n3#"
+merge "16_3/w_670_n3#" "PadBiDir_8/Vdd!"
+merge "PadBiDir_8/Vdd!" "PadBiDir_7/Vdd!"
+merge "PadBiDir_7/Vdd!" "PadBiDir_6/Vdd!"
+merge "PadBiDir_6/Vdd!" "PadBiDir_5/Vdd!"
+merge "PadBiDir_5/Vdd!" "17_35/Vdd!"
+merge "17_35/Vdd!" "17_33/Vdd!"
+merge "17_33/Vdd!" "17_32/Vdd!"
+merge "17_32/Vdd!" "17_31/Vdd!"
+merge "17_31/Vdd!" "PadBiDir_9/w_14_425#"
+merge "PadBiDir_9/w_14_425#" "17_30/Vdd!"
+merge "17_30/Vdd!" "17_29/Vdd!"
+merge "17_29/Vdd!" "17_28/Vdd!"
+merge "17_28/Vdd!" "17_27/Vdd!"
+merge "17_27/Vdd!" "17_26/Vdd!"
+merge "17_26/Vdd!" "16_2/w_670_n3#"
+merge "16_2/w_670_n3#" "16_3/m2_330_0#"
+merge "16_3/m2_330_0#" "PadBiDir_8/w_14_425#"
+merge "PadBiDir_8/w_14_425#" "PadBiDir_7/w_14_425#"
+merge "PadBiDir_7/w_14_425#" "PadBiDir_6/w_14_425#"
+merge "PadBiDir_6/w_14_425#" "PadBiDir_5/w_14_425#"
+merge "PadBiDir_5/w_14_425#" "PadVdd_1/Vdd!"
+merge "PadVdd_1/Vdd!" "17_35/w_14_425#"
+merge "17_35/w_14_425#" "17_33/w_14_425#"
+merge "17_33/w_14_425#" "17_32/w_14_425#"
+merge "17_32/w_14_425#" "17_31/w_14_425#"
+merge "17_31/w_14_425#" "18_1/Vdd!"
+merge "18_1/Vdd!" "17_30/w_14_425#"
+merge "17_30/w_14_425#" "17_29/w_14_425#"
+merge "17_29/w_14_425#" "17_28/w_14_425#"
+merge "17_28/w_14_425#" "17_27/w_14_425#"
+merge "17_27/w_14_425#" "17_26/w_14_425#"
+merge "17_26/w_14_425#" "16_2/m2_330_0#"
+merge "PadBiDir_4/Gnd!" "PadBiDir_3/Gnd!" -1.63854e+06 0 0 0 -24910 0 0 0 0 -38076 -12929 0 0 0 0 0 0 0 -24870 0 -62438 0 0
+merge "PadBiDir_3/Gnd!" "PadVdd_0/w_n3_340#"
+merge "PadVdd_0/w_n3_340#" "PadBiDir_2/Gnd!"
+merge "PadBiDir_2/Gnd!" "PadBiDir_1/Gnd!"
+merge "PadBiDir_1/Gnd!" "PadBiDir_0/Gnd!"
+merge "PadBiDir_0/Gnd!" "17_8/Gnd!"
+merge "17_8/Gnd!" "17_7/Gnd!"
+merge "17_7/Gnd!" "17_6/Gnd!"
+merge "17_6/Gnd!" "18_0/w_n3_340#"
+merge "18_0/w_n3_340#" "17_5/Gnd!"
+merge "17_5/Gnd!" "17_4/Gnd!"
+merge "17_4/Gnd!" "17_3/Gnd!"
+merge "17_3/Gnd!" "17_2/Gnd!"
+merge "17_2/Gnd!" "17_1/Gnd!"
+merge "17_1/Gnd!" "17_0/Gnd!"
+merge "17_0/Gnd!" "PadBiDir_4/GND!"
+merge "PadBiDir_4/GND!" "16_1/w_327_n3#"
+merge "16_1/w_327_n3#" "16_1/m2_769_0#"
+merge "16_1/m2_769_0#" "PadBiDir_3/GND!"
+merge "PadBiDir_3/GND!" "PadVdd_0/w_11_10#"
+merge "PadVdd_0/w_11_10#" "PadBiDir_2/GND!"
+merge "PadBiDir_2/GND!" "PadBiDir_1/GND!"
+merge "PadBiDir_1/GND!" "PadBiDir_0/GND!"
+merge "PadBiDir_0/GND!" "17_8/GND!"
+merge "17_8/GND!" "17_7/GND!"
+merge "17_7/GND!" "17_6/GND!"
+merge "17_6/GND!" "18_0/w_11_10#"
+merge "18_0/w_11_10#" "17_5/GND!"
+merge "17_5/GND!" "17_4/GND!"
+merge "17_4/GND!" "17_3/GND!"
+merge "17_3/GND!" "17_2/GND!"
+merge "17_2/GND!" "17_1/GND!"
+merge "17_1/GND!" "17_0/GND!"
+merge "17_0/GND!" "17_18/Gnd!"
+merge "17_18/Gnd!" "16_0/m2_769_0#"
+merge "16_0/m2_769_0#" "16_0/w_327_n3#"
+merge "16_0/w_327_n3#" "17_17/Gnd!"
+merge "17_17/Gnd!" "17_17/GND!"
+merge "17_17/GND!" "17_9/GND!"
+merge "17_9/GND!" "17_9/Gnd!"
+merge "17_9/Gnd!" "17_18/GND!"
+merge "17_18/GND!" "17_10/GND!"
+merge "17_10/GND!" "17_10/Gnd!"
+merge "17_10/Gnd!" "17_21/Gnd!"
+merge "17_21/Gnd!" "17_19/Gnd!"
+merge "17_19/Gnd!" "17_19/GND!"
+merge "17_19/GND!" "17_11/GND!"
+merge "17_11/GND!" "17_11/Gnd!"
+merge "17_11/Gnd!" "17_20/Gnd!"
+merge "17_20/Gnd!" "17_20/GND!"
+merge "17_20/GND!" "17_12/GND!"
+merge "17_12/GND!" "17_12/Gnd!"
+merge "17_12/Gnd!" "17_21/GND!"
+merge "17_21/GND!" "19_0/GND!"
+merge "19_0/GND!" "PadBiDir_19/Gnd!"
+merge "PadBiDir_19/Gnd!" "19_1/GND!"
+merge "19_1/GND!" "17_13/GND!"
+merge "17_13/GND!" "17_13/Gnd!"
+merge "17_13/Gnd!" "PadBiDir_19/GND!"
+merge "PadBiDir_19/GND!" "PadBiDir_14/GND!"
+merge "PadBiDir_14/GND!" "PadBiDir_14/Gnd!"
+merge "PadBiDir_14/Gnd!" "PadBiDir_18/Gnd!"
+merge "PadBiDir_18/Gnd!" "PadBiDir_18/GND!"
+merge "PadBiDir_18/GND!" "PadBiDir_13/GND!"
+merge "PadBiDir_13/GND!" "PadBiDir_13/Gnd!"
+merge "PadBiDir_13/Gnd!" "PadBiDir_17/Gnd!"
+merge "PadBiDir_17/Gnd!" "PadBiDir_17/GND!"
+merge "PadBiDir_17/GND!" "PadBiDir_12/GND!"
+merge "PadBiDir_12/GND!" "PadBiDir_12/Gnd!"
+merge "PadBiDir_12/Gnd!" "PadBiDir_16/Gnd!"
+merge "PadBiDir_16/Gnd!" "PadBiDir_16/GND!"
+merge "PadBiDir_16/GND!" "PadGnd_0/GND!"
+merge "PadGnd_0/GND!" "PadBiDir_11/GND!"
+merge "PadBiDir_11/GND!" "PadBiDir_11/Gnd!"
+merge "PadBiDir_11/Gnd!" "PadBiDir_15/Gnd!"
+merge "PadBiDir_15/Gnd!" "PadBiDir_15/GND!"
+merge "PadBiDir_15/GND!" "PadGnd_1/GND!"
+merge "PadGnd_1/GND!" "PadBiDir_10/Gnd!"
+merge "PadBiDir_10/Gnd!" "17_24/Gnd!"
+merge "17_24/Gnd!" "17_22/Gnd!"
+merge "17_22/Gnd!" "17_14/Gnd!"
+merge "17_14/Gnd!" "17_23/Gnd!"
+merge "17_23/Gnd!" "17_15/Gnd!"
+merge "17_15/Gnd!" "17_16/Gnd!"
+merge "17_16/Gnd!" "17_34/Gnd!"
+merge "17_34/Gnd!" "17_25/Gnd!"
+merge "17_25/Gnd!" "PadBiDir_9/Gnd!"
+merge "PadBiDir_9/Gnd!" "16_3/w_327_n3#"
+merge "16_3/w_327_n3#" "PadBiDir_8/Gnd!"
+merge "PadBiDir_8/Gnd!" "PadBiDir_7/Gnd!"
+merge "PadBiDir_7/Gnd!" "PadBiDir_6/Gnd!"
+merge "PadBiDir_6/Gnd!" "PadBiDir_5/Gnd!"
+merge "PadBiDir_5/Gnd!" "PadVdd_1/w_n3_340#"
+merge "PadVdd_1/w_n3_340#" "17_35/Gnd!"
+merge "17_35/Gnd!" "17_33/Gnd!"
+merge "17_33/Gnd!" "17_32/Gnd!"
+merge "17_32/Gnd!" "17_31/Gnd!"
+merge "17_31/Gnd!" "18_1/w_n3_340#"
+merge "18_1/w_n3_340#" "17_30/Gnd!"
+merge "17_30/Gnd!" "17_29/Gnd!"
+merge "17_29/Gnd!" "17_28/Gnd!"
+merge "17_28/Gnd!" "17_27/Gnd!"
+merge "17_27/Gnd!" "17_26/Gnd!"
+merge "17_26/Gnd!" "16_2/w_327_n3#"
+merge "16_2/w_327_n3#" "PadBiDir_10/GND!"
+merge "PadBiDir_10/GND!" "17_24/GND!"
+merge "17_24/GND!" "17_22/GND!"
+merge "17_22/GND!" "17_14/GND!"
+merge "17_14/GND!" "17_23/GND!"
+merge "17_23/GND!" "17_15/GND!"
+merge "17_15/GND!" "17_16/GND!"
+merge "17_16/GND!" "17_34/GND!"
+merge "17_34/GND!" "17_25/GND!"
+merge "17_25/GND!" "PadBiDir_9/GND!"
+merge "PadBiDir_9/GND!" "16_3/m2_769_0#"
+merge "16_3/m2_769_0#" "PadBiDir_8/GND!"
+merge "PadBiDir_8/GND!" "PadBiDir_7/GND!"
+merge "PadBiDir_7/GND!" "PadBiDir_6/GND!"
+merge "PadBiDir_6/GND!" "PadBiDir_5/GND!"
+merge "PadBiDir_5/GND!" "PadVdd_1/w_11_10#"
+merge "PadVdd_1/w_11_10#" "17_35/GND!"
+merge "17_35/GND!" "17_33/GND!"
+merge "17_33/GND!" "17_32/GND!"
+merge "17_32/GND!" "17_31/GND!"
+merge "17_31/GND!" "18_1/w_11_10#"
+merge "18_1/w_11_10#" "17_30/GND!"
+merge "17_30/GND!" "17_29/GND!"
+merge "17_29/GND!" "17_28/GND!"
+merge "17_28/GND!" "17_27/GND!"
+merge "17_27/GND!" "17_26/GND!"
+merge "17_26/GND!" "16_2/m2_769_0#"
+merge "17_26/m3_n36_n11#" "17_25/m3_n36_n11#" -13345.8 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2088 -166
