@@ -9,6 +9,7 @@
 !LICENSE
 !README.md
 !source/**
+!pad_06_frame64/**
 !*.v
 !*.vh
 !*.gds
