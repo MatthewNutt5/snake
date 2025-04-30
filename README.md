@@ -51,7 +51,7 @@ Verilog testbenches in `/snake/source/testbench/` are used to verify the functio
 
 ## Synthesis
 
-Completed Verilog modules are synthesized into gate-level logic by Design Compiler. DC targets the OSU AMI 0.5μm cell library and provides useful estimates about statistics like area and power required by the synthesized design. The module is also tested after synthesis, to ensure that no functionality has been lost by transforming the Verilog code into gates and registers.
+Design Compiler synthesizes Completed Verilog modules into gate-level logic. DC targets the OSU AMI 0.5μm cell library and provides useful estimates about statistics like area and power required by the synthesized design. The module is also tested after synthesis to ensure that no functionality has been lost by transforming the Verilog code into gates and registers.
 
 ## Layout
 
@@ -61,7 +61,7 @@ Once a module has been synthesized, Innovus generates a physical layout for the 
 
 Innovus only generates a layout for the core design; for fabrication and installation into a physical package, the core must be routed in a padframe that can be wired bonded to the package. A 64-pin padframe built from the bidirectional and power pads in the cell library is just large enough to fit the core, and routing to the pads is done manually in Magic using the wire tool.
 
-## IRSIM Testbench
+## IRSIM Testbenches
 
 After using extracting the layout for simulation, Magic converts the `.ext` files into a `.sim` file, for use with IRSIM. Testbench `.cmd` files in `/snake/source/testbench/` - designed to emulate the corresponding Verilog testbench - provide input patterns for IRSIM. A Python script is used to help convert the input sequences from a Verilog testbench to the IRSIM format.
 
