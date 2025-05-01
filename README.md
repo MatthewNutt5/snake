@@ -49,15 +49,15 @@ Outputs include the multiplexed display signals and all internal signals between
 
 Verilog testbenches in `/snake/source/testbench/` are used to verify the functionality of each module. For any given module `mod`, the corresponding testbench is named `mod_tb.v` in this directory. Simulations are performed with these testbenches in Questa, both before and after the code is synthesized into standard cells by Design Compiler.
 
-## Synthesis
+## Gate Synthesis
 
-Design Compiler synthesizes Completed Verilog modules into gate-level logic. DC targets the OSU AMI 0.5μm cell library and provides useful estimates about statistics like area and power required by the synthesized design. The module is also tested after synthesis to ensure that no functionality has been lost by transforming the Verilog code into gates and registers.
+Design Compiler synthesizes completed Verilog modules into gate-level logic. DC targets the OSU AMI 0.5μm cell library and provides useful estimates about statistics like area and power required by the synthesized design. The module is also tested after synthesis to ensure that no functionality has been lost by transforming the Verilog code into gates and registers.
 
-## Layout
+## Chip Layout
 
 Once a module has been synthesized, Innovus generates a physical layout for the design according to the cells and connections specified by Design Compiler. The resulting `.gds` file is imported into Magic, where it can be saved as `.mag` files representing the hierarchical cell structure and extracted for simulations.
 
-## Chip Integration
+## Padframe Integration
 
 Innovus only generates a layout for the core design; for fabrication and installation into a physical package, the core must be routed in a padframe that can be wired bonded to the package. A 64-pin padframe built from the bidirectional and power pads in the cell library is just large enough to fit the core, and routing to the pads is done manually in Magic using the wire tool.
 
