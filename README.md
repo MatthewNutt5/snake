@@ -3,9 +3,11 @@ Final project for ELEC 422 - Basic Snake game coded in Verilog and implemented i
 
 ## General Information
 
+This is a basic version of the classic Snake game coded in Verilog, synthesized into gate-level logic, and implemented in a physical VLSI layout. The final chip requires a dual-phase clock, reset signal, and directional signals as inputs, and outputs control signals for display multiplexing on an eight-by-eight LED array. For the sake of concise simulations, only one cycle of multiplexing is used (i.e. eight clock cycles). Game updates occur after every multiplexing phase, so if this chip were to be fabricated and run on a multi-megahertz clock, it is imperative to first adjust the number of multiplexing cycles so that the game updates occur at a more reasonable rate.
+
 Dual-phase clocking is used for system synchronization. Two clock signals, `clka` and `clkb`, are patterned such that one signal completes a rising and falling cycle while the other remains low, then vice versa. All flip-flops update on the falling edge of the clocks, but input registers are updated on the falling edge of `clka`, whereas output registers are updated on the falling edge of `clkb`. This way, timing discipline can be guaranteed between all the modules of the project.
 
-This project uses the Oaklahoma State University standard cell library for the AMI 0.5μm process.
+This project uses the standard cell library from Oklahoma State University for the AMI 0.5μm process.
 
 ## Verilog Core Modules
 
