@@ -9,9 +9,9 @@ This project uses the Oaklahoma State University standard cell library for the A
 
 ## Verilog Core Modules
 
-### Controller FSM
+### Controller Module
 
-The Controller FSM in `/snake/source/verilog/controller.v` manages the synchronization between modules for the game. It contains three sub-FSMs:
+The Controller Module in `/snake/source/verilog/controller.v` manages the synchronization between modules for the game. It contains three sub-FSMs:
 
 1) The game FSM, showing whether the game is ready/started/ended,
 2) The direction FSM, keeping track of which direction the snake is moving, and
