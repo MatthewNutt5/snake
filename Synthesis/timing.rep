@@ -1,0 +1,32 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : top
+Version: U-2022.12-SP7
+Date   : Mon May  5 21:21:22 2025
+****************************************
+
+Operating Conditions: typical   Library: osu05_stdcells
+Wire Load Model Mode: top
+
+  Startpoint: snake_prng/random_num_reg[1]
+              (falling edge-triggered flip-flop)
+  Endpoint: out_random_num[1]
+            (output port clocked by vclk)
+  Path Group: (none)
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  snake_prng/random_num_reg[1]/CLK (DFFNEGX1)             0.00       0.00 f
+  snake_prng/random_num_reg[1]/Q (DFFNEGX1)               0.57       0.57 f
+  out_random_num[1] (out)                                 0.00       0.57 f
+  data arrival time                                                  0.57
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1
