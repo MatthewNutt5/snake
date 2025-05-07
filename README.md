@@ -67,24 +67,24 @@ Innovus only generates a layout for the core design; for fabrication and install
 
 PIN 1  - UNUSED
 PIN 2  - UNUSED
-PIN 3  - OUTPUT - column_anode4
-PIN 4  - OUTPUT - column_anode2
-PIN 5  - OUTPUT - column_anode3
-PIN 6  - OUTPUT - column_anode5
-PIN 7  - OUTPUT - column_anode0
+PIN 3  - OUTPUT - `column_anode4`
+PIN 4  - OUTPUT - `column_anode2`
+PIN 5  - OUTPUT - `column_anode3`
+PIN 6  - OUTPUT - `column_anode5`
+PIN 7  - OUTPUT - `column_anode0`
 PIN 8  - UNUSED
-PIN 9  - OUTPUT - column_anode1
-PIN 10 - OUTPUT - column_anode6
-PIN 11 - OUTPUT - column_anode7
-PIN 12 - OUTPUT - row_cathode0
-PIN 13 - OUTPUT - row_cathode4
-PIN 14 - OUTPUT - row_cathode2
-PIN 15 - Input - VDD
-PIN 16 - OUTPUT - row_cathode1
-PIN 17 - OUTPUT - row_cathode5
-PIN 18 - OUTPUT - row_cathode3
-PIN 19 - OUTPUT - row_cathode6
-PIN 20 - OUTPUT - row_cathode7
+PIN 9  - OUTPUT - `column_anode1`
+PIN 10 - OUTPUT - `column_anode6`
+PIN 11 - OUTPUT - `column_anode7`
+PIN 12 - OUTPUT - `row_cathode0`
+PIN 13 - OUTPUT - `row_cathode4`
+PIN 14 - OUTPUT - `row_cathode2`
+PIN 15 - INPUT - VDD
+PIN 16 - OUTPUT - `row_cathode1`
+PIN 17 - OUTPUT - `row_cathode5`
+PIN 18 - OUTPUT - `row_cathode3`
+PIN 19 - OUTPUT - `row_cathode6`
+PIN 20 - OUTPUT - `row_cathode7`
 PIN 21 - INPUT - CLKA
 PIN 22 - INPUT - RIGHT Direction Input
 PIN 23 - INPUT - LEFT Direction Input
