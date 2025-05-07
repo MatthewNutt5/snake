@@ -63,6 +63,73 @@ Once a module has been synthesized, Innovus generates a physical layout for the 
 
 Innovus only generates a layout for the core design; for fabrication and installation into a physical package, the core must be routed in a padframe that can be wired bonded to the package. A 64-pin padframe built from the bidirectional and power pads in the cell library is just large enough to fit the core, and routing to the pads is done manually in Magic using the wire tool.
 
+## I/O Pin and Signal Descriptions
+
+PIN 1  - UNUSED
+PIN 2  - UNUSED
+PIN 3  - OUTPUT - column_anode4
+PIN 4  - OUTPUT - column_anode2
+PIN 5  - OUTPUT - column_anode3
+PIN 6  - OUTPUT - column_anode5
+PIN 7  - OUTPUT - column_anode0
+PIN 8  - UNUSED
+PIN 9  - OUTPUT - column_anode1
+PIN 10 - OUTPUT - column_anode6
+PIN 11 - OUTPUT - column_anode7
+PIN 12 - OUTPUT - row_cathode0
+PIN 13 - OUTPUT - row_cathode4
+PIN 14 - OUTPUT - row_cathode2
+PIN 15 - Input - VDD
+PIN 16 - OUTPUT - row_cathode1
+PIN 17 - OUTPUT - row_cathode5
+PIN 18 - OUTPUT - row_cathode3
+PIN 19 - OUTPUT - row_cathode6
+PIN 20 - OUTPUT - row_cathode7
+PIN 21 - INPUT - CLKA
+PIN 22 - INPUT - RIGHT Direction Input
+PIN 23 - INPUT - LEFT Direction Input
+PIN 24 - INPUT - DOWN Direction Input
+PIN 25 - INPUT - UP Direction Input
+PIN 26 - UNUSED
+PIN 27 - INPUT - RESTART
+PIN 28 - UNUSED
+PIN 29 - UNUSED
+PIN 30 - UNUSED
+PIN 31 - INPUT - CLKB
+PIN 32 - INPUT - GND
+PIN 33 - UNUSED
+PIN 34 - UNUSED
+PIN 35 - UNUSED
+PIN 36 - UNUSED
+PIN 37 - UNUSED
+PIN 38 - UNUSED
+PIN 39 - UNUSED
+PIN 40 - UNUSED
+PIN 41 - UNUSED
+PIN 42 - UNUSED
+PIN 43 - UNUSED
+PIN 44 - UNUSED
+PIN 45 - UNUSED
+PIN 46 - UNUSED
+PIN 47 - UNUSED
+PIN 48 - UNUSED
+PIN 49 - UNUSED
+PIN 50 - UNUSED
+PIN 51 - UNUSED
+PIN 52 - UNUSED
+PIN 53 - UNUSED
+PIN 54 - UNUSED
+PIN 55 - UNUSED
+PIN 56 - UNUSED
+PIN 57 - UNUSED
+PIN 58 - UNUSED
+PIN 59 - UNUSED
+PIN 60 - UNUSED
+PIN 61 - UNUSED
+PIN 62 - UNUSED
+PIN 63 - UNUSED
+PIN 64 - GND
+
 ## IRSIM Testbenches
 
 After using extracting the layout for simulation, Magic converts the `.ext` files into a `.sim` file, for use with IRSIM. Testbench `.cmd` files in `/snake/source/testbench/` - designed to emulate the corresponding Verilog testbench - provide input patterns for IRSIM. A Python script is used to help convert the input sequences from a Verilog testbench to the IRSIM format.
