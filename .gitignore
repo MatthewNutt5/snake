@@ -12,6 +12,7 @@
 !*.v
 !*.vh
 !*.gds
+!*.cif
 !*.mag
 !*.ext
 !*.sim
