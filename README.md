@@ -9,6 +9,8 @@ Dual-phase clocking is used for system synchronization. Two clock signals, `clka
 
 This project uses the standard cell library from Oklahoma State University for the AMI 0.5μm process.
 
+For images, test results, and more details, see `/snake/ELEC_422_Final_Report.pdf`.
+
 ## Verilog Modules
 
 ### Controller Module
